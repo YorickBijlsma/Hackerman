@@ -13,6 +13,7 @@ float rectCoords[] = {};
 float x, y, w, h = 0;
 boolean doneDrawing = false;
 int blockAmount = 0;
+color colour = color(0,0,0);
 
 //max 10 rects
 float[][] blockCoords =   {
@@ -43,9 +44,11 @@ void setup()
 void draw()
 {
   background(255);
+  switchColours();
   runEditor();
   makeRects();
   drawCoords();
+  
 }
 
 void runEditor()
@@ -80,7 +83,7 @@ void drawPuzzleBlocks()
     if(c[0]+c[1]+c[2]+c[3] != 0.0)
     {
       //PuzzleBlock puzzleblock = new PuzzleBlock(c[0],c[1],c[2], c[3]);
-      fill(255,0,0);
+      fill(colour);
       noStroke();
       rect(c[0],c[1],c[2],c[3]);
     }
@@ -140,11 +143,14 @@ void drawCoords()
   String yc = new String();
   String blocksLeft = new String();
   String exitHint = new String();
+  String colours = new String();
   
   xc = ("x pos: " +  mouseX);
   yc = ("y pos: " + mouseY);
   blocksLeft = ("Blocks left: "+(blockCoords.length-blockAmount));
   exitHint = ("Press q to quit");
+  colours = ("Colours:\n w - white \n b - blue \n r - red \n g - green");
+              
   
   textFont(font,12);
   fill(0);
@@ -152,5 +158,19 @@ void drawCoords()
   text(yc,10,30);
   text(blocksLeft,10,50);
   text(exitHint,10,height-10);
+  text(colours,width-60,height-80);
 }
   
+void switchColours()
+{
+  if(keyPressed)
+  {
+    switch(key)
+    {
+      case 'w': colour = color(255,255,255); break;
+      case 'b': colour = color(0,0,255); break;
+      case 'r': colour = color(255,0,0); break;
+      case 'g': colour = color(0,255,0); break;
+    }
+  }
+}

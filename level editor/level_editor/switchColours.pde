@@ -10,5 +10,8 @@ void switchColours()
       case 'g': colour = color(0,255,0); break;
       case 'c': clearScreen(); break;
     }
+    redVal = red(colour);
+    greenVal = green(colour);
+    blueVal = blue(colour);
   }
 }

@@ -12,7 +12,9 @@ float rectCoords[] = {};
 float x, y, w, h = 0;
 boolean doneDrawing = false;
 int blockAmount = 0;
-color colour = color(0,150,200);
+color colour = color(0,0,255);
+float redVal, greenVal = 0;
+float blueVal = 255;
 
 //max 20 rects
 float[][] blockCoords =   {
@@ -49,6 +51,13 @@ void runEditor()
   {
     if(key=='q')
     {
+      //allow user to copy colour of drawn rect's, also noStroke
+      print("noStroke();\n");
+      print("fill("+(int)redVal+","+
+                  (int)greenVal+","+
+                  (int)blueVal+
+                  ");\n");
+                  
       //print out the coordinates of the rect's user has drawn
       for(float[] coords : blockCoords)
       {

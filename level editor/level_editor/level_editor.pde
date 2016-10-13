@@ -14,18 +14,13 @@ boolean doneDrawing = false;
 int blockAmount = 0;
 color colour = color(0,150,200);
 
-//max 10 rects
+//max 20 rects
 float[][] blockCoords =   {
-                          {0.0,0.0,0.0,0.0},
-                          {0.0,0.0,0.0,0.0},
-                          {0.0,0.0,0.0,0.0},
-                          {0.0,0.0,0.0,0.0},
-                          {0.0,0.0,0.0,0.0},
-                          {0.0,0.0,0.0,0.0},
-                          {0.0,0.0,0.0,0.0},
-                          {0.0,0.0,0.0,0.0},
-                          {0.0,0.0,0.0,0.0},
-                          {0.0,0.0,0.0,0.0},
+                          {0.0,0.0,0.0,0.0},{0.0,0.0,0.0,0.0},{0.0,0.0,0.0,0.0},{0.0,0.0,0.0,0.0},
+                          {0.0,0.0,0.0,0.0},{0.0,0.0,0.0,0.0},{0.0,0.0,0.0,0.0},{0.0,0.0,0.0,0.0},
+                          {0.0,0.0,0.0,0.0},{0.0,0.0,0.0,0.0},{0.0,0.0,0.0,0.0},{0.0,0.0,0.0,0.0},
+                          {0.0,0.0,0.0,0.0},{0.0,0.0,0.0,0.0},{0.0,0.0,0.0,0.0},{0.0,0.0,0.0,0.0},
+                          {0.0,0.0,0.0,0.0},{0.0,0.0,0.0,0.0},{0.0,0.0,0.0,0.0},{0.0,0.0,0.0,0.0},
                           };
 PFont font;
 
@@ -124,13 +119,14 @@ void drawMouseCoords()
   String blocksLeft = new String();
   String exitHint = new String();
   String colours = new String();
+  String resetHint = new String();
   
   xc = ("x pos: " +  mouseX);
   yc = ("y pos: " + mouseY);
   blocksLeft = ("Blocks left: "+(blockCoords.length-blockAmount));
   exitHint = ("Press q to quit");
   colours = ("Colours:\nb - blue \n r - red \n g - green");
-              
+  resetHint = ("Press c to clear screen");
   
   textFont(font,12);
   fill(0);
@@ -138,5 +134,6 @@ void drawMouseCoords()
   text(yc,10,30);
   text(blocksLeft,10,50);
   text(exitHint,10,height-10);
+  text(resetHint,10,height-30);
   text(colours,width-60,height-80);
 }

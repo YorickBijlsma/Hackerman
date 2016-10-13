@@ -1,4 +1,3 @@
-
 void drawGrid()
 {
   stroke(100);

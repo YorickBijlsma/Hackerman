@@ -38,10 +38,10 @@ void draw()
 {
   background(255);
   drawGrid();
-  switchColours();
   runEditor();
-  makeRects();
-  drawMouseCoords();
+  getKeyboard();
+  addRectCoords();
+  drawTexts();
 }
 
 void runEditor()
@@ -72,10 +72,7 @@ void runEditor()
       }
     }
   }
-  else
-  {
-      drawPuzzleBlocks();     
-  }
+ drawPuzzleBlocks();     
 }
 
 void drawPuzzleBlocks()
@@ -104,7 +101,7 @@ void mousePressed()
   }
 }
 
-void makeRects()
+void addRectCoords()
 {   
   if(doneDrawing)
   {
@@ -114,14 +111,13 @@ void makeRects()
       float[] newBlockStats = snapRect(currentBlockStats);
       blockCoords[blockAmount] = newBlockStats;
       doneDrawing = false;
-      //println(blockCoords[blockAmount]);
-      blockAmount += 1;
+      blockAmount++;
       
     }else{text("You're out of blocks.",width/2,height/2);}
   }
 }
 
-void drawMouseCoords()
+void drawTexts()
 {
   String xc = new String();
   String yc = new String();

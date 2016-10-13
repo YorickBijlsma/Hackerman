@@ -1,4 +1,4 @@
-void switchColours()
+void getKeyboard()
 {
   if(keyPressed)
   {

@@ -13,7 +13,7 @@ float rectCoords[] = {};
 float x, y, w, h = 0;
 boolean doneDrawing = false;
 int blockAmount = 0;
-color colour = color(0,0,0);
+color colour = color(0,150,200);
 
 //max 10 rects
 float[][] blockCoords =   {
@@ -28,9 +28,7 @@ float[][] blockCoords =   {
                           {0.0,0.0,0.0,0.0},
                           {0.0,0.0,0.0,0.0},
                           };
-
 PFont font;
-
 
 void setup()
 {
@@ -44,10 +42,12 @@ void setup()
 void draw()
 {
   background(255);
+  drawGrid();
   switchColours();
   runEditor();
   makeRects();
-  drawCoords();
+  drawMouseCoords();
+  
   
 }
 
@@ -58,13 +58,15 @@ void runEditor()
   {
     if(key=='q')
     {
-      //print(blockCoords);
+      //print out the coordinates of the rect's user has drawn
       for(float[] coords : blockCoords)
       {
         if(coords[0]+coords[1]+coords[2]+coords[3] != 0.0)
         {
           String coordsString = Arrays.toString(coords);
-          print(coordsString+"\n");
+          String rectString = coordsString.substring(1,coordsString.length()-1);
+          print("rect("+rectString+");\n");
+          //string.length() - 1
         }
         exit();
       }
@@ -72,7 +74,7 @@ void runEditor()
   }
   else
   {
-      drawPuzzleBlocks();
+      drawPuzzleBlocks();     
   }
 }
 
@@ -91,32 +93,16 @@ void drawPuzzleBlocks()
 }
 
 
-
 int coordCount = 0;
 void mousePressed()
 {
-  if(coordCount == 0)
+  if(mouseButton==LEFT)
   {
-    x = mouseX;
-    y = mouseY;
-    rect(x,y,3,3);
-    coordCount++;
+    defineRect();
   }
-  
-  else if(coordCount == 1)
+  else if(mouseButton==RIGHT)
   {
-    w = -(x-mouseX);
-    rect(x,y,w,3);
-    coordCount++;
-  }
-  
-  else if(coordCount == 2)
-  {
-    h = -(y-mouseY);
-    point(x,y+h);
-    //reset the coordinate index
-    coordCount = 0;
-    doneDrawing = true;
+    removeRect();
   }
 }
 
@@ -127,17 +113,17 @@ void makeRects()
     if(blockAmount<10)
     {
       float[] currentBlockStats = {x,y,w,h};
-      blockCoords[blockAmount] = currentBlockStats;
+      float[] newBlockStats = snapRect(currentBlockStats);
+      blockCoords[blockAmount] = newBlockStats;
       doneDrawing = false;
-      println(blockCoords[blockAmount]);
-     
+      //println(blockCoords[blockAmount]);
       blockAmount += 1;
       
     }else{text("You're out of blocks.",width/2,height/2);}
   }
 }
 
-void drawCoords()
+void drawMouseCoords()
 {
   String xc = new String();
   String yc = new String();
@@ -149,7 +135,7 @@ void drawCoords()
   yc = ("y pos: " + mouseY);
   blocksLeft = ("Blocks left: "+(blockCoords.length-blockAmount));
   exitHint = ("Press q to quit");
-  colours = ("Colours:\n w - white \n b - blue \n r - red \n g - green");
+  colours = ("Colours:\nb - blue \n r - red \n g - green");
               
   
   textFont(font,12);
@@ -159,18 +145,4 @@ void drawCoords()
   text(blocksLeft,10,50);
   text(exitHint,10,height-10);
   text(colours,width-60,height-80);
-}
-  
-void switchColours()
-{
-  if(keyPressed)
-  {
-    switch(key)
-    {
-      case 'w': colour = color(255,255,255); break;
-      case 'b': colour = color(0,0,255); break;
-      case 'r': colour = color(255,0,0); break;
-      case 'g': colour = color(0,255,0); break;
-    }
-  }
 }

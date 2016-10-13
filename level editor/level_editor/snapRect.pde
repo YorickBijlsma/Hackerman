@@ -16,9 +16,6 @@ float[] snapRect(float[] currentBlockStats)
   x -= xRemainder;
   y -= yRemainder;
   
-  //newBlockCoords[0] = roundTen(xRemainder, x, snapPixels);
-  //newBlockCoords[1] = roundTen(yRemainder, y, snapPixels);
-  
   newBlockCoords[0] = x;
   newBlockCoords[1] = y;
   newBlockCoords[2] = roundTen(wRemainder, w, snapPixels);
@@ -29,7 +26,6 @@ float[] snapRect(float[] currentBlockStats)
 
 float roundTen(float remainder, float coord, float snapPixels)
 {
-
     coord += (snapPixels - remainder);
     return coord;
 }

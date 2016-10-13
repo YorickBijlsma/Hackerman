@@ -1,6 +1,5 @@
 //add class PlayerBlock inheriting from PuzzleBlock in that it has
 //x,y,w,h (and can be made by this) but can move and rotate
-
 import java.util.Arrays;
 //define a class PuzzleBlock.
 //PuzzleBlocks are made of an arbitrary number of rect's.
@@ -35,7 +34,6 @@ void setup()
  size(1024,432);
  background(255);
  fill(255,0,0);
- 
  font = createFont("Arial",12,true);
 }
 
@@ -47,8 +45,6 @@ void draw()
   runEditor();
   makeRects();
   drawMouseCoords();
-  
-  
 }
 
 void runEditor()
@@ -84,14 +80,12 @@ void drawPuzzleBlocks()
   {
     if(c[0]+c[1]+c[2]+c[3] != 0.0)
     {
-      //PuzzleBlock puzzleblock = new PuzzleBlock(c[0],c[1],c[2], c[3]);
       fill(colour);
       noStroke();
       rect(c[0],c[1],c[2],c[3]);
     }
   }
 }
-
 
 int coordCount = 0;
 void mousePressed()
@@ -110,7 +104,7 @@ void makeRects()
 {   
   if(doneDrawing)
   {
-    if(blockAmount<10)
+    if(blockAmount<blockCoords.length)
     {
       float[] currentBlockStats = {x,y,w,h};
       float[] newBlockStats = snapRect(currentBlockStats);

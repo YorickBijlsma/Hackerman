@@ -23,7 +23,4 @@ void defineRect()
     coordCount = 0;
     doneDrawing = true;
   }
-  
-  
-  
 }

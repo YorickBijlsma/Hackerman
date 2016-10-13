@@ -1,7 +1,6 @@
-
-//while true, array rectangles at index i becomes new rectangle where you clicked( x&y , w , h )
-//if you enter 'done' in the console, it prints out the array of coords per rect
-
+/*
+NOT YET IN USE 
+*/
 public class PuzzleBlock
 {
   float x,y,h,w;

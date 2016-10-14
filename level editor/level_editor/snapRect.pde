@@ -21,7 +21,6 @@ float[] snapRect(float[] currentStats)
   newCoords[2] = roundTen(wRemainder, currentW, snapPixels);
   newCoords[3] = roundTen(hRemainder, currentH, snapPixels);
   
-  print("doing newcoords");
   return newCoords;
 }
 

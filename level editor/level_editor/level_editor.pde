@@ -64,14 +64,10 @@ void draw()
 
 void exitEditor()
 {
-  //allow user to copy colour of drawn rect's, also noStroke
-  print(editType);
-  //print(donePlayerDrawing);
-  //print("\nPlayer coords: "+ doneX,doneY,doneW,doneH);
-  String playerString = Arrays.toString(playerCoords);
-  String doneReqString = playerString.substring(1,playerString.length()-1);
-  print(doneReqString);
-  print("\nList player coords: "+playerCoords);
+  
+  printDoneReqs();
+  
+  print("//dit zijn de vormen die je net hebt gemaakt:\n");
   print("noStroke();\n");
   print("fill("+(int)redVal+","+
                 (int)greenVal+","+
@@ -86,7 +82,6 @@ void exitEditor()
       String coordsString = Arrays.toString(coords);
       String rectString = coordsString.substring(1,coordsString.length()-1);
       print("rect("+rectString+");\n");
-      //string.length() - 1
     }
   }
   exit();
@@ -105,6 +100,18 @@ void drawPuzzleBlocks()
     }
   }
 }
+
+
+//switch to editing player-done-requirement coords and back to block coords
+void keyReleased()
+{
+  if(key == 'p')
+  {
+    if(Objects.equals(editType,"block")){ editType = "player"; }
+    else if(Objects.equals(editType,"player")){ editType = "block"; }
+  }
+}
+
 
 
 void mousePressed()

@@ -1,27 +1,28 @@
-float[] snapRect(float[] currentBlockStats)
+float[] snapRect(float[] currentStats)
 {
   float snapPixels = 20.0;
-  float[] newBlockCoords = new float[4];
+  float[] newCoords = new float[4];
   
-  x = currentBlockStats[0];
-  y = currentBlockStats[1];
-  w = currentBlockStats[2];
-  h = currentBlockStats[3];
+  currentX = currentStats[0];
+  currentY = currentStats[1];
+  currentW = currentStats[2];
+  currentH = currentStats[3];
   
-  float xRemainder = x % snapPixels;
-  float yRemainder =  y % snapPixels;
-  float wRemainder = w % snapPixels;
-  float hRemainder = h % snapPixels;
+  float xRemainder = currentX % snapPixels;
+  float yRemainder =  currentY % snapPixels;
+  float wRemainder = currentW % snapPixels;
+  float hRemainder = currentH % snapPixels;
   
-  x -= xRemainder;
-  y -= yRemainder;
+  currentX -= xRemainder;
+  currentY -= yRemainder;
   
-  newBlockCoords[0] = x;
-  newBlockCoords[1] = y;
-  newBlockCoords[2] = roundTen(wRemainder, w, snapPixels);
-  newBlockCoords[3] = roundTen(hRemainder, h, snapPixels);
+  newCoords[0] = currentX;
+  newCoords[1] = currentY;
+  newCoords[2] = roundTen(wRemainder, currentW, snapPixels);
+  newCoords[3] = roundTen(hRemainder, currentH, snapPixels);
   
-  return newBlockCoords;
+  print("doing newcoords");
+  return newCoords;
 }
 
 float roundTen(float remainder, float coord, float snapPixels)

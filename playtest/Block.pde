@@ -5,10 +5,16 @@ public class Block {
   float w = 150;
   float h = 25;
   
-  public void UpdateRect(){
+  Block(float x)
+  {
+    this.x = x; 
+  }
+  
+  public void UpdateRect()
+  {
     noStroke();
-  rect(x,y,w,h);
-}
+    rect(x,y,w,h);
+  }
 
 void input()
 {

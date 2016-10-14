@@ -1,20 +1,23 @@
 Block block;
-Block block2;
+//Block block2;
 
 boolean done = false;
 //float angle = 0;
 
 void setup()
 {
-  block = new Block();
-  block2 = new Block();
+  block = new Block(200);
+  ///block2 = new Block(250);
   
-  block2.y += 100;
+  //block2.y += 100;
   
-  size(500,500);
+  size(1024,432);
   background(255);
+
 }
 color c = color(255,0,0);
+
+
 
 void draw()
 {
@@ -22,7 +25,7 @@ void draw()
   if (!done)
   {
   block.input();
-  block2.input();
+  //block2.input();
   //rotate(angle);
   }
   else{ c = color(0,255,0); }
@@ -31,12 +34,15 @@ void draw()
   background(255);
   fill(c);
   
-  rect(50, 300, 25, 150);
-  rect(50,450,150,25);
-  rect(175,300,25,150);
+  rect(260.0, 80.0, 420.0, 260.0);
+rect(740.0, 80.0, 180.0, 260.0);
+rect(60.0, 120.0, 20.0, 100.0);
+rect(120.0, 120.0, 20.0, 100.0);
+rect(80.0, 200.0, 60.0, 20.0);
+
   
   block.UpdateRect();
-  block2.UpdateRect();
+  //block2.UpdateRect();
 }
 
 void makeBlocks()
@@ -47,12 +53,13 @@ void makeBlocks()
 
 boolean done()
 {
-  if(block.x >= 50 - 3 && block.x <= 50 + 3)
+  if(block.x >= 50 - 2 && block.x <= 50 + 2)
   {
-    if(block.y >= 300 - (block.h+3) && block.y <= 300 + (block.h+3)) {
-    done = true; 
+    if(block.y >= 300 - (block.h+2) && block.y <= 300 + (block.h+2))
+    {
+    return true; 
     }
   }
-  else{done = false;}  
-  return done;
+  else{return false;}  
+  return false;
 }

@@ -15,6 +15,7 @@ float currentX, currentY, currentW, currentH;
 boolean doneBlockDrawing = false;
 boolean donePlayerDrawing = false;
 int blockAmount = 0;
+int playerAmount = 0;
 color colour = color(0,0,255);
 float redVal, greenVal = 0;
 float blueVal = 255;
@@ -33,7 +34,10 @@ float[][] blockCoords =   {
                           };
                           
 //starting out with 1 rect surface as done criterium                          
-float[] playerCoords = {0.0,0.0,0.0,0.0};
+float[][] playerCoords = {
+                         {0.0,0.0,0.0,0.0},{0.0,0.0,0.0,0.0},{0.0,0.0,0.0,0.0},{0.0,0.0,0.0,0.0},
+                         
+                         };
 
 //coords for criterium puzzle finish
 float doneX , doneY, doneW, doneH = 0;
@@ -46,7 +50,7 @@ void setup()
  size(1024,432);
  background(255);
  fill(255,0,0);
- font = createFont("Arial",12,true);
+ font = createFont("Arial",15,true);
 }
 
 void draw()
@@ -66,24 +70,6 @@ void exitEditor()
 {
   
   printDoneReqs();
-  
-  print("//dit zijn de vormen die je net hebt gemaakt:\n");
-  print("noStroke();\n");
-  print("fill("+(int)redVal+","+
-                (int)greenVal+","+
-                (int)blueVal+
-                ");\n");
-                  
-  //print out the coordinates of the rect's user has drawn
-  for(float[] coords : blockCoords)
-  {
-    if(coords[0]+coords[1]+coords[2]+coords[3] != 0.0)
-    {
-      String coordsString = Arrays.toString(coords);
-      String rectString = coordsString.substring(1,coordsString.length()-1);
-      print("rect("+rectString+");\n");
-    }
-  }
   exit();
 }
 
@@ -112,18 +98,17 @@ void keyReleased()
   }
 }
 
-
-
 void mousePressed()
 {
   if(mouseButton==LEFT)
   {
-    if(editType=="block"){defineRect(); }
+    if(editType=="block"){defineRectCoords(); }
     else if(editType=="player"){definePlayerCoords(); }
   }
   else if(mouseButton==RIGHT)
   {
-    removeRect();
+    if(editType=="block"){removeRect(blockCoords); }
+    else if(editType=="player"){removeRect(playerCoords); }
   }
 }
 
@@ -137,20 +122,33 @@ void addRectCoords()
       float[] newBlockStats = snapRect(currentBlockStats);
       blockCoords[blockAmount] = newBlockStats;
       doneBlockDrawing = false;
-      blockAmount++;
-      
-    }else{text("You're out of blocks.",width/2,height/2);}
+      blockAmount++;      
+    }
+    else
+    {
+      fill(0);
+      text("You're out of blocks.",width/2,height/2);
+    }
   }
 }
 void addPlayerCoords()
 {
 if(donePlayerDrawing)
   {
-    //if(playerCoords[0]+playerCoords[1]+playerCoords[2]+playerCoords[3] == 0.0)
-      float[] currentPlayerStats = {doneX,doneY,doneW,doneH};
-      float[] newPlayerStats = snapRect(currentPlayerStats);
-      playerCoords = newPlayerStats;
-      donePlayerDrawing = false;
+    if(playerAmount<playerCoords.length)
+    {
+      //if(playerCoords[0]+playerCoords[1]+playerCoords[2]+playerCoords[3] == 0.0)
+        float[] currentPlayerStats = {doneX,doneY,doneW,doneH};
+        float[] newPlayerStats = snapRect(currentPlayerStats);
+        playerCoords[playerAmount] = newPlayerStats;
+        donePlayerDrawing = false;
+        playerAmount++;
+    }
+    else
+    {
+      fill(0);
+      text("You're out of player blocks.",width/2,(height/2)-50);
+    }
   }
 }
 
@@ -161,6 +159,7 @@ void drawTexts()
   String xc = new String();
   String yc = new String();
   String blocksLeft = new String();
+  String playerLeft = new String();
   String exitHint = new String();
   String colours = new String();
   String resetHint = new String();
@@ -169,6 +168,7 @@ void drawTexts()
   xc = ("x pos: " +  mouseX);
   yc = ("y pos: " + mouseY);
   blocksLeft = ("Blocks left: "+(blockCoords.length-blockAmount));
+  playerLeft = ("Player blocks left: "+(playerCoords.length-playerAmount));
   exitHint = ("Press q to quit");
   colours = ("Colours:\nb - blue \n r - red \n g - green");
   resetHint = ("Press c to clear screen");
@@ -179,8 +179,9 @@ void drawTexts()
   text(xc,10,10);
   text(yc,10,30);
   text(blocksLeft,10,50);
+  text(playerLeft,10,70);
   text(exitHint,10,height-15);
   text(resetHint,10,height-35);
-  text(colours,width-60,height-85);
+  text(colours,width-60,height-95);
   text(editing,10,height-200);
 }

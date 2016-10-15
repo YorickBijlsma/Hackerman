@@ -1,4 +1,4 @@
-void defineRect()
+void defineRectCoords()
 {
   if(blockCoordCount == 0)
   {

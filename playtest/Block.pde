@@ -13,6 +13,10 @@ public class Block {
   public void UpdateRect()
   {
     noStroke();
+    if (PlayerCollision(mouseX, mouseY) )
+    {
+      stroke(155);
+    }
     rect(x,y,w,h);
   }
 
@@ -50,4 +54,18 @@ void input()
           }
   }
 }
+
+ boolean PlayerCollision(float xObject, float yObject) 
+ {
+   if (xObject > x && xObject < x + w) 
+   {
+     if (yObject > y && yObject < y + h) 
+     {
+       return true;
+     }
+   }
+   return false;
+ }
+ 
+   
 }

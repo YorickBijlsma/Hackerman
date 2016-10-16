@@ -1,5 +1,6 @@
 Block block;
 //Block block2;
+EnemyCircle enemy;
 
 boolean done = false;
 //float angle = 0;
@@ -8,6 +9,8 @@ void setup()
 {
   block = new Block(200);
   ///block2 = new Block(250);
+  
+  enemy = new EnemyCircle();
   
   //block2.y += 100;
   
@@ -27,6 +30,8 @@ void draw()
   block.input();
   //block2.input();
   //rotate(angle);
+  
+  enemy.MoveEnemy();
   }
   else{ c = color(0,255,0); }
   
@@ -43,6 +48,8 @@ rect(80.0, 200.0, 60.0, 20.0);
   
   block.UpdateRect();
   //block2.UpdateRect();
+  
+  enemy.UpdateEnemy();
 }
 
 void makeBlocks()

@@ -1,16 +1,17 @@
 public class EnemyCircle {
-  float x = 0;
-  float y = 0;
+  float x = 0; //x coord
+  float y = 0; //y coord
   
-  float r = 20;
-  float xv = 1;
-  float yv = 0.1;
+  float r = 30; //radius
+  float xv = 1; //xvelocity
+  float yv = 0.1; //yvelocity
   
    
   void MoveEnemy() {
-    x += xv;
-    y += yv;
+   // x += xv;
+   // y += yv;
     
+    //bounce
     if (x == width - 0.5*r) 
     {
       xv = -xv;                 
@@ -34,18 +35,18 @@ public class EnemyCircle {
   
    void UpdateEnemy() {
      noFill();
-     if(EnemyCollision()) 
+     if(EnemyCollision(block.x, block.y) || block.PlayerCollision(mouseX, mouseY) ) //fill if collision is true
      {
        fill(0,0,0);
      }
      
      stroke(255,100,0);     
-     ellipse(x,y + r, r, r);    
+     ellipse(x + r,y + r, r, r);    
   
   }
   
-  boolean EnemyCollision() {
-    if (dist(block.x, block.y, x, y + r) < 20) 
+  boolean EnemyCollision(float xObject, float yObject) {
+    if (dist(xObject, yObject, x, y + r) < r) 
     {
       return true;
     }

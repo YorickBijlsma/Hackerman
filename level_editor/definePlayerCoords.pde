@@ -29,9 +29,16 @@ void definePlayerCoords()
 
 void drawPlayer()
 {
+  float[] reqCoords = playerCoords[0];
+  float[] mainCoords = playerCoords[1];
+  fill(255,0,255);
+  rect(reqCoords[0],reqCoords[1],reqCoords[2],reqCoords[3]);
+  rect(mainCoords[0],mainCoords[1],mainCoords[2],mainCoords[3]);
+  
   fill(255,193,37);
-  for(float[] coords : playerCoords)
+  for(int a = 2; a < playerCoords.length; a++)
   {
-    rect(coords[0],coords[1],coords[2],coords[3]);
+    float[] restCoords = playerCoords[a];
+    rect(restCoords[0],restCoords[1],restCoords[2],restCoords[3]);
   }
 }

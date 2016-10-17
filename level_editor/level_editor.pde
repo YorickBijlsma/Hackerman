@@ -35,7 +35,12 @@ float[][] blockCoords =   {
                           
 //starting out with 1 rect surface as done criterium                          
 float[][] playerCoords = {
-                         {0.0,0.0,0.0,0.0},{0.0,0.0,0.0,0.0},{0.0,0.0,0.0,0.0},{0.0,0.0,0.0,0.0},
+                         {0.0,0.0,0.0,0.0}, //the first array will hold the requirement coordinates
+                         {0.0,0.0,0.0,0.0}, //the second array will hold the main player block
+                                            //they will be compared and if they match, puzzle is done
+                         
+                         //surplus arrays will be used to store other player rectangles (will all move at the same time as main player rect)
+                         {0.0,0.0,0.0,0.0},{0.0,0.0,0.0,0.0},
                          
                          };
 

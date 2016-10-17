@@ -1,27 +1,38 @@
 void printDoneReqs()
 {
   int z = 0;
-  print("//gebruik deze variabelen als criteria om de puzzel af te maken\n\n");
   for(float[] coords : playerCoords)
   {
     float reqX = coords[0];
     float reqY = coords[1];
     float reqW = coords[2];
     float reqH = coords[3];
-    
-    if(reqX+reqY+reqW+reqH == 0.0)
+    if(!isEmpty(coords))
     {
-      print("//rect "+z+":");
-      print("\nfloat reqX"+z+" = "+reqX+
-            ";\nfloat reqY"+z+" = "+reqY+
-            ";\nfloat reqW"+z+" = "+reqW+
-            ";\nfloat reqH"+z+" = "+reqH+
-            ";\n\n");
-      z++;
+      if(z==0)
+      {
+        print("Gebruik deze variabelen in de checkDone functie van Player");
+        print("\nfloat reqX = "+reqX);
+        print("\nfloat reqY = "+reqY);
+      }
+      else if(z==1)
+      {
+        print("\n\nGebruik deze variabelen voor de Main rectangle van Player");
+        print("\nfloat mainX = "+reqX);
+        print("\nfloat mainY = "+reqY);
+        print("\nfloat mainW = "+reqW);
+        print("\nfloat mainH = "+reqH);
+      }
+      else
+      {
+        print("\n\nRestanten Player rectangles");
+        print("\nrect("+reqX+","+reqY+","+reqW+","+reqH+");");
+      }
     }
+    z++;
   }
   
-  print("//dit zijn de blocks die je net hebt gemaakt:\n");
+  print("\n\n//dit zijn de blocks die je net hebt gemaakt:\n");
   print("noStroke();\n");
   print("fill("+(int)redVal+","+
                 (int)greenVal+","+
@@ -29,7 +40,7 @@ void printDoneReqs()
                 ");\n");
   for(float[] coords : blockCoords)
   {
-    if(coords[0]+coords[1]+coords[2]+coords[3] != 0.0)
+    if(!isEmpty(coords))
     {
       String coordsString = Arrays.toString(coords);
       String rectString = coordsString.substring(1,coordsString.length()-1);

@@ -11,26 +11,31 @@ void printDoneReqs()
     {
       if(z==0)
       {
-        print("Gebruik deze variabelen in de checkDone functie van Player");
-        print("\nfloat reqX = "+reqX);
-        print("\nfloat reqY = "+reqY);
+        print("//Gebruik deze variabelen in de checkDone functie van Player");
+        print("\nplayer.reqX = "+reqX);
+        print("\nplayer.reqY = "+reqY);
       }
       else if(z==1)
       {
-        print("\n\nGebruik deze variabelen voor de Main rectangle van Player");
-        print("\nfloat mainX = "+reqX);
-        print("\nfloat mainY = "+reqY);
-        print("\nfloat mainW = "+reqW);
-        print("\nfloat mainH = "+reqH);
+        print("\n\n//Gebruik deze variabelen voor de Main rectangle van Player");
+        print("\nplayer.mainX = "+reqX);
+        print("\nplayer.mainY = "+reqY);
+        print("\nplayer.mainW = "+reqW);
+        print("\nplayer.mainH = "+reqH);
       }
-      else
+      else if(z > 1)
       {
-        print("\n\nRestanten Player rectangles");
-        print("\nrect("+reqX+","+reqY+","+reqW+","+reqH+");");
+        //print("\n\n//Restanten Player rectangles");
+        //print("\nrect("+reqX+","+reqY+","+reqW+","+reqH+");");
+        //print("float[][] playerRects = {"+reqX+","+reqY+","+reqW+","+reqH+"}");
+        float[] playerRect = {reqX, reqY, reqW, reqH};
+        String playerString = Arrays.toString(playerRect);
+        strPlayerRects += playerString;
       }
     }
     z++;
   }
+  print(strPlayerRects);
   
   print("\n\n//dit zijn de blocks die je net hebt gemaakt:\n");
   print("noStroke();\n");

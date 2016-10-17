@@ -40,9 +40,13 @@ float[][] playerCoords = {
                                             //they will be compared and if they match, puzzle is done
                          
                          //surplus arrays will be used to store other player rectangles (will all move at the same time as main player rect)
-                         {0.0,0.0,0.0,0.0},{0.0,0.0,0.0,0.0},
-                         
+                         {0.0,0.0,0.0,0.0},{0.0,0.0,0.0,0.0},{0.0,0.0,0.0,0.0},{0.0,0.0,0.0,0.0}
                          };
+                         
+float[][] playerRects =//for printing surplus player rects
+{{0.0,0.0,0.0,0.0},{0.0,0.0,0.0,0.0},{0.0,0.0,0.0,0.0},{0.0,0.0,0.0,0.0}};    
+String strPlayerRects = new String();
+
 
 //coords for criterium puzzle finish
 float doneX , doneY, doneW, doneH = 0;
@@ -178,6 +182,7 @@ void drawTexts()
   colours = ("Colours:\nb - blue \n r - red \n g - green");
   resetHint = ("Press c to clear screen");
   editing = ("editing:"+editType);
+  strPlayerRects = ("float[][] playerRects = ");
   
   textFont(font,12);
   fill(0);

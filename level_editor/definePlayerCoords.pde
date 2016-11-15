@@ -36,7 +36,7 @@ void drawPlayer()
   rect(mainCoords[0],mainCoords[1],mainCoords[2],mainCoords[3]);
   
   fill(255,193,37);
-  for(int a = 2; a < playerCoords.length; a++)
+  for(int a = 2; a < playerCoords.length; a++) //start at index 2 because the first two elements of player are the puzzle requirements
   {
     float[] restCoords = playerCoords[a];
     rect(restCoords[0],restCoords[1],restCoords[2],restCoords[3]);

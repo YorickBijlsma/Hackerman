@@ -1,0 +1,21 @@
+Gebruik deze variabelen in de checkDone functie van Player
+float reqX = 180.0
+float reqY = 140.0
+
+Gebruik deze variabelen voor de Main rectangle van Player
+float mainX = 780.0
+float mainY = 60.0
+float mainW = 100.0
+float mainH = 20.0
+
+Gebruik deze rect's als de overgebleven rectangles van Player
+rect(780.0,60.0,20.0,100.0);Gebruik deze rect's als de overgebleven rectangles van Player
+rect(860.0,60.0,20.0,100.0);
+
+//dit zijn de blocks die je net hebt gemaakt:
+noStroke();
+fill(0,0,255);
+rect(160.0, 120.0, 120.0, 20.0);
+rect(160.0, 140.0, 20.0, 120.0);
+rect(160.0, 240.0, 120.0, 20.0);
+rect(200.0, 160.0, 60.0, 80.0);

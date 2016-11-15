@@ -21,7 +21,6 @@ float redVal, greenVal = 0;
 float blueVal = 255;
 int blockCoordCount = 0;
 int playerCoordCount = 0;
-PrintWriter output;
 
 String editType = new String();
 
@@ -36,19 +35,9 @@ float[][] blockCoords =   {
                           
 //starting out with 1 rect surface as done criterium                          
 float[][] playerCoords = {
-                         {0.0,0.0,0.0,0.0}, //the first array will hold the requirement coordinates
-                         {0.0,0.0,0.0,0.0}, //the second array will hold the main player block
-                                            //they will be compared and if they match, puzzle is done
-                         
-                         //surplus arrays will be used to store other player rectangles (will all move at the same time as main player rect)
                          {0.0,0.0,0.0,0.0},{0.0,0.0,0.0,0.0},{0.0,0.0,0.0,0.0},{0.0,0.0,0.0,0.0},
-                         {0.0,0.0,0.0,0.0},{0.0,0.0,0.0,0.0},{0.0,0.0,0.0,0.0},{0.0,0.0,0.0,0.0}
-                         };
                          
-float[][] playerRects =//for printing surplus player rects
-{{0.0,0.0,0.0,0.0},{0.0,0.0,0.0,0.0},{0.0,0.0,0.0,0.0},{0.0,0.0,0.0,0.0}};    
-String strPlayerRects = new String();
-
+                         };
 
 //coords for criterium puzzle finish
 float doneX , doneY, doneW, doneH = 0;
@@ -58,11 +47,10 @@ PFont font;
 void setup()
 {
   editType = ("block");
-  output = createWriter("level_one.txt");
-  size(1024,432);
-  background(255);
-  fill(255,0,0);
-  font = createFont("Arial",15,true);
+ size(1024,432);
+ background(255);
+ fill(255,0,0);
+ font = createFont("Arial",15,true);
 }
 
 void draw()
@@ -80,9 +68,8 @@ void draw()
 
 void exitEditor()
 {
+  
   printDoneReqs();
-  output.flush();
-  output.close();
   exit();
 }
 
@@ -186,7 +173,6 @@ void drawTexts()
   colours = ("Colours:\nb - blue \n r - red \n g - green");
   resetHint = ("Press c to clear screen");
   editing = ("editing:"+editType);
-  strPlayerRects = ("");
   
   textFont(font,12);
   fill(0);

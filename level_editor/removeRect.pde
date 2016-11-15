@@ -11,7 +11,7 @@ void removeRect(float[][] coordinates)
         //empty out the current coordinates       
         coord[0] = 0.0; coord[1]= 0.0; coord[2] = 0.0; coord[3]= 0.0;
         //allow the user to draw a new block in the now empty slot
-        if(Objects.equals(editType,"block")){ blockAmount--; }
+        if(Objects.equals(editType,"puzzle")){ blockAmount--; }
         else if(Objects.equals(editType,"player")){ playerAmount--; }
       }
     }

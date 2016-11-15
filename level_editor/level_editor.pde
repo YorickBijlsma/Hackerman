@@ -10,28 +10,35 @@ import java.util.Objects;
 //make new PuzzleBlock
 //determine x and y, save to PuzzleBlock
 float rectCoords[] = {};
+
 float x, y, w, h = 0;
 float currentX, currentY, currentW, currentH;
-boolean doneBlockDrawing = false;
-boolean donePlayerDrawing = false;
-int blockAmount = 0;
-int playerAmount = 0;
+float wallX, wallY, wallW, wallH;
+
+
+
+
 color colour = color(0,0,255);
 float redVal, greenVal = 0;
 float blueVal = 255;
-int blockCoordCount = 0;
-int playerCoordCount = 0;
-PrintWriter output;
+
+int blockAmount, playerAmount, wallAmount = 0;
+int blockCoordCount,playerCoordCount,wallCoordCount = 0;
+boolean doneBlockDrawing, doneWallDrawing, donePlayerDrawing = false;
+
+PrintWriter outPlayer, outPuzzle, outWalls;
+
 
 String editType = new String();
+int editIndex = 0;
 
 //max 20 rects
 float[][] blockCoords =   {
+/* 5 x 4 = 20 indexes*/   {0.0,0.0,0.0,0.0},{0.0,0.0,0.0,0.0},{0.0,0.0,0.0,0.0},{0.0,0.0,0.0,0.0},
                           {0.0,0.0,0.0,0.0},{0.0,0.0,0.0,0.0},{0.0,0.0,0.0,0.0},{0.0,0.0,0.0,0.0},
-                          {0.0,0.0,0.0,0.0},{0.0,0.0,0.0,0.0},{0.0,0.0,0.0,0.0},{0.0,0.0,0.0,0.0},
-                          {0.0,0.0,0.0,0.0},{0.0,0.0,0.0,0.0},{0.0,0.0,0.0,0.0},{0.0,0.0,0.0,0.0},
-                          {0.0,0.0,0.0,0.0},{0.0,0.0,0.0,0.0},{0.0,0.0,0.0,0.0},{0.0,0.0,0.0,0.0},
-                          {0.0,0.0,0.0,0.0},{0.0,0.0,0.0,0.0},{0.0,0.0,0.0,0.0},{0.0,0.0,0.0,0.0},
+                          {0.0,0.0,0.0,0.0},{0.0,0.0,0.0,0.0},{0.0,0.0,0.0,0.0},{0.0,0.0,0.0,0.0}, 
+                          {0.0,0.0,0.0,0.0},{0.0,0.0,0.0,0.0},{0.0,0.0,0.0,0.0},{0.0,0.0,0.0,0.0}, 
+                          {0.0,0.0,0.0,0.0},{0.0,0.0,0.0,0.0},{0.0,0.0,0.0,0.0},{0.0,0.0,0.0,0.0}, //
                           };
                           
 //starting out with 1 rect surface as done criterium                          
@@ -45,6 +52,18 @@ float[][] playerCoords = {
                          {0.0,0.0,0.0,0.0},{0.0,0.0,0.0,0.0},{0.0,0.0,0.0,0.0},{0.0,0.0,0.0,0.0}
                          };
                          
+float[][] wallCoords =    {
+/*30 indexes*/            {0.0,0.0,0.0,0.0},{0.0,0.0,0.0,0.0},{0.0,0.0,0.0,0.0},{0.0,0.0,0.0,0.0},
+                          {0.0,0.0,0.0,0.0},{0.0,0.0,0.0,0.0},{0.0,0.0,0.0,0.0},{0.0,0.0,0.0,0.0},
+                          {0.0,0.0,0.0,0.0},{0.0,0.0,0.0,0.0},{0.0,0.0,0.0,0.0},{0.0,0.0,0.0,0.0},
+                          {0.0,0.0,0.0,0.0},{0.0,0.0,0.0,0.0},{0.0,0.0,0.0,0.0},{0.0,0.0,0.0,0.0},
+                          {0.0,0.0,0.0,0.0},{0.0,0.0,0.0,0.0},{0.0,0.0,0.0,0.0},{0.0,0.0,0.0,0.0}, 
+                          {0.0,0.0,0.0,0.0},{0.0,0.0,0.0,0.0},{0.0,0.0,0.0,0.0},{0.0,0.0,0.0,0.0},{0.0,0.0,0.0,0.0}, 
+                          {0.0,0.0,0.0,0.0},{0.0,0.0,0.0,0.0},{0.0,0.0,0.0,0.0},{0.0,0.0,0.0,0.0},{0.0,0.0,0.0,0.0} 
+                          };
+  
+                       
+                         
 float[][] playerRects =//for printing surplus player rects
 {{0.0,0.0,0.0,0.0},{0.0,0.0,0.0,0.0},{0.0,0.0,0.0,0.0},{0.0,0.0,0.0,0.0}};    
 String strPlayerRects = new String();
@@ -52,13 +71,20 @@ String strPlayerRects = new String();
 
 //coords for criterium puzzle finish
 float doneX , doneY, doneW, doneH = 0;
+
+int levelNumber = 1;
+String filepath = "data/";  //open a new directory for the current level data to be written to
                           
 PFont font;
+//File savepath = new File(
+//"C:\Users\Yorick\Desktop\Programming\processing-3.1.1\SCRIPTS\School\FYS Brightly Coloured Lines\FYS\Player_class\Game\data"
+//);
+
 
 void setup()
 {
-  editType = ("block");
-  output = createWriter("level_one.txt");
+  editType = ("puzzle");
+  //output = createWriter("level_"+levelNumber+".txt");
   size(1024,432);
   background(255);
   fill(255,0,0);
@@ -68,22 +94,32 @@ void setup()
 void draw()
 {
   background(255);
+  drawAll();
+  getInput();
+}
+
+void drawAll()
+{
   drawGrid();
   drawPuzzleBlocks();
   drawPlayer();
-  
+  drawWalls();
+}
+void getInput()
+{
   getKeyboard();
   addRectCoords();
   addPlayerCoords();
+  addWallCoords();
   drawTexts();
 }
 
 void exitEditor()
 {
   printDoneReqs();
-  output.flush();
-  output.close();
-  exit();
+  levelNumber++;
+  editType = ("puzzle");
+  clearScreen();
 }
 
 
@@ -106,8 +142,17 @@ void keyReleased()
 {
   if(key == 'p')
   {
-    if(Objects.equals(editType,"block")){ editType = "player"; }
-    else if(Objects.equals(editType,"player")){ editType = "block"; }
+    //if(Objects.equals(editType,"puzzle")){ editType = "player"; }
+    //else if(Objects.equals(editType,"player")){ editType = "puzzle"; }
+    editIndex++;
+    editIndex = editIndex % 3;
+    if(editIndex == 0) editType = "puzzle";
+    else if(editIndex == 1) editType = "player";
+    else if(editIndex  == 2) editType = "walls";
+  }
+  if(key == 'q')
+  {
+    exitEditor();
   }
 }
 
@@ -115,13 +160,15 @@ void mousePressed()
 {
   if(mouseButton==LEFT)
   {
-    if(editType=="block"){defineRectCoords(); }
+    if(editType=="puzzle"){defineRectCoords(); }
     else if(editType=="player"){definePlayerCoords(); }
+    else if(editType=="walls"){defineWallCoords(); }
   }
   else if(mouseButton==RIGHT)
   {
-    if(editType=="block"){removeRect(blockCoords); }
+    if(editType=="puzzle"){removeRect(blockCoords); }
     else if(editType=="player"){removeRect(playerCoords); }
+    else if(editType=="walls"){removeRect(wallCoords); }
   }
 }
 
@@ -162,6 +209,21 @@ if(donePlayerDrawing)
       fill(0);
       text("You're out of player blocks.",width/2,(height/2)-50);
     }
+  }
+}
+void addWallCoords()
+{
+  if(doneWallDrawing)
+  {
+    if(wallAmount<wallCoords.length)
+    {
+      float[] wallStats = {wallX,wallY,wallW,wallH};
+      float[] newWallStats = snapRect(wallStats);
+      wallCoords[wallAmount] = newWallStats;
+      doneWallDrawing = false;
+      wallAmount++;
+    }
+    else{ fill(0); text("You're out of wall blocks.",width/2,(height/2)-50); }
   }
 }
 

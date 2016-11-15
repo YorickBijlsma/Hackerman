@@ -1,5 +1,10 @@
 void printDoneReqs()
-{
+{  
+  //output = createWriter(filepath+levelNumber+"/"+"level_"+levelNumber+".txt");
+  outPlayer = createWriter(filepath+levelNumber+"/"+"lvl_"+levelNumber+"_player.txt");
+  outPuzzle = createWriter(filepath+levelNumber+"/"+"lvl_"+levelNumber+"_puzzle.txt");
+  outWalls = createWriter(filepath+levelNumber+"/"+"lvl_"+levelNumber+"_walls.txt");
+  
   int z = 0;
   for(float[] coords : playerCoords)
   {
@@ -7,63 +12,27 @@ void printDoneReqs()
     float reqY = coords[1];
     float reqW = coords[2];
     float reqH = coords[3];
-    //if(!isEmpty(coords))
-    //{
-      if(z==0)
+      if(z==0)    //requirement coords
       {
-        //print("//Gebruik deze variabelen in de checkDone functie van Player");
-        print("\n"+reqX);
-        print("\n"+reqY);
-        output.println(reqX+"\n"+reqY);
+        outPlayer.println(reqX);
+        outPlayer.println(reqY);
       }
-      else
+      else        //player coords, 0st index is main player rect
       {
-        //print("\n\n//Gebruik deze variabelen voor de Main rectangle van Player");
-        print("\n"+reqX);
-        print("\n"+reqY);
-        print("\n"+reqW);
-        print("\n"+reqH);
-        output.println(reqX);
-        output.println(reqY);
-        output.println(reqW);
-        output.println(reqH);
+        outPlayer.println(reqX);
+        outPlayer.println(reqY);
+        outPlayer.println(reqW);
+        outPlayer.println(reqH);
       }
-      /*
-      else if(z > 1)
-      {
-        //print("\n\n//Restanten Player rectangles");
-        //print("\nrect("+reqX+","+reqY+","+reqW+","+reqH+");");
-        //print("float[][] playerRects = {"+reqX+","+reqY+","+reqW+","+reqH+"}");
-          //String tempString = Arrays.toString(playerRect);
-          //String playerString = "{"+tempString.substring(1,tempString.length()-1)+"},";
-          print("\n"+reqX);
-          print("\n"+reqY);
-          print("\n"+reqW);
-          print("\n"+reqH);
-          //strPlayerRects += playerString;
-      }*/
-    //}
     z++;
   }
-  //print("\n//REMEMBER TO REMOVE THE LAST COMMA");
-  //print("\nplayer.restCoords = new float[][]\n{\n"+strPlayerRects+"\n};");
-  
-  //print("\n\n//dit zijn de blocks die je net hebt gemaakt:\n");
-  //print("noStroke();\n");
-  //print("fill("+(int)redVal+","+
-                //(int)greenVal+","+
-                //(int)blueVal+
-                //");\n");
+
   for(float[] coords : blockCoords)
   {
-    print("\n"+coords[0]);
-    print("\n"+coords[1]);
-    print("\n"+coords[2]);
-    print("\n"+coords[3]);
-    output.println(coords[0]);
-    output.println(coords[1]);
-    output.println(coords[2]);
-    output.println(coords[3]);
+    outPuzzle.println(coords[0]);
+    outPuzzle.println(coords[1]);
+    outPuzzle.println(coords[2]);
+    outPuzzle.println(coords[3]);
     
     if(!isEmpty(coords))
     {
@@ -72,4 +41,21 @@ void printDoneReqs()
       //print("rect("+rectString+");\n");
     }
   }
+  
+  for(float[] c : wallCoords)
+  {
+    outWalls.println(c[0]);
+    outWalls.println(c[1]);
+    outWalls.println(c[2]);
+    outWalls.println(c[3]);
+  }
+  
+  
+  outPlayer.flush();
+  outPuzzle.flush();
+  outWalls.flush();
+  
+  outPlayer.close();
+  outPuzzle.close();
+  outWalls.close();
 }

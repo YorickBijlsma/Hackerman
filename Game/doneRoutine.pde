@@ -10,15 +10,7 @@ void doneRoutine()
   {
     stall = 0;
     //File f = new File("data/" + levelNumber + "/lvl_" + levelNumber + "_player.txt");                                             //make a file object to test if the next level exists
-    try
-    {
-        loadLevel(levelNumber);     
-    }
-    catch(NullPointerException e)
-    {
-      text("You have beaten the game, I guess. Grats.",0,0);
-    }
-    //load the next level if it exists
-    //else player.beatGame = true;                                                                                                  //if it doesn't, we assume player has beaten the game
+    loadLevel(levelNumber);     
+    text("You have beaten the game, I guess. Grats.",0,0);
   }
 }

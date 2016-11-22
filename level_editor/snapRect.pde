@@ -1,6 +1,6 @@
 float[] snapRect(float[] currentStats)
 {
-  float snapPixels = 20.0;
+  float snapPixels = 50.0;
   float[] newCoords = new float[4];
   
   //un-snapped coordinates for rect

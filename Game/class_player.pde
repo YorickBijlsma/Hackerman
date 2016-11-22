@@ -3,13 +3,13 @@ class Player
   float reqX, reqY;
   float mainX, mainY, mainW, mainH;
   float xsp, ysp = 0;
-  float speed = 20;
+  float speed = 50;
   float angle = 0;
   boolean done = false;
   boolean beatGame = false;
   
   color colour = color(0,0,255);
-  float[][] restCoords;
+  float[][] restCoords = {{0.0}};
   
   void makeRects()
   {

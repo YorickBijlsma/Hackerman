@@ -1,10 +1,24 @@
-void runGame()
+void updateGame()
 {
-  if(slowMove % 5 == 0) //check input every 5 frames
-       {
-         player.keyReleased();
-         player.keyPressed();
-       }
-   slowMove = slowMove % 10;
-   slowMove++;
+  player.update();
+  for(Worm everyWorm : worms)
+  {
+    everyWorm.update();
+  }
+  checkAllCollisions();
+
+  updateKeys();
+}
+
+void drawGame()
+{
+  background(0);
+  noStroke();
+  
+  player.draw();
+  for (Worm everyWorm : worms)
+  {
+    everyWorm.draw();
+  }
+  drawEnvironment();
 }

@@ -7,9 +7,12 @@ int stall = 0;
 boolean done;
 
 Player player = new Player();                  //a player object, for all rectangles the player controls
-Worm worm = new Worm(500,200);
+//Worm worm = new Worm(800,200);
+
 float[][] wallCoords = new float[30][4];       //a 30 slot 2d array, each subarray having 4 slots. this is for the maximum of 30 wall blocks
 float[][] puzzleCoords = new float[20][4];     //a 20 slot 2d array, each subarray having 4 slots. this is for the maximum of 20 puzzle blocks
+
+ArrayList<Worm> worms = new ArrayList<Worm>();
 
 int levelNumber = 1;
 int levelWait = 150;
@@ -22,15 +25,10 @@ void setup()
 
 void draw()
 {
- noStroke();
- background(255);
- drawEnvironment();
- player.makeRects(); 
- runEnemies();
-
+ drawGame();
  if(!player.done) //player hasn't completed the puzzle
  {
-   runGame();
+   updateGame();
  }
  else  //player has completed the puzzle
  {

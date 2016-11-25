@@ -8,10 +8,10 @@ class Worm
   int segmentSize = 10;
   float headSize = segmentSize * 1.2;
   int maxSegments = 10;
-  float size;                 //placeholder variable for black magic
+  float size;                        //placeholder variable for black magic
   
-  int halfLife = 40;        //every halfLife amount of frames, a new segment is added (the worm grows bigger)
-  int count = 0;            //count every frame for duplication purposes
+  int segmentationTime = 40;         //every segmentationTime amount of frames, a new segment is added (the worm grows bigger)
+  int segmentCounter = 0;            //count every frame for duplication purposes
   
   public Worm(int x, int y)
   {
@@ -19,20 +19,14 @@ class Worm
     this.y = y;
   }
   
-  void drawWorm()
+  void draw()
   {
-    count++; //count ALL the frames!!
-    duplicateWorm();
-                                                        //stay inside the screen
-                                                        if(x+segmentSize > width) dir = LEFT;
-                                                        if(x-segmentSize < 0) dir = RIGHT;
-    //actually draw the worm
     for(int i = 0; i < segments; i++)
     {
-      if(i==0) fill(color(240,0,240));  //make the head (first segment) a unique colour
-      else                              //segments are alternated between 2 colours
+      if(i==0) fill(color(240,0,240));         //make the head (first segment) a unique colour
+      else                              
       {   
-        if(i%2==0) fill(color(244,164,96));
+        if(i%2==0) fill(color(244,164,96));    //segments are alternated between 2 colours
         else fill(color(205,133,63));
       }
       
@@ -43,8 +37,21 @@ class Worm
     }
   }
   
-  void moveWorm()
+  void update()
   {
+    segmentCounter++;
+    if(segments <= maxSegments)
+    {
+      if(segmentCounter > segmentationTime)
+      {
+        segments++;
+        segmentCounter = 0;
+      }
+    }else segmentCounter = 0;
+    
+    if(x+segmentSize > width) dir = LEFT;      //reverse direction if either side of screen is hit
+    if(x-segmentSize < 0) dir = RIGHT;
+    
     switch(dir)
     {
       case LEFT:                  //move left
@@ -53,18 +60,6 @@ class Worm
         x += moveSpeed; break;  
       default:
         break;
-    }
-  }
-  
-  void duplicateWorm()
-  {
-    if(segments <= maxSegments)
-    {
-      if(count > halfLife)  //a halfLife amount of frames has passed
-      {
-        segments++;  //add another segment
-        count = 0;   //reset the counter
-      }
     }
   }
 }

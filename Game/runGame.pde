@@ -1,7 +1,7 @@
 void updateGame()
 {
   player.update();
-  for(Worm everyWorm : worms)
+  for(EnemyWorm everyWorm : worms)
   {
     everyWorm.update();
   }
@@ -16,7 +16,7 @@ void drawGame()
   noStroke();
   
   player.draw();
-  for (Worm everyWorm : worms)
+  for (EnemyWorm everyWorm : worms)
   {
     everyWorm.draw();
   }

@@ -1,4 +1,4 @@
-class Worm
+class EnemyWorm
 {
   int x, y;
   int moveSpeed = 3;
@@ -13,7 +13,7 @@ class Worm
   int segmentationTime = 40;         //every segmentationTime amount of frames, a new segment is added (the worm grows bigger)
   int segmentCounter = 0;            //count every frame for duplication purposes
   
-  public Worm(int x, int y)
+  public EnemyWorm(int x, int y)
   {
     this.x = x;
     this.y = y;
@@ -61,5 +61,103 @@ class Worm
       default:
         break;
     }
+  }
+}
+
+class EnemyAdware
+{
+  
+  float x = 10;
+  float y = 10;
+  float w = 20;
+  float h = 20;
+  float xsp, ysp; 
+  float speed = 10;
+  
+  int adAmount = 10;
+  color colour = color(70, 215, 240);
+               
+  float[] burstSize = new float[adAmount];       //arrays to assign ad amount, size and location on the screen
+  float[] burstLocationX = new float[adAmount];
+  float[] burstLocationY = new float [adAmount];
+  
+  public EnemyAdware (int x, int y)
+  {
+    this.x = x;
+    this.y = y; 
+  }
+  
+  
+
+  void setup()
+  {
+    size(1000,600);
+  }
+  
+  void MoveAdware()
+  {
+    xsp = speed;
+    ysp = 0.1;
+    x += xsp;
+    y += ysp;
+
+//TODO movement, does not bounce
+    if (x > width - w) 
+    {
+      xsp = -xsp;                 
+    }
+    
+    if (x < 0)
+    {
+      xsp = -xsp;      
+    }
+  
+    if (y > height - h)
+    {
+      ysp = -ysp;
+    }
+    
+    if (y < 0) 
+    {
+      ysp = -ysp;
+    }  
+  }
+    
+  void UpdateAdware()
+  {
+    MoveAdware();
+    color(colour);
+    stroke(255,100,0);
+    rectMode(CENTER);
+    rect(x, y, w, h);
+  }
+  
+  void BurstAdware()
+  {
+//randomizing size and location
+    for (int i = 0; i < 10; i++)
+    {
+      burstSize[i] = random(60, 160);
+      burstLocationX[i] = 10 * (random(100));
+      burstLocationY[i] = 10 * (random(57));    
+    }
+    for (int i = 0; i < 10; i++)
+    {
+      rect(burstLocationX[i], burstLocationY[i], burstSize[i], burstSize[i]);
+    }
+   
+  }
+//TODO image spawning
+  void PopUpRandomizer()
+  {
+    
+    
+  }
+      
+  void draw()
+  {
+    UpdateAdware();
+    PopUpRandomizer(); 
+    noLoop();
   }
 }

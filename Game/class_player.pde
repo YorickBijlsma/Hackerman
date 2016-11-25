@@ -56,7 +56,7 @@ class Player
       
       if(keysPressed[SHIFT])
       {
-        Worm newWorm = new Worm(600,200);     //print('h');
+        EnemyWorm newWorm = new EnemyWorm(600,200);     //print('h');
         worms.add(newWorm);
       }
              if(r) r = false;

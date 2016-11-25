@@ -12,7 +12,7 @@ Player player = new Player();                  //a player object, for all rectan
 float[][] wallCoords = new float[30][4];       //a 30 slot 2d array, each subarray having 4 slots. this is for the maximum of 30 wall blocks
 float[][] puzzleCoords = new float[20][4];     //a 20 slot 2d array, each subarray having 4 slots. this is for the maximum of 20 puzzle blocks
 
-ArrayList<Worm> worms = new ArrayList<Worm>();
+ArrayList<EnemyWorm> worms = new ArrayList<EnemyWorm>();
 
 int levelNumber = 1;
 int levelWait = 150;

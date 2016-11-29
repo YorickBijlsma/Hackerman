@@ -3,6 +3,9 @@
  */
 class Player
 {
+  int health = 100;
+  color healthColour = color(255,0,0);
+  
   float reqX, reqY;
   float mainX, mainY, mainW, mainH;
   float nextXposition, nextYposition = 0.0;

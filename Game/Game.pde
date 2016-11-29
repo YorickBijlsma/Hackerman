@@ -5,6 +5,12 @@ import java.io.File;
 int slowMove = 0;
 int stall = 0;
 boolean done;
+int nEnemies = 5;
+float t = 0.0; 
+int health = 100;
+
+ArrayList<EnemyDOT> DOTenemies = new ArrayList<EnemyDOT>();
+ArrayList<Package> packages = new ArrayList<Package>();
 
 Player player = new Player();                  //a player object, for all rectangles the player controls
 //Worm worm = new Worm(800,200);
@@ -22,14 +28,13 @@ void setup()
 {
   size(1024,576);
   loadLevel(levelNumber);
-  Worm newWorm = new Worm(250, 500);
-  newWorm.dir = LEFT;
-  worms.add(newWorm);
+  setupGame();
 }
 
 void draw()
 {
  drawGame();
+ //drawGameenemies();
  if(!player.done) //player hasn't completed the puzzle
  {
    updateGame();
@@ -42,4 +47,33 @@ void draw()
  }
 
  fill(player.colour);
+}
+
+void setupenemies() {  
+  size(1024, 576);
+
+  
+  /*
+  for (int iEnemy=0; iEnemy<enemies.size (); iEnemy++) {
+    Enemy anEnemy = enemies.get(iEnemy); // Fetch a single enemy from the enemies ArrayList
+  }*/
+}
+
+void drawGameenemies() {
+  background(0);
+  text("Health: " + health, 10, 30);
+
+ 
+  
+  
+  for (int iEnemy=0; iEnemy<DOTenemies.size (); iEnemy++)
+    DOTenemies.get(iEnemy).draw();
+
+  fill(color(255, 255, 255));
+}
+
+void drawenemies() {
+  drawGameenemies();
+ 
+  t = frameCount/frameRate;
 }

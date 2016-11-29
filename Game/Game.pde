@@ -12,7 +12,8 @@ Player player = new Player();                  //a player object, for all rectan
 float[][] wallCoords = new float[30][4];       //a 30 slot 2d array, each subarray having 4 slots. this is for the maximum of 30 wall blocks
 float[][] puzzleCoords = new float[20][4];     //a 20 slot 2d array, each subarray having 4 slots. this is for the maximum of 20 puzzle blocks
 
-ArrayList<EnemyWorm> worms = new ArrayList<EnemyWorm>();
+ArrayList<Worm> worms = new ArrayList<Worm>();
+final int puzzleDoneMargin = 5;                //you need be within 5 pixels of the actual requirement for the puzzle to finish it
 
 int levelNumber = 1;
 int levelWait = 150;
@@ -21,6 +22,9 @@ void setup()
 {
   size(1024,576);
   loadLevel(levelNumber);
+  Worm newWorm = new Worm(250, 500);
+  newWorm.dir = LEFT;
+  worms.add(newWorm);
 }
 
 void draw()

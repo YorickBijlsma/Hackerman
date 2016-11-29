@@ -1,5 +1,5 @@
-boolean[] keysPressed = new boolean[256]; //a slot for every key you can press
-boolean [] lastFrameKeysPressed = new boolean[256]; //remember which keys were pressed last frame
+boolean[] keysPressed = new boolean[2560]; //a slot for every key you can press
+boolean [] lastFrameKeysPressed = new boolean[2560]; //remember which keys were pressed last frame
 
 void updateKeys()
 {

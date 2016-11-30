@@ -1,5 +1,7 @@
 void updateGame()
 {
+  updateKeys();
+  
   player.update();
   for(Worm everyWorm : worms)
   {
@@ -9,9 +11,12 @@ void updateGame()
   {
     iEnemy.update(); 
   }
+  for (EnemyAdware everyAdware : adwares)
+  {
+    everyAdware.update();
+  }
   
-  checkAllCollisions();
-  updateKeys();
+  
 }
 
 void drawGame()
@@ -34,6 +39,10 @@ void drawGame()
   {
     everyPackage.draw();
   }
+  for (EnemyAdware everyAdware : adwares)
+  {
+    everyAdware.draw();
+  }
   
   drawEnvironment();
   
@@ -45,13 +54,15 @@ void setupGame()
 {
   for (int iEnemy=0; iEnemy<nEnemies; iEnemy++)
   {
-    EnemyDOT anEnemy = new EnemyDOT();
-    anEnemy.init();
+    EnemyDOT anEnemy = new EnemyDOT(200,200);
     DOTenemies.add(anEnemy);
   }
   
   Worm newWorm = new Worm(250, 200);
   newWorm.dir = LEFT;
   worms.add(newWorm);
+  
+  EnemyAdware adware = new EnemyAdware(100,300);
+  adwares.add(adware);
   
 }

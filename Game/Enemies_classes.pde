@@ -7,7 +7,7 @@ class Worm
 
   int segments = 1;
   int segmentSize = 5;
-  float headSize = segmentSize * 1.2;
+  float headSize = segmentSize * 1.3;
   int maxSegments = 100;
   float size;                        //placeholder variable for black magic
 
@@ -24,15 +24,15 @@ class Worm
   {
     for (int i = 0; i < segments; i++)
     {
-      if (i==0) fill(color(240, 0, 240));         //make the head (first segment) a unique colour
-      else                              
-      {   
-        if (i%2==0) fill(color(244, 164, 96));    //segments are alternated between 2 colours
-        else fill(color(205, 133, 63));
+      if (i==0)        fill(color(240, 0, 240));           //make the head (first segment) a unique colour
+      else                                          
+      {  
+         if (i%2==0)   fill(color(244, 164, 96));    
+         else          fill(color(205, 133, 63));          //segments are alternated between 2 colours
       }
 
-      if (i==0) size = headSize; 
-      else size = segmentSize;            //draw the head bigger
+      size = (i == 0) ? headSize : segmentSize;           //draw the head bigger
+      
 
       if (dir == LEFT)  ellipse(x + (i*segmentSize), y, size, size);  //draw additional segments to the right of the head
       if (dir == RIGHT) ellipse(x - (i*segmentSize), y, size, size);  //draw additional segments to the left of the head
@@ -104,24 +104,35 @@ class Worm
       float otherW = c[2];
       float otherH = c[3];
 
-      if (x <= otherX + otherW    &&                //there's a wall to the left
-        x >= otherX             &&                //to the right
-        y <= otherY + otherH    &&                //above player
-        y >= otherY)            return true;      //below player
-    }
-    return false; //no wall where we want to move!
+      if(     x <= otherX + otherW    &&      //there's a wall to the left
+              x >= otherX             &&      //to the right
+              y <= otherY + otherH    &&      //above
+              y >= otherY             )       //below
+              return true;                    //collision!
+    }   
+    return false;                             //no wall where we want to move!
   }
 }
+/*
+//////////////////////////////////////////////
+end of worm class
+//////////////////////////////////////////////
+//////////////////////////////////////////////
+//////////////////////////////////////////////
+begin of adware class
+//////////////////////////////////////////////
+*/
 
 class EnemyAdware
 {
-
   float x = 10;
   float y = 10;
   float w = 20;
   float h = 20;
-  float xsp, ysp; 
-  float speed = 10;
+  int amountOfAds = 10;
+  float speed = 5;
+  float xsp = speed; 
+  float ysp = speed;
 
   int adAmount = 10;
   color colour = color(70, 215, 240);
@@ -136,8 +147,6 @@ class EnemyAdware
     this.y = y;
   }
 
-
-
   void setup()
   {
     size(1000, 600);
@@ -145,51 +154,49 @@ class EnemyAdware
 
   void MoveAdware()
   {
-    xsp = speed;
-    ysp = 0.1;
     x += xsp;
     y += ysp;
     //TODO movement, does not bounce
     if (x > width - w) 
     {
-      xsp = -xsp;
+      xsp = -speed;
     }
 
     if (x < 0)
     {
-      xsp = -xsp;
+      xsp = speed;
     }
 
     if (y > height - h)
     {
-      ysp = -ysp;
+      ysp = -speed;
     }
 
     if (y < 0) 
     {
-      ysp = -ysp;
+      ysp = speed;
     }
   }
 
-  void UpdateAdware()
+  void update()
   {
     MoveAdware();
     color(colour);
     stroke(255, 100, 0);
-    rectMode(CENTER);
+    //rectMode(CENTER);
     rect(x, y, w, h);
   }
 
   void BurstAdware()
   {
     //randomizing size and location
-    for (int i = 0; i < 10; i++)
+    for (int i = 0; i <= amountOfAds; i++)
     {
       burstSize[i] = random(60, 160);
       burstLocationX[i] = 10 * (random(100));
       burstLocationY[i] = 10 * (random(57));
     }
-    for (int i = 0; i < 10; i++)
+    for (int i = 0; i <= amountOfAds; i++)
     {
       rect(burstLocationX[i], burstLocationY[i], burstSize[i], burstSize[i]);
     }
@@ -201,44 +208,31 @@ class EnemyAdware
 
   void draw()
   {
-    UpdateAdware();
     PopUpRandomizer(); 
-    noLoop();
+    //noLoop();
   }
 }
 
 class EnemyDOT
 {
-  // Properties of an Enemy.
-  // i.e.: an Enemy HAS:
-  // a position
-  float x, y;
-  // a velocity (direction)
+  float x,  y;
   float vx, vy;
-  // a size
-  float diameter;
-  // and a color
-  color fillColor;
+  float diameter = 45;
+
+  color fillColor = color(255, 0, 0);
   int teller = 0;
   float draw = 0;
   int i = 0;
-
-  // The init method can be called to set an enemy to it's default state
-  void init()
+  
+  public EnemyDOT(float x, float y)
   {
-    // The size of an enemy varies
-    diameter = 45;
-    // Ourt enemies are red
-    fillColor = color(255, 0, 0);
-
-    // the position of the enemy is randomly chosen to fit within the window 
-    x = random(diameter/2, width-diameter/2);    
-    y = random(diameter/2, height-diameter);
-    // The velocity and the direction of the enemy is randomly chosen.
+    this.x = x;
+    this.y = y;
+    
     vx = random(-3.0, 3.0);
     vy = random(-3.0, 3.0);
   }
-
+  // The init method can be called to set an enemy to it's default stat
   // Whenever you want to update an enemy, call this method
   void update()
   {    

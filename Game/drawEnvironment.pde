@@ -6,7 +6,7 @@ void drawEnvironment()
    rect(c[0],c[1],c[2],c[3]);
   }
   
-  fill(139,69,19);
+  color brown = color(139,69,19);  fill(brown);
   for(float[] c : wallCoords) //draw the walls
   {
     rect(c[0],c[1],c[2],c[3]);

@@ -14,7 +14,7 @@ float rectCoords[] = {};
 float x, y, w, h = 0;
 float currentX, currentY, currentW, currentH;
 float wallX, wallY, wallW, wallH;
-
+float enemyX, enemyY;
 
 
 
@@ -22,11 +22,11 @@ color colour = color(0,0,255);
 float redVal, greenVal = 0;
 float blueVal = 255;
 
-int blockAmount, playerAmount, wallAmount = 0;
-int blockCoordCount,playerCoordCount,wallCoordCount = 0;
-boolean doneBlockDrawing, doneWallDrawing, donePlayerDrawing = false;
+int blockAmount, playerAmount, wallAmount, enemyAmount = 0;
+int blockCoordCount,playerCoordCount,wallCoordCount, enemyCoordCount = 0;
+boolean doneBlockDrawing, doneWallDrawing, donePlayerDrawing, doneEnemyDrawing = false;
 
-PrintWriter outPlayer, outPuzzle, outWalls;
+PrintWriter outPlayer, outPuzzle, outWalls, outEnemies;
 
 
 String editType = new String();
@@ -61,7 +61,12 @@ float[][] wallCoords =    {
                           {0.0,0.0,0.0,0.0},{0.0,0.0,0.0,0.0},{0.0,0.0,0.0,0.0},{0.0,0.0,0.0,0.0},{0.0,0.0,0.0,0.0}, 
                           {0.0,0.0,0.0,0.0},{0.0,0.0,0.0,0.0},{0.0,0.0,0.0,0.0},{0.0,0.0,0.0,0.0},{0.0,0.0,0.0,0.0} 
                           };
-  
+                                                 
+float[][] enemyCoords =   {
+                          {0.0,0.0,0.0,0.0},{0.0,0.0,0.0,0.0},{0.0,0.0,0.0,0.0},{0.0,0.0,0.0,0.0},
+                          {0.0,0.0,0.0,0.0},{0.0,0.0,0.0,0.0},{0.0,0.0,0.0,0.0},{0.0,0.0,0.0,0.0},
+                          {0.0,0.0,0.0,0.0},{0.0,0.0,0.0,0.0},{0.0,0.0,0.0,0.0},{0.0,0.0,0.0,0.0},
+                          };
                        
                          
 float[][] playerRects =//for printing surplus player rects
@@ -145,10 +150,11 @@ void keyReleased()
     //if(Objects.equals(editType,"puzzle")){ editType = "player"; }
     //else if(Objects.equals(editType,"player")){ editType = "puzzle"; }
     editIndex++;
-    editIndex = editIndex % 3;
-    if(editIndex == 0) editType = "puzzle";
+    editIndex = editIndex % 4;
+    if     (editIndex == 0) editType = "puzzle";
     else if(editIndex == 1) editType = "player";
-    else if(editIndex  == 2) editType = "walls";
+    else if(editIndex == 2) editType = "walls";
+    else if(editIndex == 3) editType = "enemies";
   }
   if(key == 'q')
   {
@@ -160,15 +166,17 @@ void mousePressed()
 {
   if(mouseButton==LEFT)
   {
-    if(editType=="puzzle"){defineRectCoords(); }
-    else if(editType=="player"){definePlayerCoords(); }
-    else if(editType=="walls"){defineWallCoords(); }
+    if(editType=="puzzle")        defineRectCoords(); 
+    else if(editType=="player")   definePlayerCoords(); 
+    else if(editType=="walls")    defineWallCoords(); 
+    else if(editType=="enemies")  defineEnemyCoords();
   }
   else if(mouseButton==RIGHT)
   {
-    if(editType=="puzzle"){removeRect(blockCoords); }
-    else if(editType=="player"){removeRect(playerCoords); }
-    else if(editType=="walls"){removeRect(wallCoords); }
+    if(editType=="puzzle")        removeRect(blockCoords); 
+    else if(editType=="player")   removeRect(playerCoords); 
+    else if(editType=="walls")    removeRect(wallCoords); 
+    else if(editType=="enemies")  removeRect(enemyCoords);
   }
 }
 
@@ -224,6 +232,20 @@ void addWallCoords()
       wallAmount++;
     }
     else{ fill(0); text("You're out of wall blocks.",width/2,(height/2)-50); }
+  }
+}
+
+void addEnemyCoords()
+{
+  if(doneEnemyDrawing)
+  {
+    if(enemyAmount<enemyCoords.length)
+    {
+      float[] enemyStats = {enemyX,enemyY};
+      enemyCoords[enemyAmount] = enemyStats;
+      doneEnemyDrawing = false;
+      enemyAmount++;
+    }
   }
 }
 

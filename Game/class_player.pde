@@ -29,8 +29,6 @@ class Player
     return (playerArea);
   }
 
-
-
   void draw()
   {
     fill(colour);
@@ -44,20 +42,14 @@ class Player
       }
     }
 
-    //move if not colliding with wall
-    //if(!collidesWithWall) update();
-
     if (checkDone()) done = true;     //check if puzzle is completed
     else colour = color(0,0,255);
   }
 
   void update()
   {
-    //speed = player.setSpeed();
     xsp *= 0.4;
     ysp *= 0.4;
-
-    //if(!collidesWithWall)
 
     if (keysPressed[LEFT])   xsp = -1;
     if (keysPressed[RIGHT])  xsp = 1;
@@ -93,7 +85,6 @@ class Player
     mainY = constrain(mainY, 0, height-mainH);     //y wise
   }
 
-
   boolean nextPositionIsWall()
   {
     nextXposition = mainX + (xsp * speed);          //position player attempts to move in
@@ -122,7 +113,6 @@ class Player
         mainY >= reqY - puzzleDoneMargin)
         return true;
     else 
-        return false;
-    
+        return false;   
   }
 }

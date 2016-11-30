@@ -149,42 +149,22 @@ class EnemyAdware
 
   void setup()
   {
-    size(1000, 600);
+    //size(1000, 600);
   }
 
-  void MoveAdware()
+  void stayInScreen()
   {
-    x += xsp;
-    y += ysp;
-    //TODO movement, does not bounce
-    if (x > width - w) 
-    {
-      xsp = -speed;
-    }
-
-    if (x < 0)
-    {
-      xsp = speed;
-    }
-
-    if (y > height - h)
-    {
-      ysp = -speed;
-    }
-
-    if (y < 0) 
-    {
-      ysp = speed;
-    }
+    if (x > width - w)    xsp = -speed;
+    if (x < 0)            xsp = speed;
+    if (y > height - h)   ysp = -speed;
+    if (y < 0)            ysp = speed;
   }
 
   void update()
   {
-    MoveAdware();
-    color(colour);
-    stroke(255, 100, 0);
-    //rectMode(CENTER);
-    rect(x, y, w, h);
+    stayInScreen();
+    x += xsp;
+    y += ysp;    
   }
 
   void BurstAdware()
@@ -192,11 +172,11 @@ class EnemyAdware
     //randomizing size and location
     for (int i = 0; i <= amountOfAds; i++)
     {
-      burstSize[i] = random(60, 160);
-      burstLocationX[i] = 10 * (random(100));
-      burstLocationY[i] = 10 * (random(57));
+      burstSize[i]      =    random(60, 160);
+      burstLocationX[i] = 10 *  (random(100));                //this part can be more efficient
+      burstLocationY[i] = 10 *  (random(57));
     }
-    for (int i = 0; i <= amountOfAds; i++)
+    for (int i = 0; i <= amountOfAds; i++)                    //this for loop isn't needed
     {
       rect(burstLocationX[i], burstLocationY[i], burstSize[i], burstSize[i]);
     }
@@ -208,9 +188,10 @@ class EnemyAdware
 
   void draw()
   {
-    PopUpRandomizer(); 
-    //noLoop();
-  }
+    fill(colour);                                                  //stroke(255, 100, 0);
+    rect(x, y, w, h); 
+    //noLoop();                                                    //i greyed out the noLoop as it stopped the game loop
+  }                                                                
 }
 
 class EnemyDOT

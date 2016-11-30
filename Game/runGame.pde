@@ -7,42 +7,20 @@ void updateGame()
   {
     everyWorm.update();
   }
-  for (EnemyDOT iEnemy : DOTenemies)
-  {
-    iEnemy.update(); 
-  }
-  for (EnemyAdware everyAdware : adwares)
-  {
-    everyAdware.update();
-  }
-  
-  
+  for (EnemyDOT iEnemy : DOTenemies) iEnemy.update(); 
+  for (EnemyAdware everyAdware : adwares) everyAdware.update();
 }
 
 void drawGame()
 {
   background(0);
   noStroke();
+  player.draw(); 
+  for            (Worm everyWorm : worms)    everyWorm   .draw();
+  for    (EnemyDOT everyDOT : DOTenemies)    everyDOT    .draw();
+  for   (Package everyPackage : packages)    everyPackage.draw();
+  for (EnemyAdware everyAdware : adwares)    everyAdware .draw();
   
-  player.draw();
-  
-  
-  for (Worm everyWorm : worms)
-  {
-    everyWorm.draw();
-  }
-  for (EnemyDOT iEnemy : DOTenemies)
-  {
-    iEnemy.draw(); 
-  }
-  for (Package everyPackage : packages)
-  {
-    everyPackage.draw();
-  }
-  for (EnemyAdware everyAdware : adwares)
-  {
-    everyAdware.draw();
-  }
   
   drawEnvironment();
   
@@ -52,6 +30,7 @@ void drawGame()
 
 void setupGame()
 {
+  /*
   for (int iEnemy=0; iEnemy<nEnemies; iEnemy++)
   {
     EnemyDOT anEnemy = new EnemyDOT(200,200);
@@ -64,5 +43,6 @@ void setupGame()
   
   EnemyAdware adware = new EnemyAdware(100,300);
   adwares.add(adware);
+  */
   
 }

@@ -1,6 +1,7 @@
 import java.util.Objects;
 import java.util.Arrays;
 import java.io.File;
+import java.lang.Math;
 
 int slowMove = 0;
 int stall    = 0;
@@ -16,8 +17,9 @@ ArrayList<Worm> worms          = new ArrayList<Worm>();
 
 Player player = new Player();                  //a player object, for all rectangles the player controls
 
-float[][] wallCoords = new float[30][4];       //a 30 slot 2d array, each subarray having 4 slots. this is for the maximum of 30 wall blocks
+float[][] wallCoords   = new float[30][4];     //a 30 slot 2d array, each subarray having 4 slots. this is for the maximum of 30 wall blocks
 float[][] puzzleCoords = new float[20][4];     //a 20 slot 2d array, each subarray having 4 slots. this is for the maximum of 20 puzzle blocks
+float[][] enemyCoords  = new float[12][2];     //12 enemies of which x and y are known
 
 final int puzzleDoneMargin = 5;                //you need be within 5 pixels of the actual puzzle requirement to finish it
 

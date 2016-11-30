@@ -2,20 +2,28 @@ void loadLevel(int num) //)
 {
   String fileName = "data/"+num+"/lvl_"+num;
   File directory = new File(dataPath(""+num));
-  //File testFile = new File(fileName+"_exists.txt");
+  //remove all data from previous level
+  clearCoordinates();
+  worms     .clear();
+  adwares   .clear();
+  DOTenemies.clear();
+  
   if (directory.exists())
   {
     int restBlocks = 0;
     int puzzleBlocks = 0;
     int wallBlocks = 0;
+    int enemyAmount = 0;
     
-    String varsPlayer[] = {};
-    String varsPuzzle[] = {};
-    String varsWalls[] = {};
+    String varsPlayer [] = {};
+    String varsPuzzle [] = {};
+    String varsWalls  [] = {};
+    String varsEnemies[] = {};
     
     varsPlayer = loadStrings(fileName+"_player.txt");
     varsPuzzle = loadStrings(fileName+"_puzzle.txt");
-    varsWalls = loadStrings(fileName+"_walls.txt");
+    varsWalls =  loadStrings(fileName+"_walls.txt");
+    varsEnemies =  loadStrings(fileName+"_enemies.txt");
   
     float[][] restCoords = new float[8][4];
     
@@ -81,10 +89,51 @@ void loadLevel(int num) //)
          wallBlocks++;
       }
     }
+    
+    for(int l = 0; l < varsEnemies.length; l+=2)
+    {
+      int enemyX = (int)Float.parseFloat(varsEnemies[l]);
+      int enemyY = (int)Float.parseFloat(varsEnemies[l+1]);
+      float[] enemyStats = {enemyX,enemyY};
+      
+      if(!isEmpty(enemyStats))
+      {
+        int range = (2 - 0) + 1;
+        int enemyType = (int)(Math.random() * range) + 0;
+        
+        switch(enemyType)  //spawn an enemy
+        {
+          case 0:
+            Worm newWorm = new Worm(enemyX, enemyY);
+            worms.add(newWorm);
+            break;
+          
+          case 1:
+            EnemyAdware newAdware = new EnemyAdware(enemyX, enemyY);
+            adwares.add(newAdware);
+            break;
+          
+          case 2:
+            EnemyDOT newDOT = new EnemyDOT(enemyX, enemyY);
+            DOTenemies.add(newDOT);
+            break;  
+        }
+        enemyAmount++;
+      }
+
+      
+    }
     levelNumber++;
+    //debug line       for(float[] coords : enemyCoords) for(float coord : coords) println(coord);
+    //println(enemyCoords.length);
   }
   else
   {
     //do nothing, as the next level doesn't exist
   }
+}
+
+void spawnEnemies()
+{
+  //int enemiesToSpawn = enemyCoords
 }

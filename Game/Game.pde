@@ -21,15 +21,14 @@ float[][] wallCoords   = new float[30][4];     //a 30 slot 2d array, each subarr
 float[][] puzzleCoords = new float[20][4];     //a 20 slot 2d array, each subarray having 4 slots. this is for the maximum of 20 puzzle blocks
 float[][] enemyCoords  = new float[12][2];     //12 enemies of which x and y are known
 
-final int puzzleDoneMargin = 5;                //you need be within 5 pixels of the actual puzzle requirement to finish it
+final int puzzleDoneMargin = 30;                //you need be within 5 pixels of the actual puzzle requirement to finish it
 
 int levelNumber = 1;
-int levelWait = 150;
+int levelWait = 40;
 
 void setup()
 {
-  //size(1024,576);
-  size(1400,788);
+  size(1250,703);
   loadLevel(levelNumber);
   setupGame();
 }
@@ -47,14 +46,13 @@ void draw()
    doneRoutine();
    if(player.beatGame) text("Congratulations, you have beaten the game. Your score is ...",width/2,height/2);
  }
-
+  
  fill(player.colour);
 }
 
 void setupenemies()
 {  
   size(1024, 576);
-
 }
 
 void drawGameenemies()
@@ -67,7 +65,8 @@ void drawGameenemies()
   fill(color(255, 255, 255));
 }
 
-void drawenemies() {
+void drawenemies()
+{
   drawGameenemies();
  
   t = frameCount/frameRate;

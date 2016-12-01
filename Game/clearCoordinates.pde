@@ -1,9 +1,5 @@
 void clearCoordinates()
 {
-  /*for(float[] c : blockCoords)
-  {
-    c[0] = 0.0; c[1]= 0.0; c[2] = 0.0; c[3]= 0.0;
-  }*/
   player.mainX = 0;
   player.mainY = 0;
   player.mainW = 0;
@@ -20,4 +16,8 @@ void clearCoordinates()
   {
     c[0] = 0.0; c[1] = 0.0;
   }
+  worms       .clear();
+  adwares     .clear();
+  DOTenemies  .clear();
+  packages    .clear();
 }

@@ -1,27 +1,46 @@
+boolean overlapsPlayer(float x, float y)
+{
+  float playerX = player.mainX;
+  float playerY = player.mainY;
+  float playerW = player.mainW;
+  float playerH = player.mainH;
 
+  return( //return if player has overlapped
+    x <= playerX + playerW      &&
+    x >= playerX                &&
+    y <= playerY + playerH      &&
+    y >= playerY
+    );
+}
 
+boolean bounceOffWall(float x, float y)
+{
+  //float nextXposition = x;         //position player attempts to move in
+  //float nextYposition = y;
 
-//deprecated, might save for later
+  for (float[] c : wallCoords)
+  {
+    float otherX = c[0];
+    float otherY = c[1];
+    float otherW = c[2];
+    float otherH = c[3];
 
+    if(     x <= otherX + otherW    &&      //there's a wall to the left
+            x >= otherX             &&      //to the right
+            y <= otherY + otherH    &&      //above
+            y >= otherY                     //below
+      )return true;                         //collision!        
+                              
+  }   
+  return false; //no wall where we want to move!
+}
 
-     //which side we collide on
-
-      /*
-        if
-        (
-          mainX + mainW >= otherX                       && 
-          mainX <= otherX + otherW                      && 
-          mainY + mainH >= otherY                       &&
-          mainY <= otherY + otherH
-         )
-         {
-            //collidesWithWall = true;
-            
-            if(mainX == otherX + otherW) l = true; else l = false;
-            if(mainX + mainW == otherX) r = true; else r = false; //!!works
-            
-            if(mainY + mainH <= otherY) u = true; else u = false;
-            if(mainY >= otherY + otherH) d = true; else d = false;
-            
-         }
-        */  
+boolean damagePlayer(float x, float y, int damage)
+{
+  if(overlapsPlayer(x,y))
+  {
+    player.health -= damage;
+    return true;
+  }
+  return false;
+}

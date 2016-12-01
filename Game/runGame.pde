@@ -3,15 +3,10 @@ void updateGame()
   updateKeys();
   
   player.update();
-  for(Worm everyWorm : worms)
-  {
-    everyWorm.update();
-    //println("yassss");
-  }
-  for (EnemyDOT iEnemy : DOTenemies) iEnemy.update(); 
-  for (EnemyAdware everyAdware : adwares) everyAdware.update();
-  
-  
+  for            (Worm everyWorm : worms)     everyWorm   .update();
+  for      (EnemyDOT iEnemy : DOTenemies)     iEnemy      .update(); 
+  for (EnemyAdware everyAdware : adwares)     everyAdware .update();
+  for   (Package everyPackage : packages)     everyPackage.update();
 }
 
 void drawGame()
@@ -29,7 +24,6 @@ void drawGame()
   
   fill(player.healthColour);
   textSize(32);
-  text("Health: " + player.health, 10, 30);
 }
 
 void setupGame()

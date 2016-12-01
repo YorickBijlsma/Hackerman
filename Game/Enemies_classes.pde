@@ -1,9 +1,9 @@
 class Worm
 {
-  int x, y;
-  int moveSpeed = 3;
+  float x, y;
+  float moveSpeed = 3;
   int dir = RIGHT;
-  int nextXposition, nextYposition = 0;
+  float nextXposition, nextYposition = 0;
 
   int segments = 1;
   int segmentSize = 5;
@@ -13,6 +13,7 @@ class Worm
 
   int segmentationTime = 5;         //every segmentationTime amount of frames, a new segment is added (the worm grows bigger)
   int segmentCounter = 0;            //count every frame for duplication purposes
+  int damage = 1;
 
   public Worm(int x, int y)
   {
@@ -53,16 +54,16 @@ class Worm
       }
     } else segmentCounter = 0;
 
-    if (x+segmentSize > width)    dir = LEFT;       //segments = 3;//reverse direction if either side of screen is hit
-    if (x-segmentSize < 0)        dir = RIGHT;      //segments = 3;
-    if (y+segmentSize > height)   dir = DOWN;       //segments = 3;
-    if (y-segmentSize < 0)        dir = UP;         //segments = 3;
+    
 
-    if (hitsWall())
+    if(bounceOffWall(x,y) || bounceOffScreenEdge())//if (hitsWall())
     {
       segments = 3;
-      if (dir == LEFT) dir = RIGHT;
-      else if (dir == RIGHT) dir = LEFT;
+      if(bounceOffWall(x,y))
+      {
+        if (dir == LEFT) dir = RIGHT;
+        else if (dir == RIGHT) dir = LEFT;
+      }
     }
 
     switch(dir)
@@ -82,50 +83,33 @@ class Worm
     default:
       break;
     }
-    if(overlapsPlayer()) player.health -= 1;
+    if (damagePlayer(x,y,damage)) player.hit = true;
+    else                          player.hit = false;
+    
   }
   
-  boolean hitsWall()
+  boolean bounceOffScreenEdge()
   {
-    switch(dir)
+    if (x+segmentSize > width)
     {
-    case LEFT:
-      nextXposition = x - moveSpeed; 
-      break;
-    case RIGHT:
-      nextXposition = x + moveSpeed; 
-      break;
+      dir = LEFT;
+      return true;
     }
-    for (float[] c : wallCoords)
+    if (x-segmentSize < 0)
     {
-      float otherX = c[0];
-      float otherY = c[1];
-      float otherW = c[2];
-      float otherH = c[3];
-
-      if(     x <= otherX + otherW    &&      //there's a wall to the left
-              x >= otherX             &&      //to the right
-              y <= otherY + otherH    &&      //above
-              y >= otherY             )       //below
-              return true;                    //collision!
-    }   
-    return false;                             //no wall where we want to move!
-  }
-  boolean overlapsPlayer()
-  {
-    float playerX = player.mainX;
-    float playerY = player.mainY;
-    float playerW = player.mainW;
-    float playerH = player.mainH;
-    
-    if (x <= playerX + playerW      &&
-        x >= playerX                &&
-        y <= playerY + playerH      &&
-        y >= playerY )
-        {
-          //if !(player.justHit) player.hp -= wormHitDamage;
-          return true;
-        }
+      dir = RIGHT;
+      return true;
+    }
+    if (y+segmentSize > height)
+    {
+      dir = DOWN;
+      return true;
+    }
+    if (y-segmentSize < 0)
+    {
+      dir = UP;
+      return true;
+    }
     return false;
   }
 }
@@ -145,12 +129,14 @@ class EnemyAdware
   float y = 10;
   float w = 20;
   float h = 20;
-  int amountOfAds = 10;
-  float speed = 5;
+  int amountOfAds = 1000;
+  float speed = 3;
   float xsp = speed; 
   float ysp = speed;
+  int damage = 0;
+  float originalSpeed = speed;
 
-  int adAmount = 10;
+  int adAmount = amountOfAds;
   color colour = color(70, 215, 240);
   //arrays to assign ad amount, size and location on the screen
   float[] burstSize = new float[adAmount];
@@ -176,26 +162,44 @@ class EnemyAdware
     if (y < 0)            ysp = speed;
   }
 
+  
+
   void update()
   {
     stayInScreen();
+    if(bounceOffWall(x,y))
+    {
+      if(xsp < 0) xsp = speed; else xsp = -speed;
+      if(ysp < 0) ysp = speed; else ysp = -speed;
+    }
     x += xsp;
-    y += ysp;    
+    y += ysp;
+    //if(overlapsPlayer(x, y)) player.health -= 1;
+    if (damagePlayer(x,y,damage))
+    {
+      player.hit = true;
+      burstAdware();
+    }
+    else player.hit = false;
   }
 
-  void BurstAdware()
+  void burstAdware()
   {
+    speed = 0;
+    player.speed = 0;
     //randomizing size and location
-    for (int i = 0; i <= amountOfAds; i++)
+    for (int i = 0; i < amountOfAds; i++)
     {
       burstSize[i]      =    random(60, 160);
       burstLocationX[i] = 10 *  (random(100));                //this part can be more efficient
       burstLocationY[i] = 10 *  (random(57));
     }
-    for (int i = 0; i <= amountOfAds; i++)                    //this for loop isn't needed
+    for (int i = 0; i < amountOfAds; i++)                    //this for loop isn't needed
     {
       rect(burstLocationX[i], burstLocationY[i], burstSize[i], burstSize[i]);
     }
+    speed = originalSpeed;
+    player.speed = player.originalSpeed;
   }
 
   void PopUpRandomizer()
@@ -234,6 +238,9 @@ class EnemyDOT
   void update()
   {    
     // use the velocity to calculate the new position
+    float ownWidth = x + diameter;
+    float ownHeight = y + diameter;
+    if(overlapsPlayer(x,y)) player.health -= 1;
     x += vx;
     y += vy;
 
@@ -282,6 +289,7 @@ class Package
   float diameter;
   color fillColor;
   int teller = 0;
+  int damage = 5;
 
   void init(float x, float y)
   {
@@ -295,5 +303,9 @@ class Package
   {
     fill(fillColor);
     rect(x, y, diameter, diameter);
+  }
+  void update()
+  {
+    damagePlayer(x,y,damage);
   }
 }

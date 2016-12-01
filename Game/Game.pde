@@ -28,7 +28,8 @@ int levelWait = 150;
 
 void setup()
 {
-  size(1024,576);
+  //size(1024,576);
+  size(1400,788);
   loadLevel(levelNumber);
   setupGame();
 }
@@ -71,5 +72,3 @@ void drawenemies() {
  
   t = frameCount/frameRate;
 }
-
-//Test voor Eyse

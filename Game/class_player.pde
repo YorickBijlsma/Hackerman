@@ -111,8 +111,11 @@ class Player
         mainX >= reqX - puzzleDoneMargin &&
         mainY <= reqY + puzzleDoneMargin &&
         mainY >= reqY - puzzleDoneMargin)
-        return true;
-    else 
-        return false;   
+        {
+          mainX = reqX;
+          mainY = reqY;
+          return true;
+        }
+    else  return false; 
   }
 }

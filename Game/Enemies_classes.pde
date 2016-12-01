@@ -53,10 +53,10 @@ class Worm
       }
     } else segmentCounter = 0;
 
-    if (x+segmentSize > width)    dir = LEFT;      //reverse direction if either side of screen is hit
-    if (x-segmentSize < 0)        dir = RIGHT;
-    if (y+segmentSize > height)   dir = DOWN;
-    if (y-segmentSize < 0)        dir = UP;
+    if (x+segmentSize > width)    dir = LEFT;       //segments = 3;//reverse direction if either side of screen is hit
+    if (x-segmentSize < 0)        dir = RIGHT;      //segments = 3;
+    if (y+segmentSize > height)   dir = DOWN;       //segments = 3;
+    if (y-segmentSize < 0)        dir = UP;         //segments = 3;
 
     if (hitsWall())
     {
@@ -82,10 +82,9 @@ class Worm
     default:
       break;
     }
+    if(overlapsPlayer()) player.health -= 1;
   }
-
-
-
+  
   boolean hitsWall()
   {
     switch(dir)
@@ -111,6 +110,23 @@ class Worm
               return true;                    //collision!
     }   
     return false;                             //no wall where we want to move!
+  }
+  boolean overlapsPlayer()
+  {
+    float playerX = player.mainX;
+    float playerY = player.mainY;
+    float playerW = player.mainW;
+    float playerH = player.mainH;
+    
+    if (x <= playerX + playerW      &&
+        x >= playerX                &&
+        y <= playerY + playerH      &&
+        y >= playerY )
+        {
+          //if !(player.justHit) player.hp -= wormHitDamage;
+          return true;
+        }
+    return false;
   }
 }
 /*

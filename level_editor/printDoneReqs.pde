@@ -1,9 +1,9 @@
 void printDoneReqs()
 {  
-  //output = createWriter(filepath+levelNumber+"/"+"level_"+levelNumber+".txt");
   outPlayer = createWriter(filepath+levelNumber+"/"+"lvl_"+levelNumber+"_player.txt");
   outPuzzle = createWriter(filepath+levelNumber+"/"+"lvl_"+levelNumber+"_puzzle.txt");
   outWalls = createWriter(filepath+levelNumber+"/"+"lvl_"+levelNumber+"_walls.txt");
+  outEnemies = createWriter(filepath+levelNumber+"/"+"lvl_"+levelNumber+"_enemies.txt");
   
   int z = 0;
   for(float[] coords : playerCoords)
@@ -50,12 +50,20 @@ void printDoneReqs()
     outWalls.println(c[3]);
   }
   
+  for(float[] c : enemyCoords)
+  {
+    outEnemies.println(c[0]);
+    outEnemies.println(c[1]);
+  }
+  
   
   outPlayer.flush();
   outPuzzle.flush();
   outWalls.flush();
+  outEnemies.flush();
   
   outPlayer.close();
   outPuzzle.close();
   outWalls.close();
+  outEnemies.close();
 }

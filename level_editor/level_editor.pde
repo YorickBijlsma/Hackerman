@@ -16,8 +16,6 @@ float currentX, currentY, currentW, currentH;
 float wallX, wallY, wallW, wallH;
 float enemyX, enemyY;
 
-
-
 color colour = color(0,0,255);
 float redVal, greenVal = 0;
 float blueVal = 255;
@@ -27,7 +25,6 @@ int blockCoordCount,playerCoordCount,wallCoordCount, enemyCoordCount = 0;
 boolean doneBlockDrawing, doneWallDrawing, donePlayerDrawing, doneEnemyDrawing = false;
 
 PrintWriter outPlayer, outPuzzle, outWalls, outEnemies;
-
 
 String editType = new String();
 int editIndex = 0;
@@ -63,9 +60,9 @@ float[][] wallCoords =    {
                           };
                                                  
 float[][] enemyCoords =   {
-                          {0.0,0.0,0.0,0.0},{0.0,0.0,0.0,0.0},{0.0,0.0,0.0,0.0},{0.0,0.0,0.0,0.0},
-                          {0.0,0.0,0.0,0.0},{0.0,0.0,0.0,0.0},{0.0,0.0,0.0,0.0},{0.0,0.0,0.0,0.0},
-                          {0.0,0.0,0.0,0.0},{0.0,0.0,0.0,0.0},{0.0,0.0,0.0,0.0},{0.0,0.0,0.0,0.0},
+                          {0.0,0.0},{0.0,0.0},{0.0,0.0},{0.0,0.0},
+                          {0.0,0.0},{0.0,0.0},{0.0,0.0},{0.0,0.0},
+                          {0.0,0.0},{0.0,0.0},{0.0,0.0},{0.0,0.0},
                           };
                        
                          
@@ -90,7 +87,7 @@ void setup()
 {
   editType = ("puzzle");
   //output = createWriter("level_"+levelNumber+".txt");
-  size(1024,432);
+  size(1024,576);
   background(255);
   fill(255,0,0);
   font = createFont("Arial",15,true);
@@ -109,6 +106,7 @@ void drawAll()
   drawPuzzleBlocks();
   drawPlayer();
   drawWalls();
+  drawEnemies();
 }
 void getInput()
 {
@@ -116,13 +114,13 @@ void getInput()
   addRectCoords();
   addPlayerCoords();
   addWallCoords();
+  addEnemyCoords();
   drawTexts();
 }
 
 void exitEditor()
 {
   printDoneReqs();
-  levelNumber++;
   editType = ("puzzle");
   clearScreen();
 }

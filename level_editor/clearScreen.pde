@@ -12,8 +12,15 @@ void clearScreen()
   {
      c[0] = 0.0; c[1]= 0.0; c[2] = 0.0; c[3]= 0.0;
   }
+  for(float[] c : enemyCoords)
+  {
+    c[0] = 0.0; c[1] = 0.0;
+  }
+  
   blockAmount = 0;
   playerAmount = 0;
   wallAmount = 0;
+  enemyAmount = 0;
   println("level "+levelNumber+" opgeslagen in "+dataPath(""));
+  levelNumber++;
 }

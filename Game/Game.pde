@@ -31,6 +31,8 @@ void setup()
   size(1250,703);
   loadLevel(levelNumber);
   setupGame();
+    EnemyDOT xnx = new EnemyDOT(200,200);
+    DOTenemies.add(xnx);
 }
 
 void draw()

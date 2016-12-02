@@ -289,7 +289,10 @@ class Package
   float diameter;
   color fillColor;
   int teller = 0;
-  int damage = 5;
+  float damage = 0.3;
+  int infectCounter = 0;
+  boolean infected = false;
+  int infectTime = 35;
 
   void init(float x, float y)
   {
@@ -305,7 +308,37 @@ class Package
     rect(x, y, diameter, diameter);
   }
   void update()
+  {/*
+    damageCounter++;
+    if(damageCounter == 10)
+    {
+      damagePlayerDoT(x,y,damage);
+      damageCounter = 0;
+
+    }
+    */
+    
+    if (overlapsPlayer(x,y)) infected = true;
+    damagePlayerDoT(x,y,damage);
+  }
+  
+  boolean damagePlayerDoT(float x, float y, float damage)
   {
-    damagePlayer(x,y,damage);
+    /*
+    if(overlapsPlayer(x,y))
+    {
+      for(int i=0; i<1; i++)
+      {
+        player.health -= 0.3;
+      }
+      return true;
+    }*/
+    if(infected)
+    {
+      infectCounter++;
+      if(infectCounter >= infectTime) infected = false;
+      player.health -= damage;
+    }
+    return false;
   }
 }

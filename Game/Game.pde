@@ -48,6 +48,7 @@ void draw()
  }
   
  fill(player.colour);
+ drawClock();
 }
 
 void setupenemies()

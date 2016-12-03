@@ -56,7 +56,9 @@ class Player
     if(checkDeath())
     {
       clearCoordinates();
-      textSize(64); text("You have died.",width/2,height/2);
+      fill(255,0,0);
+      textAlign(CENTER);
+      textSize(48); text("You got Hacked.",width/2,height/2);
     }
     else
     {

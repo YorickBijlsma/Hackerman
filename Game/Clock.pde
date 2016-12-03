@@ -17,10 +17,17 @@ void drawClock () {
     seconds = 0;
   }
   int secondsLevel = TimeLevel - seconds;
+  
+  if (secondsLevel < 0) {
+    player.health = 0;
+    secondsLevel = 0;
+    
+  }
   fill(255);
   textSize(48);
   
-  text("Time left: " + secondsLevel,60,60);
+  text("Time left: " + secondsLevel,width - 350,60);
+  
 }  
 void resetClock(){
   last = 0;

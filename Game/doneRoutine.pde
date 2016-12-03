@@ -4,6 +4,7 @@ void doneRoutine()
   player.xsp = 0;                   //freeze player
   player.ysp = 0;
   packages.clear();
+  resetClock();
   
   //this suspends progressing to the next level for the number of frames in levelWait
   stall++;

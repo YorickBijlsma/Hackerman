@@ -87,7 +87,7 @@ void setup()
 {
   editType = ("puzzle");
   //output = createWriter("level_"+levelNumber+".txt");
-  size(1024,576);
+  size(1250,703);
   background(255);
   fill(255,0,0);
   font = createFont("Arial",15,true);

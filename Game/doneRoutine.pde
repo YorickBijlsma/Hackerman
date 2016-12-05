@@ -1,5 +1,6 @@
 void doneRoutine()
 {
+  score.berekenScore();
   player.colour = color(0,255,0);   //set colour to green
   player.xsp = 0;                   //freeze player
   player.ysp = 0;

@@ -124,7 +124,6 @@ void loadLevel(int num) //)
       
     }
     levelNumber++;
-    score.berekenScore();
     //debug line       for(float[] coords : enemyCoords) for(float coord : coords) println(coord);
     //println(enemyCoords.length);
   }
@@ -134,7 +133,10 @@ void loadLevel(int num) //)
   }
 }
 
-void spawnEnemies()
+void restartGame()
 {
-  //int enemiesToSpawn = enemyCoords
+  //restart the game
+  levelNumber = 1;
+  loadLevel(levelNumber);
+  player.beatGame = false; player.done = false; player.health = player.originalHealth;
 }

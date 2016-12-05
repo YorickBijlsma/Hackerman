@@ -27,50 +27,54 @@ float[][] wallCoords   = new float[30][4];     //a 30 slot 2d array, each subarr
 float[][] puzzleCoords = new float[20][4];     //a 20 slot 2d array, each subarray having 4 slots. this is for the maximum of 20 puzzle blocks
 float[][] enemyCoords  = new float[12][2];     //12 enemies of which x and y are known
 
-final int puzzleDoneMargin = 30;                //you need be within 5 pixels of the actual puzzle requirement to finish it
+final int puzzleDoneMargin       = 30;                //you need be within 30 pixels of the actual puzzle requirement to finish it
+final int gameRestartTimeAmount  = 150;
+      int gameRestartTimer       = 0;
 
 int levelNumber = 1;
-int levelWait = 40;
+int levelWait   = 40;
 
 void setup()
 {
-  size(1250,703);
-  if ((int) loadlevels == 1) {
+  size(1250, 703);
+
     loadLevel(levelNumber);
     setupGame();
-  }
-    EnemyDOT xnx = new EnemyDOT(200,200);
-    DOTenemies.add(xnx);
+  
+  //EnemyDOT xnx = new EnemyDOT(200,200);
+  //DOTenemies.add(xnx);
 }
 
 void draw()
 {
-  background(bg);
-  if (loadlevels == 0) {
-    if (keyPressed && key == 'z'){
+  //background(bg);
+  if (loadlevels == 0)
+  {
+    if (keyPressed && key == 'z')
+    {
       loadlevels = 1;
     }
-    else if (keyPressed && key == 'x'){
-exit();
-} 
-  
- if (loadlevels == 1) {
-    drawGame();
-    if (!player.done) //player hasn't completed the puzzle
+    else if (keyPressed && key == 'x')
     {
-      updateGame();
-    } else             //player has completed the puzzle
-    {
-      player.done = false;
-      doneRoutine();
-      if (player.beatGame) text("Congratulations, you have bexeaten the game. Your score is ...", width/2, height/2);
-    }
- }
+      exit();
+    } 
+
+      drawGame();
+      if (!player.done) //player hasn't completed the puzzle
+      {
+        updateGame();
+      }
+      else             //player has completed the puzzle
+      {
+        player.done = false;
+        doneRoutine();
+        if (player.beatGame) text("Congratulations, you have bexeaten the game. Your score is ...", width/2, height/2);
+      }
   }
-  
- fill(player.colour);
- drawClock();
- score.drawScore();
+
+  fill(player.colour);
+  drawClock();
+  score.drawScore();
 }
 
 void setupenemies()
@@ -91,6 +95,6 @@ void drawGameenemies()
 void drawenemies()
 {
   drawGameenemies();
- 
+
   t = frameCount/frameRate;
 }

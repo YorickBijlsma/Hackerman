@@ -1,12 +1,13 @@
 class Score {
-  int totalscore = -10;
-  float scorepoints = 10;
+  int totalscore = 0;
+  float scorepoints = 1;
   float totaltime = minutes*60 + seconds;
   float timepoints = seconds/5;
   float healthpoints = health/10;
 
-  void berekenScore() {
-    if (health < 50) 
+  void berekenScore()
+  {
+    if (health < player.originalHealth / 2) 
     {
       healthpoints = 0;
     }
@@ -17,15 +18,14 @@ class Score {
     }
     totalscore += scorepoints;
    //totalscore += scorepoints + timepoints + healthpoints;
-    
   }
 
 
 
-  void drawScore() {
+  void drawScore()
+  {
     fill(255);
     textSize(18);
-
-    text("Score : " + totalscore, 625, 35);
+    textAlign(CENTER); text("Score : " + totalscore, 625, 35);
   }
 }

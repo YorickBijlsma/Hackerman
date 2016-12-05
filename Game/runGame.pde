@@ -22,8 +22,7 @@ void drawGame()
   
   drawEnvironment();
   
-  fill(player.healthColour);
-  textSize(32);
+  
 }
 
 void setupGame()

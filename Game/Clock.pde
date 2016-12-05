@@ -4,7 +4,8 @@ int m = 0;
 int seconds = 0;
 int minutes = 0;
 int TimeLevel = Time;
-int secondsLevel = 0;
+int secondsLeft = 0;
+//int timeForLevel = 10;
 void drawClock () 
 {
   
@@ -22,19 +23,19 @@ void drawClock ()
       seconds = 0;
     }
     
-  secondsLevel = TimeLevel - seconds;
+  secondsLeft = TimeLevel - seconds;
   
-    if (secondsLevel < 0) 
+    if (secondsLeft < 0) 
     {
       player.health = 0;
-      secondsLevel = 0;      
+      secondsLeft = 0;      
     }
     
     if (player.health > 0)
     {
-      fill(255);
+      fill(HUDcolour);
       textSize(36);
-      text("Time left: " + secondsLevel,width - 250,40);
+      text("Time left: " + secondsLeft,width - 250,40);
     }
 }  
 void resetClock()

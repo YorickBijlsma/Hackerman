@@ -1,6 +1,7 @@
-class Score {
-  int totalscore = 0;
-  float scorepoints = 1;
+class Score
+{
+  int totalScore = 0;
+  int scorepoints = 1;
   float totaltime = minutes*60 + seconds;
   float timepoints = seconds/5;
   float healthpoints = health/10;
@@ -16,7 +17,7 @@ class Score {
     {
       timepoints = 0;
     }
-    totalscore += scorepoints;
+    totalScore += scorepoints;
    //totalscore += scorepoints + timepoints + healthpoints;
   }
 
@@ -24,8 +25,8 @@ class Score {
 
   void drawScore()
   {
-    fill(255);
-    textSize(18);
-    textAlign(CENTER); text("Score : " + totalscore, 625, 35);
+    fill(HUDcolour);
+    textSize(24);
+    textAlign(CENTER); text("Score : " + totalScore, 625, 25);
   }
 }

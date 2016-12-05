@@ -14,6 +14,7 @@ PImage bg;
 PImage bgPLAY;
 PImage bgEXIT;
 int drawbackground = 0;
+color HUDcolour = color(193,134,255);
 
 ArrayList<EnemyDOT> DOTenemies = new ArrayList<EnemyDOT>();
 ArrayList<Package> packages    = new ArrayList<Package>();

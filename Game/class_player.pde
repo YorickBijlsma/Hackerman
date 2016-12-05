@@ -5,7 +5,7 @@ class Player
 {
   final int originalHealth = 100;
         int health = originalHealth;
-  public color healthColour = color(255,0,0);
+  public color healthColour = color(255,104,225);
   boolean hit = false;
   
   float reqX, reqY;
@@ -45,7 +45,7 @@ class Player
         rect(c[0], c[1], c[2], c[3]);   //draw the other blocks
       }
     }
-    fill(player.healthColour);
+    fill(healthColour);
     textAlign(LEFT); textSize(32); text("Health: " + player.health, 10, 30);
 
     if (checkDone()) done = true;     //check if puzzle is completed
@@ -62,7 +62,11 @@ class Player
       textSize(48); text("You got Hacked.",width/2,height/2);
       
       gameRestartTimer++;
-      if(gameRestartTimer >= gameRestartTimeAmount) restartGame();
+      if(gameRestartTimer >= gameRestartTimeAmount)
+      {
+        restartGame();
+        gameRestartTimer = 0;
+      }
     }
     else            //sequence for player is alive
     {
@@ -137,11 +141,4 @@ class Player
         }
     else  return false; 
   }
-  /*
-  boolean checkDeath()
-  {
-    if(health <= 0) return true;
-    else            return false;
-  }
-  */
 }

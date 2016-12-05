@@ -7,6 +7,7 @@ void loadLevel(int num) //)
   worms     .clear();
   adwares   .clear();
   DOTenemies.clear();
+  player.hit = false;
   
   if (directory.exists())
   {
@@ -138,5 +139,8 @@ void restartGame()
   //restart the game
   levelNumber = 1;
   loadLevel(levelNumber);
-  player.beatGame = false; player.done = false; player.health = player.originalHealth;
+  player.beatGame = false; player.done = false;
+  player.health = player.originalHealth;
+  resetClock();
+  score.totalScore = 0;
 }

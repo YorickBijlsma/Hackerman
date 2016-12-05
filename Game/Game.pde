@@ -9,6 +9,11 @@ boolean done = false;
 int nEnemies = 5;
 float t      = 0.0; 
 int health   = 100;
+int loadlevels = 0;
+PImage bg;
+PImage bgPLAY;
+PImage bgEXIT;
+int drawbackground = 0;
 
 ArrayList<EnemyDOT> DOTenemies = new ArrayList<EnemyDOT>();
 ArrayList<Package> packages    = new ArrayList<Package>();
@@ -30,25 +35,38 @@ int levelWait = 40;
 void setup()
 {
   size(1250,703);
-  loadLevel(levelNumber);
-  setupGame();
+  if ((int) loadlevels == 1) {
+    loadLevel(levelNumber);
+    setupGame();
+  }
     EnemyDOT xnx = new EnemyDOT(200,200);
     DOTenemies.add(xnx);
 }
 
 void draw()
 {
- drawGame();
- if(!player.done) //player hasn't completed the puzzle
- {
-   updateGame();
+  background(bg);
+  if (loadlevels == 0) {
+    if (keyPressed && key == 'z'){
+      loadlevels = 1;
+    }
+    else if (keyPressed && key == 'x'){
+exit();
+} 
+  
+ if (loadlevels == 1) {
+    drawGame();
+    if (!player.done) //player hasn't completed the puzzle
+    {
+      updateGame();
+    } else             //player has completed the puzzle
+    {
+      player.done = false;
+      doneRoutine();
+      if (player.beatGame) text("Congratulations, you have bexeaten the game. Your score is ...", width/2, height/2);
+    }
  }
- else             //player has completed the puzzle
- {
-   player.done = false;
-   doneRoutine();
-   if(player.beatGame) text("Congratulations, you have beaten the game. Your score is ...",width/2,height/2);
- }
+  }
   
  fill(player.colour);
  drawClock();

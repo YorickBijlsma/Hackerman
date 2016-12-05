@@ -136,22 +136,14 @@ class EnemyAdware
   int damage = 0;
   float originalSpeed = speed;
 
-  int adAmount = amountOfAds;
   color colour = color(70, 215, 240);
-  //arrays to assign ad amount, size and location on the screen
-  float[] burstSize = new float[adAmount];
-  float[] burstLocationX = new float[adAmount];
-  float[] burstLocationY = new float [adAmount];
+  PImage img; //image loader
+  int imgNum = 1;
 
   public EnemyAdware (int x, int y)
   {
     this.x = x;
     this.y = y;
-  }
-
-  void setup()
-  {
-    //size(1000, 600);
   }
 
   void stayInScreen()
@@ -188,7 +180,7 @@ class EnemyAdware
     speed = 0;
     player.speed = 0;
     //randomizing size and location
-    for (int i = 0; i < amountOfAds; i++)
+    /*for (int i = 0; i < amountOfAds; i++)
     {
       burstSize[i]      =    random(60, 160);
       burstLocationX[i] = 10 *  (random(100));                //this part can be more efficient
@@ -197,22 +189,28 @@ class EnemyAdware
     for (int i = 0; i < amountOfAds; i++)                    //this for loop isn't needed
     {
       rect(burstLocationX[i], burstLocationY[i], burstSize[i], burstSize[i]);
-    }
+    }*/
+    PopUpRandomizer(imgNum);
     speed = originalSpeed;
     player.speed = player.originalSpeed;
   }
 
-  void PopUpRandomizer()
+   void PopUpRandomizer(int num)
   {
+    float popUpx = random(750);
+    float popUpy = random(400);
+      
+    img = loadImage("Ad"+num+".png");
+    image(img, popUpx, popUpy);
   }
 
   void draw()
   {
     fill(colour);                                                  //stroke(255, 100, 0);
     rect(x, y, w, h); 
-    //noLoop();                                                    //i greyed out the noLoop as it stopped the game loop
   }                                                                
 }
+
 
 class EnemyDOT
 {

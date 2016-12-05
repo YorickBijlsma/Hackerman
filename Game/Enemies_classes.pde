@@ -342,3 +342,49 @@ class Package
     return false;
   }
 }
+
+class malware
+
+{
+
+  int breedte = 20;
+  int hoogte = 20;
+  int xpos = 50;
+  int ypos = 50;
+  color colour = color(255, 0, 0);
+  int speed = 3;
+  boolean alive = true;
+ // float xDistance; //= (player.mainX - malware.xpos);
+
+  void makeMalware() {
+    fill(colour);
+    move();
+    ellipse(xpos, ypos, breedte, hoogte);
+    noStroke();
+    collision();
+    
+  }
+  void move() {
+    
+    float xDistance = xpos - player.mainX;
+    float yDistance = ypos - player.mainY;
+
+    
+     if(Math.abs(xDistance) <= 300 && Math.abs(yDistance) <= 300){
+       double hyp = Math.sqrt(xDistance * xDistance + yDistance * yDistance);
+    xDistance /= hyp;
+    yDistance /= hyp;
+    xpos += (xDistance * -speed);
+    ypos += (yDistance * -speed);
+    
+    }
+    
+    
+    }
+  void collision() {
+    if (xpos == player.mainX) {
+      alive = false;
+      //player.playerhp-=10;
+    }
+  }
+}

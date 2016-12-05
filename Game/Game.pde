@@ -16,6 +16,7 @@ ArrayList<EnemyAdware> adwares = new ArrayList<EnemyAdware>();
 ArrayList<Worm> worms          = new ArrayList<Worm>();
 
 Player player = new Player();                  //a player object, for all rectangles the player controls
+Score score = new Score();
 
 float[][] wallCoords   = new float[30][4];     //a 30 slot 2d array, each subarray having 4 slots. this is for the maximum of 30 wall blocks
 float[][] puzzleCoords = new float[20][4];     //a 20 slot 2d array, each subarray having 4 slots. this is for the maximum of 20 puzzle blocks
@@ -51,6 +52,7 @@ void draw()
   
  fill(player.colour);
  drawClock();
+ score.drawScore();
 }
 
 void setupenemies()

@@ -124,6 +124,7 @@ void loadLevel(int num) //)
       
     }
     levelNumber++;
+    score.berekenScore();
     //debug line       for(float[] coords : enemyCoords) for(float coord : coords) println(coord);
     //println(enemyCoords.length);
   }

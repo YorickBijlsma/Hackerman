@@ -130,7 +130,7 @@ class EnemyAdware
   float w = 20;
   float h = 20;
   int amountOfAds = 1000;
-  float speed = 3;
+  float speed = 20;
   float xsp = speed; 
   float ysp = speed;
   int damage = 0;
@@ -179,23 +179,15 @@ class EnemyAdware
   {
     speed = 0;
     player.speed = 0;
-    //randomizing size and location
-    /*for (int i = 0; i < amountOfAds; i++)
+    for (int i = 0; i < 10; i++)
     {
-      burstSize[i]      =    random(60, 160);
-      burstLocationX[i] = 10 *  (random(100));                //this part can be more efficient
-      burstLocationY[i] = 10 *  (random(57));
+      PopUpRandomizer(imgNum);
     }
-    for (int i = 0; i < amountOfAds; i++)                    //this for loop isn't needed
-    {
-      rect(burstLocationX[i], burstLocationY[i], burstSize[i], burstSize[i]);
-    }*/
-    PopUpRandomizer(imgNum);
     speed = originalSpeed;
     player.speed = player.originalSpeed;
   }
 
-   void PopUpRandomizer(int num)
+   void PopUpRandomizer(int num) //spawns x, y and image
   {
     float popUpx = random(750);
     float popUpy = random(400);

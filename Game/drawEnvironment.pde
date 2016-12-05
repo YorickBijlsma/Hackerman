@@ -1,6 +1,7 @@
 void drawEnvironment()
 {
-  fill(player.colour);
+  if(player.done) fill(green);
+  else            fill(blue);
   for(float[] c : puzzleCoords) //draw the puzzle
   {
    rect(c[0],c[1],c[2],c[3]);

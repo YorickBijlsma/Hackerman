@@ -20,4 +20,5 @@ void clearCoordinates()
   adwares     .clear();
   DOTenemies  .clear();
   packages    .clear();
+  malwares    .clear();
 }

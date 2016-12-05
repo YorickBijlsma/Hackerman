@@ -95,11 +95,12 @@ void loadLevel(int num) //)
     {
       int enemyX = (int)Float.parseFloat(varsEnemies[l]);
       int enemyY = (int)Float.parseFloat(varsEnemies[l+1]);
+      int amountOfEnemies = 3;
       float[] enemyStats = {enemyX,enemyY};
       
       if(!isEmpty(enemyStats))
       {
-        int range = (2 - 0) + 1;
+        int range = (amountOfEnemies - 0) + 1;
         int enemyType = (int)(Math.random() * range) + 0;
         
         switch(enemyType)  //spawn an enemy
@@ -118,12 +119,17 @@ void loadLevel(int num) //)
             EnemyDOT newDOT = new EnemyDOT(enemyX, enemyY);
             DOTenemies.add(newDOT);
             break;  
+            
+          case 3:
+            Malware newMalware = new Malware(enemyX,enemyY);
+            malwares.add(newMalware);
         }
         enemyAmount++;
       }
 
       
     }
+    player.done = false;
     levelNumber++;
     //debug line       for(float[] coords : enemyCoords) for(float coord : coords) println(coord);
     //println(enemyCoords.length);

@@ -39,6 +39,7 @@ boolean damagePlayer(float x, float y, int damage)
 {
   if(overlapsPlayer(x,y))
   {
+    player.colour = color(255,0,0);
     player.health -= damage;
     return true;
   }

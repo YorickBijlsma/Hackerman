@@ -14,12 +14,16 @@ PImage bg;
 PImage bgPLAY;
 PImage bgEXIT;
 int drawbackground = 0;
-color HUDcolour = color(193,134,255);
+color HUDcolour = color(193, 134, 255);
+color red   = color(255,0,0);
+color green = color(0,255,0);
+color blue  = color(0,0,255);
 
 ArrayList<EnemyDOT> DOTenemies = new ArrayList<EnemyDOT>();
 ArrayList<Package> packages    = new ArrayList<Package>();
 ArrayList<EnemyAdware> adwares = new ArrayList<EnemyAdware>();
 ArrayList<Worm> worms          = new ArrayList<Worm>();
+ArrayList<Malware> malwares = new ArrayList<Malware>();
 
 Player player = new Player();                  //a player object, for all rectangles the player controls
 Score score = new Score();
@@ -30,7 +34,7 @@ float[][] enemyCoords  = new float[12][2];     //12 enemies of which x and y are
 
 final int puzzleDoneMargin       = 30;                //you need be within 30 pixels of the actual puzzle requirement to finish it
 final int gameRestartTimeAmount  = 150;
-      int gameRestartTimer       = 0;
+int gameRestartTimer       = 0;
 
 int levelNumber = 1;
 int levelWait   = 40;
@@ -39,48 +43,39 @@ void setup()
 {
   size(1250, 703);
 
-    loadLevel(levelNumber);
-    setupGame();
-  
-  //EnemyDOT xnx = new EnemyDOT(200,200);
-  //DOTenemies.add(xnx);
+  loadLevel(levelNumber);
+  setupGame();
+
+  Worm xnx = new Worm(200,200);
+  worms.add(xnx);
 }
 
 void draw()
 {
-  //background(bg);
-  if (loadlevels == 0)
+
+  drawGame();
+  if (!player.done) //player hasn't completed the puzzle
   {
-    if (keyPressed && key == 'z')
-    {
-      loadlevels = 1;
-    }
-    else if (keyPressed && key == 'x')
-    {
-      exit();
-    } 
-
-      drawGame();
-      if (!player.done) //player hasn't completed the puzzle
-      {
-        updateGame();
-      }
-      else             //player has completed the puzzle
-      {
-        player.done = false;
-        doneRoutine();
-        if (player.beatGame) text("Congratulations, you have bexeaten the game. Your score is ...", width/2, height/2);
-      }
+    updateGame();
   }
-
-  fill(player.colour);
-  drawClock();
-  score.drawScore();
+  else             //player has completed the puzzle
+  {
+    doneRoutine();
+    if (player.beatGame) text("Congratulations, you have bexeaten the game. Your score is ...", width/2, height/2);
+  }
 }
 
-void setupenemies()
-{  
-  size(1024, 576);
+void drawHUD()
+{
+  textAlign(LEFT);
+  textSize(32);
+
+  fill(HUDcolour);
+  text("Time left: " + secondsLeft, width - 250, 40);
+  text("Score : " + score.totalScore, 625, 40);
+
+  fill(player.healthColour);
+  text("Health: " + player.health, 10, 40);
 }
 
 void drawGameenemies()

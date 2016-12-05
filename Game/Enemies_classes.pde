@@ -28,12 +28,12 @@ class Worm
       if (i==0)        fill(color(240, 0, 240));           //make the head (first segment) a unique colour
       else                                          
       {  
-         if (i%2==0)   fill(color(244, 164, 96));    
-         else          fill(color(205, 133, 63));          //segments are alternated between 2 colours
+        if (i%2==0)   fill(color(244, 164, 96));    
+        else          fill(color(205, 133, 63));          //segments are alternated between 2 colours
       }
 
       size = (i == 0) ? headSize : segmentSize;           //draw the head bigger
-      
+
 
       if (dir == LEFT)  ellipse(x + (i*segmentSize), y, size, size);  //draw additional segments to the right of the head
       if (dir == RIGHT) ellipse(x - (i*segmentSize), y, size, size);  //draw additional segments to the left of the head
@@ -44,6 +44,8 @@ class Worm
 
   void update()
   {
+    damagePlayer(x, y, damage);
+
     segmentCounter++;
     if (segments <= maxSegments)
     {
@@ -54,12 +56,12 @@ class Worm
       }
     } else segmentCounter = 0;
 
-    
 
-    if(bounceOffWall(x,y) || bounceOffScreenEdge())//if (hitsWall())
+
+    if (bounceOffWall(x, y) || bounceOffScreenEdge())//if (hitsWall())
     {
       segments = 3;
-      if(bounceOffWall(x,y))
+      if (bounceOffWall(x, y))
       {
         if (dir == LEFT) dir = RIGHT;
         else if (dir == RIGHT) dir = LEFT;
@@ -83,11 +85,8 @@ class Worm
     default:
       break;
     }
-    if (damagePlayer(x,y,damage)) player.hit = true;
-    else                          player.hit = false;
-    
   }
-  
+
   boolean bounceOffScreenEdge()
   {
     if (x+segmentSize > width)
@@ -115,13 +114,13 @@ class Worm
 }
 /*
 //////////////////////////////////////////////
-end of worm class
-//////////////////////////////////////////////
-//////////////////////////////////////////////
-//////////////////////////////////////////////
-begin of adware class
-//////////////////////////////////////////////
-*/
+ end of worm class
+ //////////////////////////////////////////////
+ //////////////////////////////////////////////
+ //////////////////////////////////////////////
+ begin of adware class
+ //////////////////////////////////////////////
+ */
 
 class EnemyAdware
 {
@@ -154,25 +153,25 @@ class EnemyAdware
     if (y < 0)            ysp = speed;
   }
 
-  
+
 
   void update()
   {
     stayInScreen();
-    if(bounceOffWall(x,y))
+    if (bounceOffWall(x, y))
     {
-      if(xsp < 0) xsp = speed; else xsp = -speed;
-      if(ysp < 0) ysp = speed; else ysp = -speed;
+      if (xsp < 0) xsp = speed; 
+      else xsp = -speed;
+      if (ysp < 0) ysp = speed; 
+      else ysp = -speed;
     }
     x += xsp;
     y += ysp;
-    //if(overlapsPlayer(x, y)) player.health -= 1;
-    if (damagePlayer(x,y,damage))
+
+    if (damagePlayer(x, y, damage))
     {
-      player.hit = true;
       burstAdware();
     }
-    else player.hit = false;
   }
 
   void burstAdware()
@@ -187,11 +186,11 @@ class EnemyAdware
     player.speed = player.originalSpeed;
   }
 
-   void PopUpRandomizer(int num) //spawns x, y and image
+  void PopUpRandomizer(int num) //spawns x, y and image
   {
     float popUpx = random(750);
     float popUpy = random(400);
-      
+
     img = loadImage("Ad"+num+".png");
     image(img, popUpx, popUpy);
   }
@@ -199,77 +198,62 @@ class EnemyAdware
   void draw()
   {
     fill(colour);                                                  //stroke(255, 100, 0);
-    rect(x, y, w, h); 
-  }                                                                
+    rect(x, y, w, h);
+  }
 }
 
 
 class EnemyDOT
 {
-  float x,  y;
+  float x, y;
   float vx, vy;
   float diameter = 45;
 
   color fillColor = color(255, 0, 0);
   int teller = 0;
   float draw = 0;
-  int i = 0;
-  
+  int amountOfPackages = 0;
+  int damage = 3;
+
   public EnemyDOT(float x, float y)
   {
     this.x = x;
     this.y = y;
-    
+
     vx = random(-3.0, 3.0);
     vy = random(-3.0, 3.0);
   }
-  // The init method can be called to set an enemy to it's default stat
-  // Whenever you want to update an enemy, call this method
+
   void update()
   {    
-    // use the velocity to calculate the new position
-    float ownWidth = x + diameter;
-    float ownHeight = y + diameter;
-    if(overlapsPlayer(x,y)) player.health -= 1;
+
+    //if(overlapsPlayer(x,y)) player.health -= 1;
     x += vx;
     y += vy;
 
-    // Detect wether the enemy bounces against the edges of the window
-    // and change the direction if they do
+    //bounce off screen edge
     if ((x > width-diameter/2) || (x < diameter/2)) vx = -vx;
     if ((y > height-diameter/2) || (y < diameter/2)) vy = -vy;
     teller++;  
 
-    if (teller >= 150 && i!=5)
+    if (teller >= 150 && amountOfPackages!=5)
     {
-      i++;
+      amountOfPackages++;
 
-      // Instanciate a specific enemy
-      Package aPackage = new Package();
-      // set its properties to default values 
-      aPackage.init(x, y);
-      // add the enemy to the array
-      packages.add(aPackage);
+      Package newPackage = new Package();    //make a new package
+      newPackage.init(x, y);                 //spawn it under ourselves
+      packages.add(newPackage);              //add it to the arraylist
 
-      System.out.println("ready" + i);
-      teller = 0;
+
+      teller = 0;                            //wait teller amount of frames before repeating
     }
   }
 
-  // Whenever you want to draw the enemy, call this method
-  void draw() {
+  void draw() 
+  {
     fill(fillColor);
     ellipse(x, y, diameter, diameter);
   }
-
-  // Use this method to check wether a player overlaps with the enemy
-  /*boolean overlapsPlayer(Player somePlayer){
-   // Calculate the distance between the player and an enemy
-   float a = x-somePlayer.x,  // horizontal distance between player and enemy
-   b = y-somePlayer.y,  // vertical distance between player and enemy
-   c = sqrt(a*a + b*b); // diagonal distance between player and enemy
-   // if distance < radii combined, they overlap
-   return c < (diameter/2 + somePlayer.diameter/2); */
 }
 
 class Package
@@ -279,7 +263,7 @@ class Package
   float diameter;
   color fillColor;
   int teller = 0;
-  float damage = 0.3;
+  int damage = 3;
   int infectCounter = 0;
   boolean infected = false;
   int infectTime = 35;
@@ -298,83 +282,85 @@ class Package
     rect(x, y, diameter, diameter);
   }
   void update()
-  {/*
-    damageCounter++;
-    if(damageCounter == 10)
-    {
-      damagePlayerDoT(x,y,damage);
-      damageCounter = 0;
+  {
+    damagePlayer(x, y, damage);
 
-    }
-    */
-    
-    if (overlapsPlayer(x,y)) infected = true;
-    damagePlayerDoT(x,y,damage);
+    if (overlapsPlayer(x, y)) infected = true;
+    damagePlayerDoT(x, y, damage);
   }
-  
+
   boolean damagePlayerDoT(float x, float y, float damage)
   {
     /*
     if(overlapsPlayer(x,y))
-    {
-      for(int i=0; i<1; i++)
-      {
-        player.health -= 0.3;
-      }
-      return true;
-    }*/
-    if(infected)
+     {
+     for(int i=0; i<1; i++)
+     {
+     player.health -= 0.3;
+     }
+     return true;
+     }*/
+    if (infected)
     {
       infectCounter++;
-      if(infectCounter >= infectTime) infected = false;
+      if (infectCounter >= infectTime) infected = false;
       player.health -= damage;
     }
     return false;
   }
 }
 
-class malware
+class Malware
 
 {
 
   int breedte = 20;
   int hoogte = 20;
-  int xpos = 50;
-  int ypos = 50;
-  color colour = color(255, 0, 0);
-  int speed = 3;
+  float x;
+  float y;
+  color colour = color(125, 125, 0);
+  int speed = 8;
   boolean alive = true;
- // float xDistance; //= (player.mainX - malware.xpos);
 
-  void makeMalware() {
-    fill(colour);
-    move();
-    ellipse(xpos, ypos, breedte, hoogte);
-    noStroke();
-    collision();
-    
+  public Malware(float x, float y)
+  {
+    this.x = x;
+    this.y = y;
   }
-  void move() {
-    
-    float xDistance = xpos - player.mainX;
-    float yDistance = ypos - player.mainY;
+  
+  void draw()
+  {
+    fill(colour);
+    ellipse(x, y, breedte, hoogte);
+  }
+  
+  void update()
+  {
+    move();
+    collision();
+  }
 
-    
-     if(Math.abs(xDistance) <= 300 && Math.abs(yDistance) <= 300){
-       double hyp = Math.sqrt(xDistance * xDistance + yDistance * yDistance);
-    xDistance /= hyp;
-    yDistance /= hyp;
-    xpos += (xDistance * -speed);
-    ypos += (yDistance * -speed);
-    
+  void move() 
+  {
+
+    float xDistance = x - player.mainX;                      //black magic
+    float yDistance = y - player.mainY;
+
+    if (Math.abs(xDistance) <= 300 && Math.abs(yDistance) <= 300)
+    {
+      double hyp = Math.sqrt(xDistance * xDistance + yDistance * yDistance);
+      xDistance /= hyp;
+      yDistance /= hyp;
+      x += (xDistance * -speed);
+      y += (yDistance * -speed);
     }
-    
-    
-    }
-  void collision() {
-    if (xpos == player.mainX) {
+  }
+
+  void collision() 
+  {
+    if (overlapsPlayer(x,y)) 
+    {
       alive = false;
-      //player.playerhp-=10;
     }
   }
 }

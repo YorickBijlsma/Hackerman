@@ -25,8 +25,6 @@ class Score
 
   void drawScore()
   {
-    fill(HUDcolour);
-    textSize(24);
-    textAlign(CENTER); text("Score : " + totalScore, 625, 25);
+    
   }
 }

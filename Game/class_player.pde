@@ -33,8 +33,10 @@ class Player
 
   void draw()
   {
-    if(hit)   colour = color(255,0,0);
-    else      colour = color(0,0,255);
+    /*if     (hit)  colour = color(255,0,0);
+    else if(done) colour = color(0,255,0);
+    else          colour = color(0,0,255);*/
+    
     fill(colour);
     rect(mainX, mainY, mainW, mainH);   //draw the main block
     for (float[] c : restCoords)
@@ -45,8 +47,7 @@ class Player
         rect(c[0], c[1], c[2], c[3]);   //draw the other blocks
       }
     }
-    fill(healthColour);
-    textAlign(LEFT); textSize(32); text("Health: " + player.health, 10, 30);
+    
 
     if (checkDone()) done = true;     //check if puzzle is completed
     else colour = color(0,0,255);

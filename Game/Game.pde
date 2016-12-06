@@ -9,15 +9,14 @@ boolean done = false;
 int nEnemies = 5;
 float t      = 0.0; 
 int health   = 100;
-int loadlevels = 0;
-PImage bg;
-PImage bgPLAY;
-PImage bgEXIT;
+boolean showStartScreen = true;
+
+
 int drawbackground = 0;
 color HUDcolour = color(193, 134, 255);
-color red   = color(255,0,0);
-color green = color(0,255,0);
-color blue  = color(0,0,255);
+color red   = color(255, 0, 0);
+color green = color(0, 255, 0);
+color blue  = color(0, 0, 255);
 
 ArrayList<EnemyDOT> DOTenemies = new ArrayList<EnemyDOT>();
 ArrayList<Package> packages    = new ArrayList<Package>();
@@ -39,30 +38,26 @@ int gameRestartTimer       = 0;
 int levelNumber = 1;
 int levelWait   = 40;
 
+PImage entryScreen; 
+PImage deathScreen;
+
 void setup()
 {
+  entryScreen = loadImage("start_screen.png");
+  deathScreen = loadImage("death_screen.png");
   size(1250, 703);
 
   loadLevel(levelNumber);
-  setupGame();
 
-  Worm xnx = new Worm(200,200);
+  Worm xnx = new Worm(200, 200);
   worms.add(xnx);
 }
 
 void draw()
 {
-
   drawGame();
-  if (!player.done) //player hasn't completed the puzzle
-  {
-    updateGame();
-  }
-  else             //player has completed the puzzle
-  {
-    doneRoutine();
-    if (player.beatGame) text("Congratulations, you have bexeaten the game. Your score is ...", width/2, height/2);
-  }
+  updateGame();
+  doneRoutine();
 }
 
 void drawHUD()
@@ -81,7 +76,6 @@ void drawHUD()
 void drawGameenemies()
 {
   background(0);
-  text("Health: " + health, 10, 30);
 
   for (int iEnemy=0; iEnemy<DOTenemies.size (); iEnemy++)   DOTenemies.get(iEnemy).draw();
 

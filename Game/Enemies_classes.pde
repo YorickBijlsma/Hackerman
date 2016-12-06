@@ -1,13 +1,13 @@
 class Worm
 {
   float x, y;
-  float moveSpeed = 3;
+  float moveSpeed = 5;
   int dir = RIGHT;
   float nextXposition, nextYposition = 0;
 
   int segments = 1;
-  int segmentSize = 5;
-  float headSize = segmentSize * 1.3;
+  int segmentSize = 7;
+  float headSize = segmentSize * 1.4;
   int maxSegments = 100;
   float size;                        //placeholder variable for black magic
 
@@ -31,9 +31,9 @@ class Worm
         if (i%2==0)   fill(color(244, 164, 96));    
         else          fill(color(205, 133, 63));          //segments are alternated between 2 colours
       }
-
-      size = (i == 0) ? headSize : segmentSize;           //draw the head bigger
-
+      
+      //black magic ternary operator, draws the head bigger
+      size = (i == 0) ? headSize : segmentSize;
 
       if (dir == LEFT)  ellipse(x + (i*segmentSize), y, size, size);  //draw additional segments to the right of the head
       if (dir == RIGHT) ellipse(x - (i*segmentSize), y, size, size);  //draw additional segments to the left of the head
@@ -263,7 +263,7 @@ class Package
   float diameter;
   color fillColor;
   int teller = 0;
-  int damage = 3;
+  int damage = 1;
   int infectCounter = 0;
   boolean infected = false;
   int infectTime = 35;
@@ -321,6 +321,7 @@ class Malware
   color colour = color(125, 125, 0);
   int speed = 8;
   boolean alive = true;
+  int engagementDistance = 300;
 
   public Malware(float x, float y)
   {
@@ -343,10 +344,10 @@ class Malware
   void move() 
   {
 
-    float xDistance = x - player.mainX;                      //black magic
-    float yDistance = y - player.mainY;
+    float xDistance = x - player.mainX - (player.mainW/2);                      //black magic
+    float yDistance = y - player.mainY - (player.mainH/2);
 
-    if (Math.abs(xDistance) <= 300 && Math.abs(yDistance) <= 300)
+    if (Math.abs(xDistance) <= engagementDistance && Math.abs(yDistance) <= engagementDistance)
     {
       double hyp = Math.sqrt(xDistance * xDistance + yDistance * yDistance);
       xDistance /= hyp;

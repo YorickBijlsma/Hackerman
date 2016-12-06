@@ -3,11 +3,11 @@
  */
 class Player
 {
-  final int originalHealth = 100;
-        int health = originalHealth;
-  public color healthColour = color(255,104,225);
+  final int originalHealth = 10000;
+  int health = originalHealth;
+  public color healthColour = color(255, 104, 225);
   boolean hit = false;
-  
+
   float reqX, reqY;
   float mainX, mainY, mainW, mainH;
   float xRemainderToWall, yRemainderToWall = 0.0;
@@ -34,9 +34,9 @@ class Player
   void draw()
   {
     /*if     (hit)  colour = color(255,0,0);
-    else if(done) colour = color(0,255,0);
-    else          colour = color(0,0,255);*/
-    
+     else if(done) colour = color(0,255,0);
+     else          colour = color(0,0,255);*/
+
     fill(colour);
     rect(mainX, mainY, mainW, mainH);   //draw the main block
     for (float[] c : restCoords)
@@ -47,63 +47,68 @@ class Player
         rect(c[0], c[1], c[2], c[3]);   //draw the other blocks
       }
     }
-    
+
 
     if (checkDone()) done = true;     //check if puzzle is completed
-    else colour = color(0,0,255);
+    else colour = color(0, 0, 255);
   }
 
   void update()
   {
-    if(health <= 0)  //death sequence
+    if (health <= 0)  //death sequence
     {
       clearCoordinates();
       //fill(255,0,0);
       //textAlign(CENTER);
       //textSize(48); text("You got Hacked.",width/2,height/2);
-      image(deathScreen,0,0);
-      
+      image(deathScreen, 0, 0);
+
       gameRestartTimer++;
-      if(gameRestartTimer >= gameRestartTimeAmount)
+      if (gameRestartTimer >= gameRestartTimeAmount)
       {
         restartGame();
         gameRestartTimer = 0;
       }
-    }
-    else            //sequence for player is alive
+    } else            //sequence for player is alive
     {
       xsp *= 0.4;
       ysp *= 0.4;
-  
+
       if (keysPressed[LEFT])   xsp = -1;
       if (keysPressed[RIGHT])  xsp = 1;
       if (keysPressed[UP])     ysp = -1;
       if (keysPressed[DOWN])   ysp = 1;
-  
+
       if (keysPressed[SHIFT])
       {
-        
       }
-  
-      if (! nextPositionIsWall() ) //if next position is free
+      if (! testNextPositionIsWall('x') ) //if next position is free
       {
         mainX += xsp * speed;      //move us in the direction(xsp), with the speed (speed)
+        //mainY += ysp * speed;
+      }
+      if (! testNextPositionIsWall('y') )
+      {
         mainY += ysp * speed;
       }
-      else//if next position is a wall
+       else//if next position is a wall
       {   //and if we're not directly touching the wall (more than 1 pixel difference)
-      
-        if (mainX-1 <= otherX + otherW)
-        {} else mainX += xsp;     //move us 1 pixel to the right
-        
-        if (mainX+mainW+1 >= otherX)
-        {} else mainX -= xsp;     //move us 1 pixel to the left
-        
-        if (mainY-1 <= otherY + otherH)
-        {} else mainY += ysp;     //1 pixel down
-        
-        if (mainY+mainH+1 >= otherY)
-        {} else mainY -= ysp;     //1 pixel up
+
+        /*if (mainX-1 <= otherX + otherW)                                                                          //if you put this in the actual collision method
+         {                                                                                          //it might move you closer even when you're still holding button
+         } else mainX += xsp;     //move us 1 pixel to the right
+         
+         if (mainX+mainW+1 >= otherX)
+         {
+         } else mainX -= xsp;     //move us 1 pixel to the left
+         
+         if (mainY-1 <= otherY + otherH)
+         {
+         } else mainY += ysp;     //1 pixel down
+         
+         if (mainY+mainH+1 >= otherY)
+         {
+         } else mainY -= ysp;     //1 pixel up*/
       }
       mainX = constrain(mainX, 0, width-mainW);      //stay in the screen x wise
       mainY = constrain(mainY, 0, height-mainH);     //y wise
@@ -123,24 +128,84 @@ class Player
       otherH = c[3];
 
       if (nextXposition <= otherX + otherW    &&                //there's a wall to the left
-          nextXposition + mainW >= otherX     &&                //to the right
-          nextYposition <= otherY + otherH    &&                //above player
-          nextYposition + mainH >= otherY)    return true;      //below player
+        nextXposition + mainW >= otherX     &&                //to the right
+        nextYposition <= otherY + otherH    &&                //above player
+        nextYposition + mainH >= otherY)    
+      {
+        return true;
+      }      //below player
     }
     return false; //no wall where we want to move!
+  }
+  boolean testNextPositionIsWall(char checkSide)
+  {
+    float nextXposition = mainX + (xsp * speed);          //position player attempts to move in
+    float nextYposition = mainY + (ysp * speed);
+
+    if (checkSide == 'x')
+    {
+
+      for (float[] c : wallCoords)
+      {
+        otherX = c[0]; 
+        otherY = c[1];
+        otherW = c[2]; 
+        otherH = c[3];
+
+        if (nextXposition <= otherX + otherW    &&                //there's a wall to the left
+          nextXposition + mainW >= otherX     &&                //to the right
+          mainY <= otherY + otherH    &&                //above player
+          mainY + mainH >= otherY)   
+        {
+          if (mainX-1 <= otherX + otherW)                                                                          //if you put this in the actual collision method
+          {                                                                                          //it might move you closer even when you're still holding button
+          } else mainX += 1;     //move us 1 pixel to the right
+
+          if (mainX+mainW+1 >= otherX)
+          {
+          } else mainX -= 1;     //move us 1 pixel to the left
+          return true;
+        }
+      }
+    }
+    if (checkSide == 'y')
+    {
+      for (float[] c : wallCoords)
+      {
+        otherX = c[0]; 
+        otherY = c[1];
+        otherW = c[2]; 
+        otherH = c[3];
+
+        if (mainX <= otherX + otherW    &&                //there's a wall to the left
+          mainX + mainW >= otherX     &&                //to the right
+          nextYposition <= otherY + otherH    &&                //above player
+          nextYposition + mainH >= otherY)   
+        {
+          if (mainY-1 <= otherY + otherH)
+          {
+          } else mainY += 1;     //1 pixel down
+
+          if (mainY+mainH+1 >= otherY)
+          {
+          } else mainY -= 1;     //1 pixel up
+          return true;
+        }      //below player
+      }
+    }
+    return false;
   }
 
   boolean checkDone()
   {
     if (mainX <= reqX + puzzleDoneMargin &&
-        mainX >= reqX - puzzleDoneMargin &&
-        mainY <= reqY + puzzleDoneMargin &&
-        mainY >= reqY - puzzleDoneMargin)
-        {
-          mainX = reqX;
-          mainY = reqY;
-          return true;
-        }
-    else  return false; 
+      mainX >= reqX - puzzleDoneMargin &&
+      mainY <= reqY + puzzleDoneMargin &&
+      mainY >= reqY - puzzleDoneMargin)
+    {
+      mainX = reqX;
+      mainY = reqY;
+      return true;
+    } else  return false;
   }
 }

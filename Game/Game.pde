@@ -18,11 +18,11 @@ color red   = color(255, 0, 0);
 color green = color(0, 255, 0);
 color blue  = color(0, 0, 255);
 
-ArrayList<EnemyDOT> DOTenemies = new ArrayList<EnemyDOT>();
-ArrayList<Package> packages    = new ArrayList<Package>();
-ArrayList<EnemyAdware> adwares = new ArrayList<EnemyAdware>();
-ArrayList<Worm> worms          = new ArrayList<Worm>();
-ArrayList<Malware> malwares = new ArrayList<Malware>();
+ArrayList<EnemyDOT>    DOTenemies = new ArrayList<EnemyDOT>();
+ArrayList<Package>     packages   = new ArrayList<Package>();
+ArrayList<EnemyAdware> adwares    = new ArrayList<EnemyAdware>();
+ArrayList<Worm>        worms      = new ArrayList<Worm>();
+ArrayList<Malware>     malwares   = new ArrayList<Malware>();
 
 Player player = new Player();                  //a player object, for all rectangles the player controls
 Score score = new Score();
@@ -76,9 +76,7 @@ void drawHUD()
 void drawGameenemies()
 {
   background(0);
-
   for (int iEnemy=0; iEnemy<DOTenemies.size (); iEnemy++)   DOTenemies.get(iEnemy).draw();
-
   fill(color(255, 255, 255));
 }
 

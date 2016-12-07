@@ -31,9 +31,9 @@ void drawGame()
   for   (Package everyPackage : packages)    everyPackage.draw();
   for (EnemyAdware everyAdware : adwares)    everyAdware .draw();
   for   (Malware everyMalware : malwares)    everyMalware.draw();
+  for                  (Ad everyAd : ads)    everyAd     .draw();
 
-
-
+  
   if (player.health > 0) drawHUD();
 }
 

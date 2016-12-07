@@ -7,6 +7,7 @@ void loadLevel(int num) //)
   worms     .clear();
   adwares   .clear();
   DOTenemies.clear();
+  ads       .clear();
   player.hit = false;
   
   if (directory.exists())

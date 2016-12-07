@@ -23,6 +23,7 @@ ArrayList<Package>     packages   = new ArrayList<Package>();
 ArrayList<EnemyAdware> adwares    = new ArrayList<EnemyAdware>();
 ArrayList<Worm>        worms      = new ArrayList<Worm>();
 ArrayList<Malware>     malwares   = new ArrayList<Malware>();
+ArrayList<Ad>          ads        = new ArrayList<Ad>();
 
 Player player = new Player();                  //a player object, for all rectangles the player controls
 Score score = new Score();
@@ -49,8 +50,8 @@ void setup()
 
   loadLevel(levelNumber);
 
-  Worm xnx = new Worm(200, 200);
-  worms.add(xnx);
+  EnemyAdware xnx = new EnemyAdware(width-50, 100);
+  adwares.add(xnx);
 }
 
 void draw()

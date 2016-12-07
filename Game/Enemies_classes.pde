@@ -128,7 +128,12 @@ class EnemyAdware
   float y = 10;
   float w = 20;
   float h = 20;
-  int amountOfAds = 1000;
+  final static int amountOfAds = 5;          //final static so we can use this variable by refererring to the class, instead of a specific instance (used to spawn ads)
+  int adSpawnCounter = 0;
+  int adSpawnTime = 0;
+  boolean bursting = false;
+  int burstCounter = 0;
+  int burstingDuration = 40;
   float speed = 20;
   float xsp = speed; 
   float ysp = speed;
@@ -170,35 +175,61 @@ class EnemyAdware
 
     if (damagePlayer(x, y, damage))
     {
-      burstAdware();
+      bursting = true;
+    }
+    if(bursting)
+    {
+      burstCounter++;
+      if(burstCounter >= burstingDuration)
+      {
+        burstCounter = 0;
+        bursting = false;
+        ads.clear();
+      }
+      else
+      {
+        burstAdware();
+      }
     }
   }
 
   void burstAdware()
   {
-    speed = 0;
-    player.speed = 0;
-    for (int i = 0; i < 10; i++)
+    adSpawnCounter++;
+    if(adSpawnCounter >= adSpawnTime)
     {
-      PopUpRandomizer(imgNum);
+      adSpawnCounter = 0;
+      Ad newAd = new Ad();
+      ads.add(newAd);
     }
-    speed = originalSpeed;
-    player.speed = player.originalSpeed;
-  }
-
-  void PopUpRandomizer(int num) //spawns x, y and image
-  {
-    float popUpx = random(750);
-    float popUpy = random(400);
-
-    img = loadImage("Ad"+num+".png");
-    image(img, popUpx, popUpy);
   }
 
   void draw()
   {
     fill(colour);                                                  //stroke(255, 100, 0);
     rect(x, y, w, h);
+  }
+}
+
+class Ad
+{
+  float x;
+  float y;
+  int adImage;
+  PImage sprite;
+  
+  public Ad()
+  {
+    this.x = random(0, width  -  150);          //spawn anywhere, as long as it's 150 pixels away from all edges 
+    this.y = random(0, width  -  150);
+
+    adImage = (int) random(1, EnemyAdware.amountOfAds+1);       //amountOfAds is a static member of EnemyAdware, so we can refer to the class name
+    sprite = loadImage("adware_images/ad"+adImage+".png");      //get a random image to use for the instance
+  }
+  
+  void draw()
+  {
+    image(sprite, x, y);
   }
 }
 

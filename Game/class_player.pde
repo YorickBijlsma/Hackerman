@@ -157,11 +157,11 @@ class Player
           mainY <= otherY + otherH    &&                //above player
           mainY + mainH >= otherY)   
         {
-          if (mainX-1 <= otherX + otherW)                                                                          //if you put this in the actual collision method
+          if (mainX <= otherX + otherW)                                                                          //if you put this in the actual collision method
           {                                                                                          //it might move you closer even when you're still holding button
           } else mainX += 1;     //move us 1 pixel to the right
 
-          if (mainX+mainW+1 >= otherX)
+          if (mainX+mainW >= otherX)
           {
           } else mainX -= 1;     //move us 1 pixel to the left
           return true;
@@ -182,13 +182,13 @@ class Player
           nextYposition <= otherY + otherH    &&                //above player
           nextYposition + mainH >= otherY)   
         {
-          if (mainY-1 <= otherY + otherH)
+          if (mainY <= otherY + otherH)
           {
-          } else mainY += 1;     //1 pixel down
+          } else mainY += 2;     //1 pixel down
 
-          if (mainY+mainH+1 >= otherY)
+          if (mainY+mainH >= otherY)
           {
-          } else mainY -= 1;     //1 pixel up
+          } else mainY -= 2;     //1 pixel up
           return true;
         }      //below player
       }

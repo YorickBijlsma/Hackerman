@@ -3,9 +3,9 @@
  */
 class Player
 {
-  final int originalHealth = 10000;
+  final int originalHealth = 100;
   int health = originalHealth;
-  public color healthColour = color(255, 104, 225);
+  public color healthColour = color(255, 255,255);
   boolean hit = false;
 
   float reqX, reqY;

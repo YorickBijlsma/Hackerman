@@ -1,4 +1,4 @@
-int Time = 11000;
+int Time = 11;
 int last = 0;
 int m = 0;
 int seconds = 0;

@@ -130,7 +130,7 @@ class EnemyAdware
   float h = 20;
   final static int amountOfAds = 5;          //final static so we can use this variable by refererring to the class, instead of a specific instance (used to spawn ads)
   int adSpawnCounter = 0;
-  int adSpawnTime = 0;
+  int adSpawnTime = 7;
   boolean bursting = false;
   int burstCounter = 0;
   int burstingDuration = 40;

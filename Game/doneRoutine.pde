@@ -2,7 +2,10 @@ void doneRoutine()
 {
   if(player.done)
   {
-    score.berekenScore();
+    int addedPoints = 0;
+    addedPoints++;
+    if(addedPoints < levelWait/1.5) score.totalScore++;
+    //score.berekenScore();
     player.colour = color(0,255,0);   //set colour to green
     player.xsp = 0;                   //freeze player
     player.ysp = 0;

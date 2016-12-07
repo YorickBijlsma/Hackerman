@@ -66,12 +66,21 @@ void drawHUD()
   textAlign(LEFT);
   textSize(32);
 
+  color timeLeftValue = (secondsLeft * 366) % 255;
+  fill(timeLeftValue, timeLeftValue/2, (timeLeftValue*2) % 255);
+  textSize(24);
+  text(secondsLeft, player.mainX-5, player.mainY - 5);
+  
+  textSize(24);
   fill(HUDcolour);
-  text("Time left: " + secondsLeft, width - 250, 40);
-  text("Score : " + score.totalScore, 625, 40);
+  textAlign(LEFT);
+  if(!player.done) text("Score : " + score.totalScore, 625, 40);
+  else             text("Score : " + score.totalScore, width/2,height/2);
 
   fill(player.healthColour);
-  text("Health: " + player.health, 10, 40);
+  textSize(32);
+  textAlign(CENTER);
+  text(player.health, player.mainX+(player.mainW/2), player.mainY+(player.mainH/2));
 }
 
 void drawGameenemies()

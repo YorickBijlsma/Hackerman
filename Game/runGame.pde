@@ -24,6 +24,7 @@ void drawGame()
   noStroke();
   drawEnvironment();                                                     //draw the environment under all other things in the room
   player.draw(); 
+  if (player.health > 0) drawHUD();
 
   //draw all enemies
   for            (Worm everyWorm : worms)    everyWorm   .draw();
@@ -34,7 +35,7 @@ void drawGame()
   for                  (Ad everyAd : ads)    everyAd     .draw();
 
   
-  if (player.health > 0) drawHUD();
+  
 }
 
 void startGame()

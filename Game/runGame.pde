@@ -1,10 +1,10 @@
 void updateGame()
 {
   updateKeys();
-  updateClock();
 
   if (!player.done)      //if player isn't done yet, keep updating
   {
+    updateClock();
     player.update();
     for            (Worm everyWorm : worms)     everyWorm   .update();
     for      (EnemyDOT iEnemy : DOTenemies)     iEnemy      .update(); 
@@ -24,7 +24,7 @@ void drawGame()
   noStroke();
   drawEnvironment();                                                     //draw the environment under all other things in the room
   player.draw(); 
-  if (player.health > 0) drawHUD();
+  
 
   //draw all enemies
   for            (Worm everyWorm : worms)    everyWorm   .draw();
@@ -33,12 +33,5 @@ void drawGame()
   for (EnemyAdware everyAdware : adwares)    everyAdware .draw();
   for   (Malware everyMalware : malwares)    everyMalware.draw();
   for                  (Ad everyAd : ads)    everyAd     .draw();
-
-  
-  
-}
-
-void startGame()
-{
-  
+  if (player.health > 0) drawHUD();
 }

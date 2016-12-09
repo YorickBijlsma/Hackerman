@@ -1,9 +1,9 @@
-final int TIMELEVEL = 10; //Amount of seconds for each level
+final int TIMELEVEL = 10;
 int secondsCounter = 0;
 int secondsLeft = 0;
 
 void updateClock() //TODO: levels start at 9, not 10. this means secondsCounter = 1 somewhere early in the code
-{   
+{
   if (frameCount % 60 == 0)
   {
     secondsCounter++;
@@ -15,7 +15,7 @@ void updateClock() //TODO: levels start at 9, not 10. this means secondsCounter 
   }
   
   secondsLeft = TIMELEVEL - secondsCounter;
-}  
+} 
 
 void resetClock()  // reset all values making the clock reset itself
 {

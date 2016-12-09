@@ -13,7 +13,7 @@ class Worm
 
   int segmentationTime = 5;         //every segmentationTime amount of frames, a new segment is added (the worm grows bigger)
   int segmentCounter = 0;            //count every frame for duplication purposes
-  int damage = 1;
+  int damage = 5;
 
   public Worm(int x, int y)
   {
@@ -65,6 +65,8 @@ class Worm
       {
         if (dir == LEFT) dir = RIGHT;
         else if (dir == RIGHT) dir = LEFT;
+        else if (dir == UP) dir = DOWN;
+        else if (dir == DOWN) dir = UP;
       }
     }
 
@@ -130,7 +132,7 @@ class EnemyAdware
   float h = 20;
   final static int amountOfAds = 5;          //final static so we can use this variable by refererring to the class, instead of a specific instance (used to spawn ads)
   int adSpawnCounter = 0;
-  int adSpawnTime = 7;
+  int adSpawnTime = 2;
   boolean bursting = false;
   int burstCounter = 0;
   int burstingDuration = 40;
@@ -215,16 +217,16 @@ class Ad
 {
   float x;
   float y;
-  int adImage;
+  int imageNumber;
   PImage sprite;
   
   public Ad()
   {
     this.x = random(0, width  -  150);          //spawn anywhere, as long as it's 150 pixels away from all edges 
-    this.y = random(0, width  -  150);
+    this.y = random(0, height  -  150);
 
-    adImage = (int) random(1, EnemyAdware.amountOfAds+1);       //amountOfAds is a static member of EnemyAdware, so we can refer to the class name
-    sprite = loadImage("adware_images/ad"+adImage+".png");      //get a random image to use for the instance
+    imageNumber = (int) random(1, EnemyAdware.amountOfAds+1);       //amountOfAds is a static member of EnemyAdware, so we can refer to the class name
+    sprite = loadImage("adware_images/ad"+imageNumber+".png");      //get a random image to use for the instance
   }
   
   void draw()
@@ -294,7 +296,7 @@ class Package
   float diameter;
   color fillColor;
   int teller = 0;
-  int damage = 1;
+  float damage = 0.6;
   int infectCounter = 0;
   boolean infected = false;
   int infectTime = 35;
@@ -342,15 +344,14 @@ class Package
 }
 
 class Malware
-
 {
-
   int breedte = 20;
   int hoogte = 20;
   float x;
   float y;
   color colour = color(125, 125, 0);
-  int speed = 8;
+  int speed = 6;
+  int damage = 10;
   boolean alive = true;
   int engagementDistance = 300;
 
@@ -374,7 +375,6 @@ class Malware
 
   void move() 
   {
-
     float xDistance = x - player.mainX - (player.mainW/2);                      //black magic
     float yDistance = y - player.mainY - (player.mainH/2);
 
@@ -390,8 +390,10 @@ class Malware
 
   void collision() 
   {
-    if (overlapsPlayer(x,y)) 
+    if (damagePlayer(x,y,damage)) 
     {
+      x = 10000;          //place the colliding malware outside the room
+      y = 10000;
       alive = false;
     }
   }

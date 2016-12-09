@@ -4,7 +4,7 @@
 class Player
 {
   final int originalHealth = 100;
-  int health = originalHealth;
+  float health = originalHealth;
   public color healthColour = color(255, 255,255);
   boolean hit = false;
 
@@ -58,13 +58,12 @@ class Player
     if (health <= 0)  //death sequence
     {
       clearCoordinates();
-      //fill(255,0,0);
-      //textAlign(CENTER);
-      //textSize(48); text("You got Hacked.",width/2,height/2);
       image(deathScreen, 0, 0);
+      fill(red); textSize(68); imageMode(CORNER); textAlign(LEFT);
+      text((int)score.totalScore,760 ,317);
 
       gameRestartTimer++;
-      if (gameRestartTimer >= gameRestartTimeAmount)
+      if (keysPressed['Z'])
       {
         restartGame();
         gameRestartTimer = 0;
@@ -153,9 +152,9 @@ class Player
         otherH = c[3];
 
         if (nextXposition <= otherX + otherW    &&                //there's a wall to the left
-          nextXposition + mainW >= otherX     &&                //to the right
-          mainY <= otherY + otherH    &&                //above player
-          mainY + mainH >= otherY)   
+            nextXposition + mainW >= otherX     &&                //to the right
+            mainY <= otherY + otherH            &&                //above player
+            mainY + mainH >= otherY)   
         {
           if (mainX <= otherX + otherW)                                                                          //if you put this in the actual collision method
           {                                                                                          //it might move you closer even when you're still holding button

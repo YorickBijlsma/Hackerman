@@ -35,7 +35,7 @@ boolean bounceOffWall(float x, float y)
   return false; //no wall where we want to move!
 }
 
-boolean damagePlayer(float x, float y, int damage)
+boolean damagePlayer(float x, float y, float damage)
 {
   if(overlapsPlayer(x,y))
   {

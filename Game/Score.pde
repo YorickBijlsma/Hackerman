@@ -1,30 +1,55 @@
 class Score
 {
-  int totalScore = 0;
-  int scorepoints = 1;
+  float totalScore = 0;
+  float oldScore = 0;
+  int numberOfScores = 0;
+  float scorePoints = 20;
   float totaltime = secondsCounter;
-  float timepoints = secondsCounter/5;
+  float timePoints;
   float healthpoints = health/10;
+  boolean calculatedThisLevel = false;
 
-  void berekenScore()
-  {
-    if (health < player.originalHealth / 2) 
+  float berekenScore()
+  { 
+    if (!calculatedThisLevel)
     {
-      healthpoints = 0;
-    }
+      oldScore = totalScore;
 
-    if (secondsCounter < 8)
-    {
-      timepoints = 0;
+      timePoints = secondsLeft * 5;      //add secondsLeft*5 amount of points over levelWait amount of frames
+      totalScore += scorePoints;
+      totalScore += timePoints;
+      
+      //numberOfScores = numberOfScores % 20;
+
+      calculatedThisLevel = true;
+      
     }
-    totalScore += scorepoints;
-   //totalscore += scorepoints + timepoints + healthpoints;
+    return totalScore;
   }
 
 
 
   void drawScore()
   {
-    
+  }
+}
+
+class Leaderboard
+{
+  float[] lastFiveScores = {0, 0, 0, 0, 0};
+  int x = 1170;
+  int y = 0;
+  int padding = 20;
+
+  void draw()
+  {
+    fill(HUDcolour);
+    imageMode(CORNER);
+    image(leaderboardImage, x, y);
+    textSize(18);
+    for (int thisScore = 0; thisScore < 5; thisScore++)
+    {
+      text(thisScore+1+": " + (int)lastFiveScores[thisScore], x+padding, padding*3 + (thisScore*padding));
+    }
   }
 }

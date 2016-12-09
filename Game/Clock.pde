@@ -1,33 +1,26 @@
-int Time = 10; //Amount of seconds for each level
-int last = 0;
-int m = 0;
-int seconds = 0;
-int TimeLevel = Time;
+final int TIMELEVEL = 10; //Amount of seconds for each level
+int millisCounter = 0;
+int secondsCounter = 0;
 int secondsLeft = 0;
 
-void updateClock() 
-{  
-  m = millis()-last;
-
-  if (millis() > last + 1000) //do something every 1000 miliseconds (1 second)
+void updateClock() //TODO: levels start at 9, not 10. this means secondsCounter = 1 somewhere early in the code
+{   
+  if (millis()> millisCounter + 1000) //1000 millis is 1 second
   {
-    last = millis();
-    seconds += 1;
+    millisCounter = millis(); //this makes the difference 1000 millis again thus 1 second
+    secondsCounter++;
   }
   
-  secondsLeft = TimeLevel - seconds;  //subtract amount of time by already passed time
-
   if (secondsLeft < 0)
   {
     player.health = 0;
-    secondsLeft = 0;
   }
+  
+  secondsLeft = TIMELEVEL - secondsCounter;
 }  
 
 void resetClock()  // reset all values making the clock reset itself
 {
-  last = 0;
-  seconds = 0;
-  m = 0;
-  TimeLevel = Time;
+  millisCounter = 0;
+  secondsCounter = 0;
 }

@@ -2,8 +2,8 @@ class Score
 {
   int totalScore = 0;
   int scorepoints = 1;
-  float totaltime = minutes*60 + seconds;
-  float timepoints = seconds/5;
+  float totaltime = secondsCounter;
+  float timepoints = secondsCounter/5;
   float healthpoints = health/10;
 
   void berekenScore()
@@ -13,7 +13,7 @@ class Score
       healthpoints = 0;
     }
 
-    if (seconds < 8)
+    if (secondsCounter < 8)
     {
       timepoints = 0;
     }

@@ -48,7 +48,8 @@ PImage deathScreen;
 PImage wallSprite;
 PImage leaderboardImage;
 PImage scoreAdditionImage;
-PImage wallspritesheet;
+PImage wallSpritesheet;
+PImage damageSprite;
 
 PrintWriter recentScoresWriter; //= createWriter("recent_scores.txt");
 File bestScoresEver = new File("best_5_scores.txt");
@@ -63,9 +64,10 @@ void setup()
   loadBestScores();
   entryScreen        = loadImage("start_screen.png");
   deathScreen        = loadImage("death_screen.png");
-  wallspritesheet    = loadImage("wall_texture.png");
   leaderboardImage   = loadImage("leaderboard_image.png");
   scoreAdditionImage = loadImage("score_addition.png");
+  wallSpritesheet    = loadImage("wall_texture.png");
+  damageSprite       = loadImage("damagesprite.png");
   
   loadLevel(levelNumber);
 

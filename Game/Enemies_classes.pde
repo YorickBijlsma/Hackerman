@@ -135,16 +135,14 @@ class EnemyAdware
   int adSpawnTime = 2;
   boolean bursting = false;
   int burstCounter = 0;
-  int burstingDuration = 40;
-  float speed = 20;
+  int burstingDuration = 30;                 //duration time is in frames
+  float speed = 18;
   float xsp = speed; 
   float ysp = speed;
   int damage = 0;
   float originalSpeed = speed;
 
   color colour = color(70, 215, 240);
-  PImage img; //image loader
-  int imgNum = 1;
 
   public EnemyAdware (int x, int y)
   {
@@ -167,9 +165,9 @@ class EnemyAdware
     stayInScreen();
     if (bounceOffWall(x, y))
     {
-      if (xsp < 0) xsp = speed; 
+      if (xsp < 0) xsp = speed;
       else xsp = -speed;
-      if (ysp < 0) ysp = speed; 
+      if (ysp < 0) ysp = speed;
       else ysp = -speed;
     }
     x += xsp;
@@ -208,7 +206,7 @@ class EnemyAdware
 
   void draw()
   {
-    fill(colour);                                                  //stroke(255, 100, 0);
+    fill(colour);                   
     rect(x, y, w, h);
   }
 }
@@ -218,7 +216,7 @@ class Ad
   float x;
   float y;
   int imageNumber;
-  PImage sprite;
+  PImage adSprite;
   
   public Ad()
   {
@@ -226,12 +224,12 @@ class Ad
     this.y = random(0, height  -  150);
 
     imageNumber = (int) random(1, EnemyAdware.amountOfAds+1);       //amountOfAds is a static member of EnemyAdware, so we can refer to the class name
-    sprite = loadImage("adware_images/ad"+imageNumber+".png");      //get a random image to use for the instance
+    adSprite = loadImage("adware_images/ad"+imageNumber+".png");      //get a random image to use for the instance
   }
   
   void draw()
   {
-    image(sprite, x, y);
+    image(adSprite, x, y);
   }
 }
 
@@ -350,7 +348,7 @@ class Malware
   float x;
   float y;
   color colour = color(125, 125, 0);
-  int speed = 6;
+  int speed = 5;
   int damage = 10;
   boolean alive = true;
   int engagementDistance = 300;

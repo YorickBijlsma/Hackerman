@@ -24,7 +24,7 @@ void drawEnvironment()
     
     //rect(wallX,wallY,wallW,wallH);
     
-    wallSprite = wallspritesheet.get(thisWallX, thisWallY, thisWallW, thisWallH);
+    wallSprite = wallSpritesheet.get(thisWallX, thisWallY, thisWallW, thisWallH);
     image               (wallSprite, thisWallX, thisWallY, thisWallW, thisWallH);
   }
 }

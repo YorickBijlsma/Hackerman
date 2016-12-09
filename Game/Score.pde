@@ -26,12 +26,6 @@ class Score
     }
     return totalScore;
   }
-
-
-
-  void drawScore()
-  {
-  }
 }
 
 class Leaderboard
@@ -49,7 +43,7 @@ class Leaderboard
     textSize(18);
     for (int thisScore = 0; thisScore < 5; thisScore++)
     {
-      text(thisScore+1+": " + (int)lastFiveScores[thisScore], x+padding, padding*3 + (thisScore*padding));
+      text(thisScore+1+": " + (int)lastFiveScores[thisScore], x+10, padding*2.5 + (thisScore*padding));
     }
   }
 }

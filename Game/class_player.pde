@@ -61,12 +61,9 @@ class Player
       image(deathScreen, 0, 0);
       fill(red); textSize(68); imageMode(CORNER); textAlign(LEFT);
       text((int)score.totalScore,760 ,317);
-
-      gameRestartTimer++;
       if (keysPressed['Z'])
       {
         restartGame();
-        gameRestartTimer = 0;
       }
     } else            //sequence for player is alive
     {

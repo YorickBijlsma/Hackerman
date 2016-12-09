@@ -1,5 +1,3 @@
-final int AMOUNTOFLEVELS = 4;
-
 void doneRoutine()
 {
   if(player.done)

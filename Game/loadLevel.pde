@@ -146,6 +146,7 @@ void restartGame()
 {
   //restart the game
   //leaderboard.lastFiveScores[score.numberOfScores] = score.totalScore;
+  recentScoresWriter = createWriter(bestScoresEver);
   for (int i = 0; i < 5; i++)
   {
     float everyScore = leaderboard.lastFiveScores[i];
@@ -161,10 +162,12 @@ void restartGame()
   }
   for (float currentScore : leaderboard.lastFiveScores)
   {
-    println("yo");
-    recentScoresWriter.print(currentScore);
+    //println(currentScore);
+    recentScoresWriter.println(currentScore);
     recentScoresWriter.flush();
   }
+
+  //recentScoresWriter.close();
   levelNumber = 1;
   loadLevel(levelNumber);
   player.beatGame = false;
@@ -172,4 +175,14 @@ void restartGame()
   player.health = player.originalHealth;
   resetClock();
   score.totalScore = 0;
+}
+
+void loadBestScores()
+{
+  String[] stringBestScores = loadStrings("best_5_scores.txt");
+  for (int thisScore = 0; thisScore < 5; thisScore++)
+  {
+    float floatScore = Float.parseFloat(stringBestScores[thisScore]);
+    leaderboard.lastFiveScores[thisScore] = floatScore;
+  }
 }

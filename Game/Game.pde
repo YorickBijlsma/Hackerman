@@ -10,6 +10,7 @@ int nEnemies = 5;
 float t      = 0.0; 
 int health   = 100;
 boolean showStartScreen = true;
+int levelNumber = 1;
 
 
 int drawbackground = 0;
@@ -34,12 +35,13 @@ float[][] puzzleCoords = new float[20][4];     //a 20 slot 2d array, each subarr
 float[][] enemyCoords  = new float[12][2];     //12 enemies of which x and y are known
 int[] lastFiveScores = {0,0,0,0,0};
 
-final int puzzleDoneMargin       = 30;                //you need be within 30 pixels of the actual puzzle requirement to finish it
-final int gameRestartTimeAmount  = 150;
-int gameRestartTimer       = 0;
 
-int levelNumber = 1;
-int levelWait   = 150;
+//game constants
+final int puzzleDoneMargin       = 30;                
+final int gameRestartTimeAmount  = 150;
+final int AMOUNTOFLEVELS         = 6;
+final int levelWait              = 150;
+
 
 PImage entryScreen; 
 PImage deathScreen;
@@ -48,17 +50,23 @@ PImage leaderboardImage;
 PImage scoreAdditionImage;
 PImage wallspritesheet;
 
-PrintWriter recentScoresWriter = createWriter("recent_scores.txt");
+PrintWriter recentScoresWriter; //= createWriter("recent_scores.txt");
+File bestScoresEver = new File("best_5_scores.txt");
 
 void setup()
 {
+  size(1250, 703);
+  //size(1280, 720);
+  //surface.setResizable(true);
+  //bestScoresEver = new File("data/best_5_scores.txt");
+  println(dataPath(""));
+  loadBestScores();
   entryScreen        = loadImage("start_screen.png");
   deathScreen        = loadImage("death_screen.png");
   wallspritesheet    = loadImage("wall_texture.png");
   leaderboardImage   = loadImage("leaderboard_image.png");
   scoreAdditionImage = loadImage("score_addition.png");
-  size(1250, 703);
-
+  
   loadLevel(levelNumber);
 
   Worm xnx = new Worm(width-50, 100);
@@ -103,7 +111,7 @@ void drawHUD()
     fill(red);
     image(scoreAdditionImage,width/2,height/2);
 
-    text((int)score.oldScore, 678,228);
+    text((int)score.oldScore,                   678,228);
     text((int)score.timePoints,                 678,304);
     text((int)score.scorePoints,                678,382);
     
@@ -116,17 +124,4 @@ void drawHUD()
   textSize(32);
   textAlign(CENTER);
   text((int)player.health, player.mainX+(player.mainW/2), player.mainY+(player.mainH/2));
-}
-
-void drawGameenemies()
-{
-  background(0);
-  for (int iEnemy=0; iEnemy<DOTenemies.size (); iEnemy++) DOTenemies.get(iEnemy).draw();
-  fill(color(255, 255, 255));
-}
-
-void drawenemies()
-{
-  drawGameenemies();
-  t = frameCount/frameRate;
 }

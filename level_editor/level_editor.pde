@@ -74,7 +74,7 @@ String strPlayerRects = new String();
 //coords for criterium puzzle finish
 float doneX , doneY, doneW, doneH = 0;
 
-int levelNumber = 1;
+int levelNumber = 6;
 String filepath = "data/";  //open a new directory for the current level data to be written to
                           
 PFont font;
@@ -87,7 +87,7 @@ void setup()
 {
   editType = ("puzzle");
   //output = createWriter("level_"+levelNumber+".txt");
-  size(1250,703);
+  size(1250,702);
   background(255);
   fill(255,0,0);
   font = createFont("Arial",15,true);

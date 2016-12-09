@@ -21,6 +21,9 @@ void clearScreen()
   playerAmount = 0;
   wallAmount = 0;
   enemyAmount = 0;
-  println("level "+levelNumber+" opgeslagen in "+dataPath(""));
-  levelNumber++;
+  if(keyPressed && keyCode == 'Q')
+  {
+    println("level "+levelNumber+" opgeslagen in "+dataPath(""));
+    levelNumber++;
+  }
 }

@@ -55,7 +55,7 @@ File bestScoresEver = new File("best_5_scores.txt");
 
 void setup()
 {
-  size(1250, 703);
+  size(1250, 702);
   //size(1280, 720);
   //surface.setResizable(true);
   //bestScoresEver = new File("data/best_5_scores.txt");

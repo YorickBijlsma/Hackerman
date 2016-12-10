@@ -18,11 +18,10 @@ class Score
       timePoints = secondsLeft * 5;      //add secondsLeft*5 amount of points over levelWait amount of frames
       totalScore += scorePoints;
       totalScore += timePoints;
-      
+
       //numberOfScores = numberOfScores % 20;
 
       calculatedThisLevel = true;
-      
     }
     return totalScore;
   }
@@ -44,6 +43,15 @@ class Leaderboard
     for (int thisScore = 0; thisScore < 5; thisScore++)
     {
       text(thisScore+1+": " + (int)lastFiveScores[thisScore], x+10, padding*2.5 + (thisScore*padding));
+    }
+  }
+  void loadBestScores()
+  {
+    String[] stringBestScores = loadStrings("best_5_scores.txt");
+    for (int thisScore = 0; thisScore < 5; thisScore++)
+    {
+      float floatScore = Float.parseFloat(stringBestScores[thisScore]);
+      leaderboard.lastFiveScores[thisScore] = floatScore;
     }
   }
 }

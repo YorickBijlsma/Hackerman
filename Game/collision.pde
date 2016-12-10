@@ -39,7 +39,7 @@ boolean damagePlayer(float x, float y, float damage)
 {
   if(overlapsPlayer(x,y))
   {
-    if (damage > 0) //non-damage collision should not trigger this
+    if(damage > 0)
     {
       image(damageSprite, 0, 0);
     }

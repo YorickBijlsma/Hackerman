@@ -58,6 +58,7 @@ class Player
     if (health <= 0)  //death sequence
     {
       clearCoordinates();
+      saveBestScores();
       image(deathScreen, 0, 0);
       fill(red); textSize(68); imageMode(CORNER); textAlign(LEFT);
       text((int)score.totalScore,760 ,317);

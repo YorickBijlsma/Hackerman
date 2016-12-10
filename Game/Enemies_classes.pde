@@ -135,14 +135,16 @@ class EnemyAdware
   int adSpawnTime = 2;
   boolean bursting = false;
   int burstCounter = 0;
-  int burstingDuration = 30;                 //duration time is in frames
-  float speed = 18;
+  int burstingDuration = 40;
+  float speed = 20;
   float xsp = speed; 
   float ysp = speed;
   int damage = 0;
   float originalSpeed = speed;
 
   color colour = color(70, 215, 240);
+  PImage img; //image loader
+  int imgNum = 1;
 
   public EnemyAdware (int x, int y)
   {
@@ -165,9 +167,9 @@ class EnemyAdware
     stayInScreen();
     if (bounceOffWall(x, y))
     {
-      if (xsp < 0) xsp = speed;
+      if (xsp < 0) xsp = speed; 
       else xsp = -speed;
-      if (ysp < 0) ysp = speed;
+      if (ysp < 0) ysp = speed; 
       else ysp = -speed;
     }
     x += xsp;
@@ -206,7 +208,7 @@ class EnemyAdware
 
   void draw()
   {
-    fill(colour);                   
+    fill(colour);                                                  //stroke(255, 100, 0);
     rect(x, y, w, h);
   }
 }
@@ -348,7 +350,7 @@ class Malware
   float x;
   float y;
   color colour = color(125, 125, 0);
-  int speed = 5;
+  int speed = 6;
   int damage = 10;
   boolean alive = true;
   int engagementDistance = 300;

@@ -224,9 +224,12 @@ class Ad
   {
     this.x = random(0, width  -  150);          //spawn anywhere, as long as it's 150 pixels away from all edges 
     this.y = random(0, height  -  150);
-
-    imageNumber = (int) random(1, EnemyAdware.amountOfAds+1);       //amountOfAds is a static member of EnemyAdware, so we can refer to the class name
-    adSprite = loadImage("adware_images/ad"+imageNumber+".png");      //get a random image to use for the instance
+    imageNumber = (int) random(0, EnemyAdware.amountOfAds-1); 
+    adSprite = adwareSprites[imageNumber];
+    
+    //deprecated due to performance, now handled in loadAllImages
+          
+    //adSprite = loadImage("adware_images/ad"+imageNumber+".png");
   }
   
   void draw()

@@ -9,6 +9,7 @@ void loadLevel(int num) //)
   adwares   .clear();
   DOTenemies.clear();
   ads       .clear();
+  packages  .clear();
   player.hit = false;
 
   if (directory.exists())
@@ -179,4 +180,21 @@ void saveBestScores()
   recentScoresWriter.flush();
   recentScoresWriter.close();
   savedBestScoresThisLevel = true;
+}
+
+void loadAllImages()
+{
+  entryScreen        = loadImage("start_screen.png");
+  deathScreen        = loadImage("death_screen.png");
+  wallSpritesheet    = loadImage("wall_texture.png");
+  leaderboardImage   = loadImage("leaderboard_image.png");
+  scoreAdditionImage = loadImage("score_addition.png");
+  damageSprite       = loadImage("damagesprite.png");
+  puzzleDoneSprite   = loadImage("donesprite.png");
+  
+  adwareSprites = new PImage[EnemyAdware.amountOfAds];    //amountOfAds is a static member of EnemyAdware, so we can refer to the class name
+  for(int i = 0; i < EnemyAdware.amountOfAds; i++)
+  {
+    adwareSprites[i] = loadImage("adware_images/ad"+(i+1)+".png");
+  }
 }

@@ -1,15 +1,23 @@
+void runStates()
+{
+  switch(gameState)
+  {
+    case 0:
+      startScreen();
+      break;
+    case 1:
+      runGame();
+      break;
+    case 2:
+      exit();
+      break;
+  }
+}  
+
 void runGame()
 {
-  if(keysPressed['Z']) showStartScreen = false;    //press Z to start
-  if(showStartScreen) image(entryScreen,0,0);      //show start screen if z not yet pressed this game
-  
-  else                                             //if Z was pressed, start updating and drawing the 1st level (which has already been loaded in setup())
-  {
-    
-    drawGame();
-    updateGame();
-    
-  }
+  drawGame();
+  updateGame();
 }
 
 void updateGame()
@@ -21,7 +29,7 @@ void updateGame()
     updateClock();
     player.update();
     for            (Worm everyWorm : worms)     everyWorm   .update();
-    for      (EnemyDOT iEnemy : DOTenemies)     iEnemy      .update(); 
+    for      (Virus iEnemy : DOTenemies)     iEnemy      .update(); 
     for (EnemyAdware everyAdware : adwares)     everyAdware .update();
     for   (Package everyPackage : packages)     everyPackage.update();
     for   (Malware everyMalware : malwares)     everyMalware.update();
@@ -42,7 +50,7 @@ void drawGame()
 
   //draw all enemies
   for            (Worm everyWorm : worms)    everyWorm   .draw();
-  for    (EnemyDOT everyDOT : DOTenemies)    everyDOT    .draw();
+  for    (Virus everyDOT : DOTenemies)    everyDOT    .draw();
   for   (Package everyPackage : packages)    everyPackage.draw();
   for (EnemyAdware everyAdware : adwares)    everyAdware .draw();
   for   (Malware everyMalware : malwares)    everyMalware.draw();

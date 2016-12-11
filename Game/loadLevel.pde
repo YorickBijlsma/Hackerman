@@ -119,7 +119,7 @@ void loadLevel(int num) //)
           break;
 
         case 2:
-          EnemyDOT newDOT = new EnemyDOT(enemyX, enemyY);
+          Virus newDOT = new Virus(enemyX, enemyY);
           DOTenemies.add(newDOT);
           break;  
 

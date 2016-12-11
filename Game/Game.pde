@@ -34,6 +34,7 @@ int health   = 100;
 boolean showStartScreen = true;
 boolean savedBestScoresThisLevel = false;
 int levelNumber = 1;
+int gameState = 0; //0 = starmenu, 1 = game, 2 = exitgame
 
 
 int drawbackground = 0;
@@ -42,7 +43,7 @@ color red   = color(255, 0, 0);
 color green = color(0, 255, 0);
 color blue  = color(0, 0, 255);
 
-ArrayList<EnemyDOT>    DOTenemies = new ArrayList<EnemyDOT>();
+ArrayList<Virus>    DOTenemies = new ArrayList<Virus>();
 ArrayList<Package>     packages   = new ArrayList<Package>();
 ArrayList<EnemyAdware> adwares    = new ArrayList<EnemyAdware>();
 ArrayList<Worm>        worms      = new ArrayList<Worm>();
@@ -84,7 +85,7 @@ void setup()
 
 void draw()
 {
-  runGame();
+  runStates();
   println(frameRate);
 }
 
@@ -126,7 +127,7 @@ void drawScoreAddition()
   text((int)score.timePoints, 678, 304);
   text((int)score.scorePoints, 678, 382);
 
-  float newScore = (int) score.berekenScore();
+  float newScore = (int) score.calculateScore();
   textSize(64);
-  text((int)score.berekenScore(), 540, 490);
+  text((int)score.calculateScore(), 540, 490);
 }

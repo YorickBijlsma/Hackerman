@@ -239,19 +239,19 @@ class Ad
 }
 
 
-class EnemyDOT
+class Virus
 {
   float x, y;
   float vx, vy;
   float diameter = 45;
 
-  color fillColor = color(255, 0, 0);
+  color colour = color(255, 0, 0);
   int teller = 0;
   float draw = 0;
   int amountOfPackages = 0;
   int damage = 3;
 
-  public EnemyDOT(float x, float y)
+  public Virus(float x, float y)
   {
     this.x = x;
     this.y = y;
@@ -287,7 +287,7 @@ class EnemyDOT
 
   void draw() 
   {
-    fill(fillColor);
+    fill(colour);
     ellipse(x, y, diameter, diameter);
   }
 }
@@ -297,7 +297,7 @@ class Package
   float vx, vy;
   float x, y;
   float diameter;
-  color fillColor;
+  color colour;
   int teller = 0;
   float damage = 0.6;
   int infectCounter = 0;
@@ -308,13 +308,13 @@ class Package
   {
     // The size of an enemy varies
     diameter = 20;
-    fillColor = color(255, 255, 255);
+    colour = color(255, 255, 255);
     this.x = x;
     this.y = y;
   }
   void draw()
   {
-    fill(fillColor);
+    fill(colour);
     rect(x, y, diameter, diameter);
   }
   void update()
@@ -322,20 +322,11 @@ class Package
     damagePlayer(x, y, damage);
 
     if (overlapsPlayer(x, y)) infected = true;
-    damagePlayerDoT(x, y, damage);
+    damagePlayerVirus(x, y, damage);
   }
 
-  boolean damagePlayerDoT(float x, float y, float damage)
+  boolean damagePlayerVirus(float x, float y, float damage)
   {
-    /*
-    if(overlapsPlayer(x,y))
-     {
-     for(int i=0; i<1; i++)
-     {
-     player.health -= 0.3;
-     }
-     return true;
-     }*/
     if (infected)
     {
       infectCounter++;
@@ -348,10 +339,10 @@ class Package
 
 class Malware
 {
-  int breedte = 20;
-  int hoogte = 20;
   float x;
   float y;
+  float w = 20;
+  float h = 20;
   color colour = color(125, 125, 0);
   int speed = 5;
   int damage = 10;
@@ -367,7 +358,7 @@ class Malware
   void draw()
   {
     fill(colour);
-    ellipse(x, y, breedte, hoogte);
+    ellipse(x, y, w, h);
   }
   
   void update()

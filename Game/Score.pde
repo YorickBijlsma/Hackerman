@@ -37,7 +37,6 @@ class Leaderboard
   void draw()
   {
     fill(HUDcolour);
-    imageMode(CORNER);
     image(leaderboardImage, x, y);
     textSize(18);
     for (int thisScore = 0; thisScore < 5; thisScore++)

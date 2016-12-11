@@ -2,7 +2,7 @@ void doneRoutine()
 {
   if(player.done)
   {
-    imageMode(CORNER);
+
     image(puzzleDoneSprite,0,0);
     player.colour = color(0,255,0);   //set colour to green
     

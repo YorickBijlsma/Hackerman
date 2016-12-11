@@ -67,7 +67,8 @@ final int LEVELWAIT              = 150;
 final int TIMELEVEL              = 10;
 
 PImage   entryScreen, deathScreen, wallSprite, leaderboardImage, scoreAdditionImage, 
-         wallSpritesheet, damageSprite, puzzleDoneSprite;
+         wallSpritesheet, damageSprite, puzzleDoneSprite, playerSpriteNormal,
+         playerSpriteDone;
 PImage[] adwareSprites;
 
 File bestScoresEver = new File("best_5_scores.txt");
@@ -92,9 +93,7 @@ void draw()
 
 void drawHUD()
 {
-  textAlign(LEFT);
   textSize(32);
-
   //color timeLeftColour = color((int) random(155,255));          //random colour between 155 and 255 RGB
   leaderboard.draw();
   fill(255);
@@ -103,8 +102,6 @@ void drawHUD()
 
   textSize(24);
   fill(red);
-  textAlign(LEFT);
-  imageMode(CORNER);
   if (!player.done)      //draw leaderboard and score in top right if player isnt done (player.done is handled in doneRoutine)
   {
     int leaderboardX = leaderboard.x;
@@ -113,18 +110,17 @@ void drawHUD()
   }
 
   fill(player.healthColour);
-  textSize(32);
-  textAlign(CENTER);
-  text((int)player.health, player.mainX+(player.mainW/2), player.mainY+(player.mainH/2));
+  float textSize = (int)  (player.mainW/2) + (player.mainH/2) /23;
+  textSize(textSize);
+  //textAlign(CENTER);
+  text((int)player.health, player.mainX, player.mainY+(player.mainH/2));
 }
 
 void drawScoreAddition()
 {
-  imageMode(CENTER);
-  textAlign(LEFT);
   textSize(48);
   fill(red);
-  image(scoreAdditionImage, width/2, height/2);
+  image(scoreAdditionImage, (width/2)-(344/2), (height/2)-(358/2));
 
   text((int)score.oldScore, 678, 228);
   text((int)score.timePoints, 678, 304);

@@ -4,6 +4,8 @@ class Player
   float health = originalHealth;
   public color healthColour = color(255, 255,255);
   boolean hit = false;
+  PImage sprite;
+  PImage eitherSprite;
 
   float reqX, reqY;
   float mainX, mainY, mainW, mainH;
@@ -35,16 +37,10 @@ class Player
      else          colour = color(0,0,255);*/
 
     fill(colour);
-    rect(mainX, mainY, mainW, mainH);   //draw the main block
-    for (float[] c : restCoords)
-    {
-      if (!isEmpty(c))
-      {
-        fill(colour);
-        rect(c[0], c[1], c[2], c[3]);   //draw the other blocks
-      }
-    }
-
+    eitherSprite = (done)? playerSpriteDone : playerSpriteNormal; //change sprite if player done
+    
+    sprite = eitherSprite.get(0, 0, (int)mainW, (int)mainH);
+    image(sprite, mainX, mainY);   //player sprite corresponding to width and height at x and y
 
     if (checkDone()) done = true;     //check if puzzle is completed
     else colour = color(0, 0, 255);
@@ -56,7 +52,7 @@ class Player
     {
       clearCoordinates();
       image(deathScreen, 0, 0);
-      fill(red); textSize(68); imageMode(CORNER); textAlign(LEFT);
+      fill(red); textSize(68);
       text((int)score.totalScore,760 ,317);
       if(!savedBestScoresThisLevel) saveBestScores();
       if (keysPressed['Z'])

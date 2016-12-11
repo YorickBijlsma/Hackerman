@@ -191,6 +191,8 @@ void loadAllImages()
   scoreAdditionImage = loadImage("score_addition.png");
   damageSprite       = loadImage("damagesprite.png");
   puzzleDoneSprite   = loadImage("donesprite.png");
+  playerSpriteNormal = loadImage("playersprite_regular.png");
+  playerSpriteDone   = loadImage("playersprite_done.png");
   
   adwareSprites = new PImage[EnemyAdware.amountOfAds];    //amountOfAds is a static member of EnemyAdware, so we can refer to the class name
   for(int i = 0; i < EnemyAdware.amountOfAds; i++)

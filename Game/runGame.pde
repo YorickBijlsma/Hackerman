@@ -5,8 +5,10 @@ void runGame()
   
   else                                             //if Z was pressed, start updating and drawing the 1st level (which has already been loaded in setup())
   {
+    
     drawGame();
     updateGame();
+    
   }
 }
 

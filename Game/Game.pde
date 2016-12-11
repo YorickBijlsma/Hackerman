@@ -18,6 +18,7 @@ basic program flow
       *if player coordinates match with done requirement coordinates, break loop
     *increment level index, wrap around if nonexistent
 
+
 */
 import java.util.Objects;
 import java.util.Arrays;
@@ -97,8 +98,7 @@ void setup()
 
 void draw()
 {
-  drawGame();
-  updateGame();
+  runGame();
 }
 
 void drawHUD()

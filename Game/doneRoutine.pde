@@ -12,10 +12,8 @@ void doneRoutine()
     
     //this suspends progressing to the next level for the number of frames in levelWait
     stall++;
-    if(stall>=levelWait)             //wait before going to next level
+    if(stall>=LEVELWAIT)             //wait before going to next level
     {
-      
-      
       stall = 0;
       //File f = new File("data/" + levelNumber + "/lvl_" + levelNumber + "_player.txt");                                             //make a file object to test if the next level exists
       if(levelNumber > AMOUNTOFLEVELS) levelNumber = 1;

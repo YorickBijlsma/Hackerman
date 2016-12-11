@@ -168,14 +168,14 @@ class EnemyAdware
     if (bounceOffWall(x, y))
     {
       if (xsp < 0) xsp = speed; 
-      else xsp = -speed;
+      else         xsp = -speed;
       if (ysp < 0) ysp = speed; 
-      else ysp = -speed;
+      else         ysp = -speed;
     }
     x += xsp;
     y += ysp;
 
-    if (damagePlayer(x, y, damage))
+    if (overlapsPlayer(x, y))
     {
       bursting = true;
     }
@@ -350,7 +350,7 @@ class Malware
   float x;
   float y;
   color colour = color(125, 125, 0);
-  int speed = 6;
+  int speed = 5;
   int damage = 10;
   boolean alive = true;
   int engagementDistance = 300;
@@ -375,12 +375,12 @@ class Malware
 
   void move() 
   {
-    float xDistance = x - player.mainX - (player.mainW/2);                      //black magic
+    float xDistance = x - player.mainX - (player.mainW/2);                      
     float yDistance = y - player.mainY - (player.mainH/2);
 
     if (Math.abs(xDistance) <= engagementDistance && Math.abs(yDistance) <= engagementDistance)
     {
-      double hyp = Math.sqrt(xDistance * xDistance + yDistance * yDistance);
+      double hyp = Math.sqrt(xDistance * xDistance + yDistance * yDistance);                    //pythagoras
       xDistance /= hyp;
       yDistance /= hyp;
       x += (xDistance * -speed);

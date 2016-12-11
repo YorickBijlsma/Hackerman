@@ -1,4 +1,3 @@
-final int TIMELEVEL = 10;
 int secondsCounter = 0;
 int secondsLeft = 0;
 

@@ -1,6 +1,3 @@
-/*
-  DON'T CHANGE ANYTHING IN PLAYER, I AM WORKING ON COLLISION AT THE MOMENT -Yorick
- */
 class Player
 {
   final int originalHealth = 100;
@@ -58,10 +55,10 @@ class Player
     if (health <= 0)  //death sequence
     {
       clearCoordinates();
-      saveBestScores();
       image(deathScreen, 0, 0);
       fill(red); textSize(68); imageMode(CORNER); textAlign(LEFT);
       text((int)score.totalScore,760 ,317);
+      if(!savedBestScoresThisLevel) saveBestScores();
       if (keysPressed['Z'])
       {
         restartGame();
@@ -79,69 +76,26 @@ class Player
       if (keysPressed[SHIFT])
       {
       }
-      if (! testNextPositionIsWall('x') ) //if next position is free
+      if (! nextPositionIsWall('x') )
       {
-        mainX += xsp * speed;      //move us in the direction(xsp), with the speed (speed)
-        //mainY += ysp * speed;
+        mainX += xsp * speed;
       }
-      if (! testNextPositionIsWall('y') )
+      if (! nextPositionIsWall('y') )
       {
         mainY += ysp * speed;
-      }
-       else//if next position is a wall
-      {   //and if we're not directly touching the wall (more than 1 pixel difference)
-
-        /*if (mainX-1 <= otherX + otherW)                                                                          //if you put this in the actual collision method
-         {                                                                                          //it might move you closer even when you're still holding button
-         } else mainX += xsp;     //move us 1 pixel to the right
-         
-         if (mainX+mainW+1 >= otherX)
-         {
-         } else mainX -= xsp;     //move us 1 pixel to the left
-         
-         if (mainY-1 <= otherY + otherH)
-         {
-         } else mainY += ysp;     //1 pixel down
-         
-         if (mainY+mainH+1 >= otherY)
-         {
-         } else mainY -= ysp;     //1 pixel up*/
       }
       mainX = constrain(mainX, 0, width-mainW);      //stay in the screen x wise
       mainY = constrain(mainY, 0, height-mainH);     //y wise
     }
   }
 
-  boolean nextPositionIsWall()
-  {
-    float nextXposition = mainX + (xsp * speed);          //position player attempts to move in
-    float nextYposition = mainY + (ysp * speed);
-
-    for (float[] c : wallCoords)
-    {
-      otherX = c[0];
-      otherY = c[1];
-      otherW = c[2];
-      otherH = c[3];
-
-      if (nextXposition <= otherX + otherW    &&                //there's a wall to the left
-        nextXposition + mainW >= otherX     &&                //to the right
-        nextYposition <= otherY + otherH    &&                //above player
-        nextYposition + mainH >= otherY)    
-      {
-        return true;
-      }      //below player
-    }
-    return false; //no wall where we want to move!
-  }
-  boolean testNextPositionIsWall(char checkSide)
+  boolean nextPositionIsWall(char checkSide)
   {
     float nextXposition = mainX + (xsp * speed);          //position player attempts to move in
     float nextYposition = mainY + (ysp * speed);
 
     if (checkSide == 'x')
     {
-
       for (float[] c : wallCoords)
       {
         otherX = c[0]; 
@@ -149,20 +103,17 @@ class Player
         otherW = c[2]; 
         otherH = c[3];
 
-        if (nextXposition <= otherX + otherW    &&                //there's a wall to the left
-            nextXposition + mainW >= otherX     &&                //to the right
-            mainY <= otherY + otherH            &&                //above player
-            mainY + mainH >= otherY)   
-        {
-          if (mainX <= otherX + otherW)                                                                          //if you put this in the actual collision method
-          {                                                                                          //it might move you closer even when you're still holding button
-          } else mainX += 1;     //move us 1 pixel to the right
-
-          if (mainX+mainW >= otherX)
+        if(                                                    //if our next position is...
+            nextXposition <= otherX + otherW    &&             //more left than most right side of wall   
+            nextXposition + mainW >= otherX     &&             //more right than most left side of wall   
+            mainY <= otherY + otherH            &&             //more up than most down side of wall   
+            mainY + mainH >= otherY                            //more down than most up side of wall
+           )                                                   //then we have collision!
           {
-          } else mainX -= 1;     //move us 1 pixel to the left
-          return true;
-        }
+            if (!(mainX <= otherX + otherW)) mainX += 1;    //applies bounciness on x
+            if (!(mainX + mainW >= otherX))  mainX -= 1;
+            return true;
+          }
       }
     }
     if (checkSide == 'y')
@@ -174,18 +125,15 @@ class Player
         otherW = c[2]; 
         otherH = c[3];
 
-        if (mainX <= otherX + otherW    &&                //there's a wall to the left
-          mainX + mainW >= otherX     &&                //to the right
-          nextYposition <= otherY + otherH    &&                //above player
-          nextYposition + mainH >= otherY)   
+        if(                                                       
+            mainX <= otherX + otherW            &&             
+            mainX + mainW >= otherX             &&                
+            nextYposition <= otherY + otherH    &&                
+            nextYposition + mainH >= otherY                       
+          )                                                       
         {
-          if (mainY <= otherY + otherH)
-          {
-          } else mainY += 2;     //1 pixel down
-
-          if (mainY+mainH >= otherY)
-          {
-          } else mainY -= 2;     //1 pixel up
+          if (!(mainY <= otherY + otherH)) mainY += 2;     //applies bounciness on y
+          if (!(mainY+mainH >= otherY))    mainY -= 2;     
           return true;
         }      //below player
       }
@@ -195,14 +143,17 @@ class Player
 
   boolean checkDone()
   {
-    if (mainX <= reqX + puzzleDoneMargin &&
-      mainX >= reqX - puzzleDoneMargin &&
-      mainY <= reqY + puzzleDoneMargin &&
-      mainY >= reqY - puzzleDoneMargin)
+    //check if player collides with a pseudo hitbox cast around the requirement coordinates
+    if (mainX <= reqX + PUZZLEDONEMARGIN &&
+        mainX >= reqX - PUZZLEDONEMARGIN &&
+        mainY <= reqY + PUZZLEDONEMARGIN &&
+        mainY >= reqY - PUZZLEDONEMARGIN)
     {
-      mainX = reqX;
+      //place the player exactly where they need to be, thus removing any ugly lines from the player not exactly fitting (puzzle margin)
+      mainX = reqX;                   
       mainY = reqY;
       return true;
-    } else  return false;
+    }
+    return false;
   }
 }

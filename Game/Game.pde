@@ -1,3 +1,24 @@
+/*space for writing general comments on the code
+
+every resource involving numbers (score, time, health etc.) should be float, but drawn as int.
+this gives us more control over handling these numbers, as we can be more precise due to the nature of float
+drawing the numbers as int is important as this removes the fraction floats have, which is ugly on screen
+
+basic program flow
+  
+  *just once:
+    *initialize things like score, leaderboard and timer
+  
+  *loop indefinitely
+    *load level at the index, levels have player, enemies, wall information
+    *loop until player has completed level
+      *update player depending on input
+      *update enemies depending on behaviour
+      *draw everything in the room
+      *if player coordinates match with done requirement coordinates, break loop
+    *increment level index, wrap around if nonexistent
+
+*/
 import java.util.Objects;
 import java.util.Arrays;
 import java.io.File;
@@ -10,6 +31,7 @@ int nEnemies = 5;
 float t      = 0.0; 
 int health   = 100;
 boolean showStartScreen = true;
+boolean savedBestScoresThisLevel = false;
 int levelNumber = 1;
 
 
@@ -33,14 +55,14 @@ Leaderboard leaderboard = new Leaderboard();
 float[][] wallCoords   = new float[30][4];     //a 30 slot 2d array, each subarray having 4 slots. this is for the maximum of 30 wall blocks
 float[][] puzzleCoords = new float[20][4];     //a 20 slot 2d array, each subarray having 4 slots. this is for the maximum of 20 puzzle blocks
 float[][] enemyCoords  = new float[12][2];     //12 enemies of which x and y are known
-int[] lastFiveScores = {0, 0, 0, 0, 0};
+//int[] lastFiveScores = {0, 0, 0, 0, 0};
 
 
 //game constants
-final int puzzleDoneMargin       = 30;                
-final int gameRestartTimeAmount  = 150;
+final int PUZZLEDONEMARGIN       = 40;                
 final int AMOUNTOFLEVELS         = 6;
-final int levelWait              = 150;
+final int LEVELWAIT              = 150;
+final int TIMELEVEL              = 10;
 
 
 PImage entryScreen; 
@@ -51,7 +73,6 @@ PImage scoreAdditionImage;
 PImage wallSpritesheet;
 PImage damageSprite;
 
-PrintWriter recentScoresWriter = createWriter("best_5_scores.txt");
 File bestScoresEver = new File("best_5_scores.txt");
 
 void setup()
@@ -60,7 +81,6 @@ void setup()
   //size(1280, 720);
   //surface.setResizable(true);
   //bestScoresEver = new File("data/best_5_scores.txt");
-  println(dataPath(""));
   leaderboard.loadBestScores();
   entryScreen        = loadImage("start_screen.png");
   deathScreen        = loadImage("death_screen.png");
@@ -79,8 +99,6 @@ void draw()
 {
   drawGame();
   updateGame();
-  //println(mouseX); println(mouseY);
-  //doneRoutine();
 }
 
 void drawHUD()
@@ -103,7 +121,8 @@ void drawHUD()
     int leaderboardX = leaderboard.x;
     //image(scoreAdditionImage,leaderboard.x-275,0 , leaderboard.x-425, 300);
     text("Score : " + (int)score.totalScore, leaderboard.x-175, leaderboard.padding);
-  } else 
+  }
+  else 
   {
     imageMode(CENTER);
     textAlign(LEFT);

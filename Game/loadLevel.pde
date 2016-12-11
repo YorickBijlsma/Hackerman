@@ -130,12 +130,10 @@ void loadLevel(int num) //)
       }
     }
 
-
     player.done = false;
     score.calculatedThisLevel = false;
+    savedBestScoresThisLevel  = false;
     levelNumber++;
-    //debug line       for(float[] coords : enemyCoords) for(float coord : coords) println(coord);
-    //println(enemyCoords.length);
   } else
   {
     //do nothing, as the next level doesn't exist
@@ -149,14 +147,14 @@ void restartGame()
   //recentScoresWriter = createWriter(bestScoresEver);
   for (int i = 0; i < 5; i++)
   {
-    float everyScore = leaderboard.lastFiveScores[i];
+    float everyScore = leaderboard.bestFiveScores[i];
     if (score.totalScore > everyScore)
     {
       for (int j=4; j>=max(i, 1); j--)
       {
-        leaderboard.lastFiveScores[j] = leaderboard.lastFiveScores[j-1];
+        leaderboard.bestFiveScores[j] = leaderboard.bestFiveScores[j-1];
       }
-      leaderboard.lastFiveScores[i] = score.totalScore;
+      leaderboard.bestFiveScores[i] = score.totalScore;
       break;
     }
   }
@@ -173,11 +171,12 @@ void restartGame()
 
 void saveBestScores()
 {
-  for (float currentScore : leaderboard.lastFiveScores)
+  PrintWriter recentScoresWriter = createWriter("data/best_5_scores.txt");
+  for (float currentScore : leaderboard.bestFiveScores)
   {
-    //println(currentScore);
-    //recentScoresWriter.println(currentScore);    //NPE
-    recentScoresWriter.flush();
+    recentScoresWriter.println(currentScore);    //NPE
   }
-  //recentScoresWriter.close();
+  recentScoresWriter.flush();
+  recentScoresWriter.close();
+  savedBestScoresThisLevel = true;
 }

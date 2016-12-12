@@ -34,6 +34,7 @@ int health   = 100;
 boolean showStartScreen = true;
 boolean savedBestScoresThisLevel = false;
 int levelNumber = 1;
+int gameState = 0; //0 = starmenu, 1 = game, 2 = exitgame
 
 
 int drawbackground = 0;
@@ -87,7 +88,7 @@ void setup()
 
 void draw()
 {
-  runGame();
+  runStates();
   println(frameRate);
 }
 

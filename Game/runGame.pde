@@ -1,15 +1,23 @@
+void runStates()
+{
+  switch(gameState)
+  {
+    case 0:
+      startScreen();
+      break;
+    case 1:
+      runGame();
+      break;
+    case 2:
+      exit();
+      break;
+  }
+}  
+
 void runGame()
 {
-  if(keysPressed['Z']) showStartScreen = false;    //press Z to start
-  if(showStartScreen) image(entryScreen,0,0);      //show start screen if z not yet pressed this game
-  
-  else                                             //if Z was pressed, start updating and drawing the 1st level (which has already been loaded in setup())
-  {
-    
-    drawGame();
-    updateGame();
-    
-  }
+  drawGame();
+  updateGame();
 }
 
 void updateGame()

@@ -7,7 +7,7 @@ void loadLevel(int num) //)
   resetClock();
   worms     .clear();
   adwares   .clear();
-  DOTenemies.clear();
+  vira.clear();
   ads       .clear();
   packages  .clear();
   player.hit = false;
@@ -119,8 +119,8 @@ void loadLevel(int num) //)
           break;
 
         case 2:
-          EnemyDOT newDOT = new EnemyDOT(enemyX, enemyY);
-          DOTenemies.add(newDOT);
+          Virus newDOT = new Virus(enemyX, enemyY);
+          vira.add(newDOT);
           break;  
 
         case 3:

@@ -6,7 +6,7 @@ void doneRoutine()
     image(puzzleDoneSprite,0,0);
     player.colour = color(0,255,0);   //set colour to green
     
-    score.berekenScore();
+    score.calculateScore();
     drawScoreAddition();
     
     //this suspends progressing to the next level for the number of frames in LEVELWAIT

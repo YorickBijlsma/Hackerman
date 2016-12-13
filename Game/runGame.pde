@@ -29,7 +29,7 @@ void updateGame()
     updateClock();
     player.update();
     for             (Worm everyWorm : worms)     everyWorm    .update();
-    for       (EnemyDOT iEnemy : DOTenemies)     iEnemy       .update(); 
+    for            (Virus everyVirus : vira)     everyVirus   .update(); 
     for  (EnemyAdware everyAdware : adwares)     everyAdware  .update();
     for    (Package everyPackage : packages)     everyPackage .update();
     for    (Malware everyMalware : malwares)     everyMalware .update();
@@ -51,7 +51,7 @@ void drawGame()
 
   //draw all enemies
   for             (Worm everyWorm : worms)    everyWorm   .draw();
-  for     (EnemyDOT everyDOT : DOTenemies)    everyDOT    .draw();
+  for            (Virus everyVirus : vira)    everyVirus  .draw();
   for    (Package everyPackage : packages)    everyPackage.draw();
   for  (EnemyAdware everyAdware : adwares)    everyAdware .draw();
   for    (Malware everyMalware : malwares)    everyMalware.draw();

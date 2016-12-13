@@ -18,7 +18,7 @@ void clearCoordinates()
   }
   worms       .clear();
   adwares     .clear();
-  DOTenemies  .clear();
+  vira  .clear();
   packages    .clear();
   malwares    .clear();
 }

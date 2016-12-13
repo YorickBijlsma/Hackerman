@@ -31,7 +31,7 @@ class Worm
         if (i%2==0)   fill(color(244, 164, 96));    
         else          fill(color(205, 133, 63));          //segments are alternated between 2 colours
       }
-      
+
       //black magic ternary operator, draws the head bigger
       size = (i == 0) ? headSize : segmentSize;
 
@@ -135,16 +135,14 @@ class EnemyAdware
   int adSpawnTime = 2;
   boolean bursting = false;
   int burstCounter = 0;
-  int burstingDuration = 40;
-  float speed = 20;
+  int burstingDuration = 30;
+  float speed = 17;
   float xsp = speed; 
   float ysp = speed;
   int damage = 0;
   float originalSpeed = speed;
 
   color colour = color(70, 215, 240);
-  PImage img; //image loader
-  int imgNum = 1;
 
   public EnemyAdware (int x, int y)
   {
@@ -179,16 +177,15 @@ class EnemyAdware
     {
       bursting = true;
     }
-    if(bursting)
+    if (bursting)
     {
       burstCounter++;
-      if(burstCounter >= burstingDuration)
+      if (burstCounter >= burstingDuration)
       {
         burstCounter = 0;
         bursting = false;
         ads.clear();
-      }
-      else
+      } else
       {
         burstAdware();
       }
@@ -198,7 +195,7 @@ class EnemyAdware
   void burstAdware()
   {
     adSpawnCounter++;
-    if(adSpawnCounter >= adSpawnTime)
+    if (adSpawnCounter >= adSpawnTime)
     {
       adSpawnCounter = 0;
       Ad newAd = new Ad();
@@ -219,7 +216,7 @@ class Ad
   float y;
   int imageNumber;
   PImage adSprite;
-  
+
   public Ad()
   {
     this.x = random(0, width  -  150);          //spawn anywhere, as long as it's 150 pixels away from all edges 
@@ -227,7 +224,7 @@ class Ad
     imageNumber = (int) random(0, EnemyAdware.amountOfAds-1); 
     adSprite = adwareSprites[imageNumber];
   }
-  
+
   void draw()
   {
     image(adSprite, x, y);
@@ -235,19 +232,19 @@ class Ad
 }
 
 
-class EnemyDOT
+class Virus
 {
   float x, y;
   float vx, vy;
   float diameter = 45;
 
-  color fillColor = color(255, 0, 0);
+  color colour = color(255, 0, 0);
   int teller = 0;
   float draw = 0;
   int amountOfPackages = 0;
   int damage = 3;
 
-  public EnemyDOT(float x, float y)
+  public Virus(float x, float y)
   {
     this.x = x;
     this.y = y;
@@ -258,17 +255,15 @@ class EnemyDOT
 
   void update()
   {    
-
-    //if(overlapsPlayer(x,y)) player.health -= 1;
     x += vx;
     y += vy;
 
     //bounce off screen edge
-    if ((x > width-diameter/2) || (x < diameter/2)) vx = -vx;
-    if ((y > height-diameter/2) || (y < diameter/2)) vy = -vy;
+    if ( (x > width-diameter/2)  || (x < diameter/2) )  vx = -vx;
+    if ( (y > height-diameter/2) || (y < diameter/2) )   vy = -vy;
     teller++;  
 
-    if (teller >= 150 && amountOfPackages!=5)
+    if (teller == 150 && amountOfPackages!=5)
     {
       amountOfPackages++;
 
@@ -283,18 +278,16 @@ class EnemyDOT
 
   void draw() 
   {
-    fill(fillColor);
+    fill(colour);
     ellipse(x, y, diameter, diameter);
   }
 }
 
 class Package
 {
-  float vx, vy;
   float x, y;
-  float diameter;
-  color fillColor;
-  int teller = 0;
+  float w = 18;
+  color colour = color(255, 255, 255);
   float damage = 0.6;
   int infectCounter = 0;
   boolean infected = false;
@@ -302,16 +295,13 @@ class Package
 
   void init(float x, float y)
   {
-    // The size of an enemy varies
-    diameter = 20;
-    fillColor = color(255, 255, 255);
     this.x = x;
     this.y = y;
   }
   void draw()
   {
-    fill(fillColor);
-    rect(x, y, diameter, diameter);
+    fill(colour);
+    rect(x, y, w, w);
   }
   void update()
   {
@@ -323,15 +313,6 @@ class Package
 
   boolean damagePlayerDoT(float x, float y, float damage)
   {
-    /*
-    if(overlapsPlayer(x,y))
-     {
-     for(int i=0; i<1; i++)
-     {
-     player.health -= 0.3;
-     }
-     return true;
-     }*/
     if (infected)
     {
       infectCounter++;
@@ -344,10 +325,10 @@ class Package
 
 class Malware
 {
-  int breedte = 20;
-  int hoogte = 20;
   float x;
   float y;
+  int w = 20;
+  int h = 20;
   color colour = color(125, 125, 0);
   int speed = 5;
   int damage = 10;
@@ -359,13 +340,13 @@ class Malware
     this.x = x;
     this.y = y;
   }
-  
+
   void draw()
   {
     fill(colour);
-    ellipse(x, y, breedte, hoogte);
+    ellipse(x, y, w, h);
   }
-  
+
   void update()
   {
     move();
@@ -389,7 +370,7 @@ class Malware
 
   void collision() 
   {
-    if (damagePlayer(x,y,damage)) 
+    if (damagePlayer(x, y, damage)) 
     {
       x = 10000;          //place the colliding malware outside the room
       y = 10000;

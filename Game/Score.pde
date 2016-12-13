@@ -9,7 +9,7 @@ class Score
   float healthpoints = health/10;
   boolean calculatedThisLevel = false;
 
-  float berekenScore()
+  float calculateScore()
   { 
     if (!calculatedThisLevel)
     {

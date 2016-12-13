@@ -45,8 +45,10 @@ void drawGame()
 {
   background(0);
   noStroke();
-  drawEnvironment();                                                     //draw the environment under all other things in the room
-  player.draw(); 
+  drawEnvironment(); //draw the environment under all other things in the room    
+  player.draw();
+  drawClock();  
+  
   
 
   //draw all enemies

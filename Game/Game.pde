@@ -36,7 +36,6 @@ boolean savedBestScoresThisLevel = false;
 int levelNumber = 1;
 int gameState = 0; //0 = starmenu, 1 = game, 2 = exitgame
 
-
 int drawbackground = 0;
 color HUDcolour = color(255, 201, 14);
 color red   = color(255, 0, 0);
@@ -80,7 +79,8 @@ File bestScoresEver = new File("best_5_scores.txt");
 void setup()
 {
   size(1250, 702);
-
+  
+  TimerInit();
   loadAllImages();
   loadAllSounds();
   leaderboard.loadBestScores();

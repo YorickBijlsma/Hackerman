@@ -1,7 +1,9 @@
 int secondsCounter = 0;
 int secondsLeft = 0;
+float speed;           // How fast the Timer dissapears
+float lengthTimer;     // How long the Timer has to be
 
-void updateClock() //TODO: levels start at 9, not 10. this means secondsCounter = 1 somewhere early in the code
+void updateClock()
 {
   if (frameCount % 60 == 0)
   {
@@ -19,4 +21,19 @@ void updateClock() //TODO: levels start at 9, not 10. this means secondsCounter 
 void resetClock()  // reset all values making the clock reset itself
 {
   secondsCounter = 0;
+  lengthTimer = width;
+}
+
+void drawClock()
+{
+  if (lengthTimer > 0)
+  {
+   lengthTimer =- speed; 
+  }
+  fill(255,0,0);
+  rect(0,0,lengthTimer,20);
+}
+void TimerInit() {
+  lengthTimer = width;
+  speed = width /(TIMELEVEL * 60);
 }

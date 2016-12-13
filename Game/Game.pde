@@ -70,16 +70,18 @@ final int LEVELWAIT              = 150;
 final int TIMELEVEL              = 10;
 
 PImage   entryScreen, deathScreen, wallSprite, leaderboardImage, scoreAdditionImage, 
-         wallSpritesheet, damageSprite, puzzleDoneSprite, playerSpriteNormal,
+         wallSpritesheet, playerInjuredSprite, puzzleDoneSprite, playerSpriteNormal,
          playerSpriteDone;
 PImage[] adwareSprites;
+PFont    regularFont;
 
 File bestScoresEver = new File("best_5_scores.txt");
 
 void setup()
 {
   size(1250, 702);
-  
+  regularFont = loadFont("regular_font.vlw");
+  textFont(regularFont);
   
   loadAllImages();
   loadAllSounds();
@@ -105,15 +107,18 @@ void drawHUD()
   leaderboard.draw();
   fill(255);
   textSize(24);
-  text(secondsLeft, player.mainX-5, player.mainY-5);
+  //text(secondsLeft, player.mainX-5, player.mainY-5);
 
-  textSize(24);
-  fill(red);
+  
   if (!player.done)      //draw leaderboard and score in top right if player isnt done (player.done is handled in doneRoutine)
   {
-    int leaderboardX = leaderboard.x;
-    //image(scoreAdditionImage,leaderboard.x-275,0 , leaderboard.x-425, 300);
-    text("Score : " + (int)score.totalScore, leaderboard.x-175, leaderboard.padding);
+    textSize(30);
+    fill(HUDcolour);
+    text("Score : " + (int)score.totalScore, leaderboard.x-125, leaderboard.padding);
+  }
+  if(player.hit)
+  {
+    image(playerInjuredSprite,0,0);
   }
 
   fill(player.healthColour);

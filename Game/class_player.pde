@@ -4,6 +4,7 @@ class Player
   float health = originalHealth;
   public color healthColour = color(255, 255,255);
   boolean hit = false;
+  int hitCounter = 0;
   PImage sprite;
   PImage eitherSprite;
 
@@ -61,6 +62,7 @@ class Player
       }
     } else            //sequence for player is alive
     {
+      hitSpriteHandler();
       xsp *= 0.4;
       ysp *= 0.4;
 
@@ -139,7 +141,7 @@ class Player
 
   boolean checkDone()
   {
-    //check if player collides with a pseudo hitbox cast around the requirement coordinates
+    //check if player collides with a pseudo hitbox cast around the requirement coordinates by margin amount of pixels
     if (mainX <= reqX + PUZZLEDONEMARGIN &&
         mainX >= reqX - PUZZLEDONEMARGIN &&
         mainY <= reqY + PUZZLEDONEMARGIN &&
@@ -151,5 +153,18 @@ class Player
       return true;
     }
     return false;
+  }
+  
+  void hitSpriteHandler()
+  {
+    if(hit)
+    {
+      hitCounter++;
+    }
+    if(hitCounter >= 20)
+    {
+      hitCounter = 0;
+      hit = false;
+    }
   }
 }

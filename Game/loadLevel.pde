@@ -189,7 +189,7 @@ void loadAllImages()
   wallSpritesheet    = loadImage("wall_texture.png");
   leaderboardImage   = loadImage("leaderboard_image.png");
   scoreAdditionImage = loadImage("score_addition.png");
-  damageSprite       = loadImage("damagesprite.png");
+  playerInjuredSprite= loadImage("damagesprite.png");
   puzzleDoneSprite   = loadImage("donesprite.png");
   playerSpriteNormal = loadImage("playersprite_regular.png");
   playerSpriteDone   = loadImage("playersprite_done.png");

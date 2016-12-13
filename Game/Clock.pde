@@ -26,14 +26,15 @@ void resetClock()  // reset all values making the clock reset itself
 
 void drawClock()
 {
-  if (lengthTimer > 0)
+  if (lengthTimer > 0 && !player.done)
   {
-   lengthTimer -= speed; 
+    lengthTimer -= speed;
   }
   fill(255,0,0);
-  rect(0,0,lengthTimer,20);
+  rect(0,0,lengthTimer,30);
 }
-void timerInit() {
+void timerInit()
+{
   lengthTimer = width;
   speed = width /(TIMELEVEL * 60);
 }

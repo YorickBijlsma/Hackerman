@@ -43,7 +43,7 @@ color red   = color(255, 0, 0);
 color green = color(0, 255, 0);
 color blue  = color(0, 0, 255);
 
-ArrayList<Virus>    vira = new ArrayList<Virus>();
+ArrayList<Virus>       vira = new ArrayList<Virus>();
 ArrayList<Package>     packages   = new ArrayList<Package>();
 ArrayList<EnemyAdware> adwares    = new ArrayList<EnemyAdware>();
 ArrayList<Worm>        worms      = new ArrayList<Worm>();
@@ -82,13 +82,14 @@ void setup()
   size(1250, 702);
 
   loadAllImages();
+  loadAllSounds();
   leaderboard.loadBestScores();
   loadLevel(levelNumber);
 }
 
 void draw()
 {
-  runStates();
+  runGame();
   println(frameRate);
 }
 

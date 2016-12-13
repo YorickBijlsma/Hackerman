@@ -1,4 +1,4 @@
-void runStates()
+void runGame()
 {
   switch(gameState)
   {
@@ -6,7 +6,7 @@ void runStates()
       startScreen();
       break;
     case 1:
-      runGame();
+      playGame();
       break;
     case 2:
       exit();
@@ -14,7 +14,7 @@ void runStates()
   }
 }  
 
-void runGame()
+void playGame()
 {
   drawGame();
   updateGame();

@@ -200,3 +200,8 @@ void loadAllImages()
     adwareSprites[i] = loadImage("adware_images/ad"+(i+1)+".png");
   }
 }
+
+void loadAllSounds()
+{
+  
+}

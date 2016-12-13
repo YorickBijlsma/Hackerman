@@ -80,11 +80,12 @@ void setup()
 {
   size(1250, 702);
   
-  TimerInit();
+  
   loadAllImages();
   loadAllSounds();
   leaderboard.loadBestScores();
   loadLevel(levelNumber);
+  timerInit();
 }
 
 void draw()
@@ -98,6 +99,7 @@ void draw()
 
 void drawHUD()
 {
+  drawClock();
   textSize(32);
   //color timeLeftColour = color((int) random(155,255));          //random colour between 155 and 255 RGB
   leaderboard.draw();

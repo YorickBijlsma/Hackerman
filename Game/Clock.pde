@@ -28,12 +28,12 @@ void drawClock()
 {
   if (lengthTimer > 0)
   {
-   lengthTimer =- speed; 
+   lengthTimer -= speed; 
   }
   fill(255,0,0);
   rect(0,0,lengthTimer,20);
 }
-void TimerInit() {
+void timerInit() {
   lengthTimer = width;
   speed = width /(TIMELEVEL * 60);
 }

@@ -47,7 +47,7 @@ void drawGame()
   noStroke();
   drawEnvironment(); //draw the environment under all other things in the room    
   player.draw();
-  drawClock();  
+    
   
   
 

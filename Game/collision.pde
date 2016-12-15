@@ -39,10 +39,6 @@ boolean damagePlayer(float x, float y, float damage)
 {
   if(overlapsPlayer(x,y))
   {
-    if(damage > 0)
-    {
-      //image(playerInjuredSprite, 0, 0);
-    }
     player.hit = true;
     player.colour = color(255,0,0);
     player.health -= damage;

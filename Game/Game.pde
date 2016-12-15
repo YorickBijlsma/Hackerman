@@ -17,8 +17,6 @@
  *draw everything in the room
  *if player coordinates match with done requirement coordinates, break loop
  *increment level index, wrap around if nonexistent
- 
- 
  */
 import java.util.Objects;
 import java.util.Arrays;
@@ -50,7 +48,8 @@ ArrayList<Malware>     malwares   = new ArrayList<Malware>();
 ArrayList<Ad>          ads        = new ArrayList<Ad>();
 //ArrayList<ParticleSystem>    particles  = new ArrayList<ParticleSystem>();
 
-ParticleSystem playerDamageParticle = new ParticleSystem(10000, 10000);
+ParticleSystem playerDamageParticle = new ParticleSystem(0,0);
+
 
 //setup prerequisites
 Player player           = new Player();                  

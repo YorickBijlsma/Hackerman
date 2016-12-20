@@ -51,16 +51,10 @@ class Player
   {
     if (health <= 0)  //death sequence
     {
-      clearCoordinates();
-      stretchAnimation(deathScreen,0,0);
-      if(stretchCounter > height-10)  //check if the animation is almost done, if so, display the score
-      {
-        fill(red); textSize(68);
-        text((int)score.totalScore,760 ,317);
-      }
       if(!savedBestScoresThisLevel) saveBestScores();
       if (keysPressed['Z'])
       {
+        clearCoordinates();
         restartGame();
       }
     } else            //sequence for player is alive

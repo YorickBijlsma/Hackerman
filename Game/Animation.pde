@@ -67,7 +67,7 @@ void stretchAnimation(PImage source, int x, int y)
   
   if(stretchCounter < h)
   {
-    stretchCounter+=10;
+    stretchCounter+=20;
   }
   
   image(

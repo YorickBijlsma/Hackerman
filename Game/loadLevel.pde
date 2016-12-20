@@ -7,7 +7,7 @@ void loadLevel(int num) //)
   resetClock();
   worms     .clear();
   adwares   .clear();
-  vira.clear();
+  vira      .clear();
   ads       .clear();
   packages  .clear();
   player.hit = false;
@@ -193,6 +193,9 @@ void loadAllImages()
   puzzleDoneSprite   = loadImage("donesprite.png");
   playerSpriteNormal = loadImage("playersprite_regular.png");
   playerSpriteDone   = loadImage("playersprite_done.png");
+  adwareSprite       = loadImage("adwareSprite.png");
+  virusSprite        = loadImage("virusSprite.png");
+  malwareSprite      = loadImage("malwareSpriteSheet.png");
   
   adwareSprites = new PImage[EnemyAdware.amountOfAds];    //amountOfAds is a static member of EnemyAdware, so we can refer to the class name
   for(int i = 0; i < EnemyAdware.amountOfAds; i++)

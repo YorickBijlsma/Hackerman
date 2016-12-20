@@ -205,7 +205,8 @@ class EnemyAdware
   void draw()
   {
     fill(colour);                                                  
-    rect(x, y, w, h);
+    //rect(x, y, w, h);
+    image(adwareSprite, x, y);
   }
 }
 /*
@@ -293,7 +294,8 @@ class Virus
   void draw() 
   {
     fill(colour);
-    ellipse(x, y, diameter, diameter);
+    //ellipse(x, y, diameter, diameter);
+    image(virusSprite, x, y);
   }
 }
 
@@ -306,6 +308,7 @@ class Package
   int infectCounter = 0;
   boolean infected = false;
   int infectTime = 35;
+ 
 
   void init(float x, float y)
   {
@@ -314,8 +317,8 @@ class Package
   }
   void draw()
   {
-    fill(colour);
-    rect(x, y, w, w);
+    //fill(colour);
+    //rect(x, y, w, w);
   }
   void update()
   {
@@ -348,6 +351,13 @@ class Malware
   int damage = 10;
   boolean alive = true;
   int engagementDistance = 300;
+  
+  //spriteSheet variables
+  int frameAmount = 10; //after frameAmount frames, the next sprite loads
+  int spritePosition = 0; //spritecounter
+  int frameWidth = 26;
+  int frameHeight = 26;
+  int spriteAmount = 18; //amount of sprites in spritesheet
 
   public Malware(float x, float y)
   {
@@ -358,13 +368,14 @@ class Malware
   void draw()
   {
     fill(colour);
-    ellipse(x, y, w, h);
+    copy(malwareSprite,(spritePosition*frameWidth), 0, frameWidth, frameHeight, (int)x, (int)y, frameWidth, frameHeight); //this is the engine in spritesheet, change the first imageVariable
   }
 
   void update()
   {
     move();
     collision();
+    if ((frameCount % frameAmount) == 0)  spritePosition =  (spritePosition + 1) % spriteAmount; //spritesheet counter
   }
 
   void move() 

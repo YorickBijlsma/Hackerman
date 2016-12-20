@@ -317,8 +317,8 @@ class Package
   }
   void draw()
   {
-    //fill(colour);
-    //rect(x, y, w, w);
+    fill(colour);
+    rect(x, y, w, w);
   }
   void update()
   {
@@ -353,7 +353,7 @@ class Malware
   int engagementDistance = 300;
   
   //spriteSheet variables
-  int frameAmount = 10; //after frameAmount frames, the next sprite loads
+  int frameSpeed = 2; //after frameSpeed amount frames, the next sprite loads
   int spritePosition = 0; //spritecounter
   int frameWidth = 26;
   int frameHeight = 26;
@@ -375,7 +375,7 @@ class Malware
   {
     move();
     collision();
-    if ((frameCount % frameAmount) == 0)  spritePosition =  (spritePosition + 1) % spriteAmount; //spritesheet counter
+    if ((frameCount % frameSpeed) == 0)  spritePosition =  (spritePosition + 1) % spriteAmount; //spritesheet counter
   }
 
   void move() 

@@ -259,6 +259,13 @@ class Virus
   float draw = 0;
   int amountOfPackages = 0;
   int damage = 3;
+  
+  //spriteSheet variables
+  int frameAmount = 1; //after frameAmount frames, the next sprite loads
+  int spritePosition = 0; //spritecounter
+  int frameWidth = 69;
+  int frameHeight = 70;
+  int spriteAmount = 48; //amount of sprites in spritesheet
 
   public Virus(float x, float y)
   {
@@ -271,6 +278,7 @@ class Virus
 
   void update()
   {    
+    if ((frameCount % frameAmount) == 0)  spritePosition =  (spritePosition + 1) % spriteAmount; //spritesheet counter
     x += vx;
     y += vy;
 
@@ -293,9 +301,8 @@ class Virus
 
   void draw() 
   {
-    fill(colour);
-    //ellipse(x, y, diameter, diameter);
-    image(virusSprite, x, y);
+fill(colour);
+    copy(DoTcom,(spritePosition*frameWidth), 0, frameWidth, frameHeight, (int)x, (int)y, frameWidth, frameHeight); //this is the engine in spritesheet, change the first imageVariable
   }
 }
 
@@ -309,7 +316,13 @@ class Package
   boolean infected = false;
   int infectTime = 35;
  
-
+//spriteSheet variables
+  int frameAmount = 10; //after frameAmount frames, the next sprite loads
+  int spritePosition = 0; //spritecounter
+  int frameWidth = 20;
+  int frameHeight = 19;
+  int spriteAmount = 1; //amount of sprites in spritesheet
+  
   void init(float x, float y)
   {
     this.x = x;
@@ -317,13 +330,15 @@ class Package
   }
   void draw()
   {
-    //fill(colour);
-    //rect(x, y, w, w);
+fill(colour);
+    copy(Packagespritesheet,(spritePosition*frameWidth), 0, frameWidth, frameHeight, (int)x, (int)y, frameWidth, frameHeight); //this is the engine in spritesheet, change the first imageVariable
   }
   void update()
   {
     damagePlayer(x, y, damage);
-
+    
+if ((frameCount % frameAmount) == 0)  spritePosition =  (spritePosition + 1) % spriteAmount; //spritesheet counter
+    
     if (overlapsPlayer(x, y)) infected = true;
     damagePlayerDoT(x, y, damage);
   }

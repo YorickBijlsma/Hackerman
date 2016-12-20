@@ -70,7 +70,7 @@ final int TIMELEVEL              = 10;
 
 PImage   entryScreen, deathScreen, wallSprite, leaderboardImage, scoreAdditionImage, 
          wallSpritesheet, playerInjuredSprite, puzzleDoneSprite, playerSpriteNormal,
-         playerSpriteDone, adwareSprite, virusSprite, malwareSprite;
+         playerSpriteDone, adwareSprite, virusSprite, malwareSprite, Packagespritesheet, DoTcom;
 PImage[] adwareSprites;
 PFont    regularFont;
 

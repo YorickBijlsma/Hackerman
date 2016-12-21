@@ -131,13 +131,17 @@ void drawScoreAddition()
 {
   textSize(48);
   fill(red);
-  image(scoreAdditionImage, (width/2)-(344/2), (height/2)-(358/2));
-
-  text((int)score.oldScore, 678, 228);
-  text((int)score.timePoints, 678, 304);
-  text((int)score.scorePoints, 678, 382);
-
+  int scoreX = width /2 - (344/2);
+  int scoreY = height/2 - (358/2);
+  easeLeftAnimation(scoreAdditionImage, scoreX, scoreY);
+  
+  if(easeCounter > scoreX-10)    //only draw text if easing is nearly done
+  {
+    text((int)score.oldScore, 678, 228);
+    text((int)score.timePoints, 678, 304);
+    text((int)score.scorePoints, 678, 382);
+    textSize(64);
+    text((int)score.calculateScore(), 540, 490);
+  }
   float newScore = (int) score.calculateScore();
-  textSize(64);
-  text((int)score.calculateScore(), 540, 490);
 }

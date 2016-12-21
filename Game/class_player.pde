@@ -51,13 +51,10 @@ class Player
   {
     if (health <= 0)  //death sequence
     {
-      clearCoordinates();
-      image(deathScreen, 0, 0);
-      fill(red); textSize(68);
-      text((int)score.totalScore,760 ,317);
       if(!savedBestScoresThisLevel) saveBestScores();
       if (keysPressed['Z'])
       {
+        clearCoordinates();
         restartGame();
       }
     } else            //sequence for player is alive

@@ -1,6 +1,6 @@
 void startScreen()
 {
-  image(entryScreen,0,0);
+  blockAnimation(entryScreen,0,0);
   if (keysPressed['Z'])
   {
     gameState = 1;

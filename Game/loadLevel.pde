@@ -217,6 +217,9 @@ void clearCoordinates()
   player.mainY = 0;
   player.mainW = 0;
   player.mainH = 0;
+  stretchCounter = 0;
+  blockCounter = 0;
+  easeCounter = 0;
   for(float[] c : wallCoords)
   {
      c[0] = 0.0; c[1]= 0.0; c[2] = 0.0; c[3]= 0.0;

@@ -1,7 +1,8 @@
 int stretchCounter,
-    blockCounter  ,
-    easeCounter  
+      blockCounter  
+        
         = 0;
+        float easeCounter = 0;
         
 void blockAnimation(PImage source, int x, int y)
 {
@@ -37,7 +38,7 @@ void easeLeftAnimation(PImage source, int x, int y)
 {
   if(easeCounter < x)
   {
-    easeCounter+=10;
+    easeCounter = easeCounter + (x - easeCounter) * 0.10;
   }
   
   image(source, easeCounter, y);
@@ -60,18 +61,16 @@ void easeAnimation(
   }
 }
 */
-void stretchAnimation(PImage source, int x, int y)
+void slideFromTopAnimation(PImage source, int x, int y)
 {
   int w = source.width;
   int h = source.height;
-  
+  y = -height;
+  int yPos = y+stretchCounter;
+  yPos = constrain(yPos,(y+stretchCounter),0);
   if(stretchCounter < h)
   {
-    stretchCounter+=20;
+    stretchCounter+=15;
   }
-  
-  image(
-        source,
-        x, y, w, stretchCounter
-        );
+  image(source, x, yPos);
 }

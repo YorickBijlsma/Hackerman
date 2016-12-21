@@ -65,7 +65,7 @@ float[][] enemyCoords  = new float[12][2];     //12 enemies of which x and y are
 //game constants
 final int PUZZLEDONEMARGIN       = 40;                
 final int AMOUNTOFLEVELS         = 6;
-final int LEVELWAIT              = 150;
+final int LEVELWAIT              = 120;
 final int TIMELEVEL              = 10;
 
 PImage   entryScreen, deathScreen, wallSprite, leaderboardImage, scoreAdditionImage, 

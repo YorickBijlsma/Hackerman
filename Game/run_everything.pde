@@ -16,8 +16,8 @@ void runGame()
 
 void playGame()
 {
-    drawGame();
-    updateGame();
+  drawGame();
+  updateGame();
 }
 
 void updateGame()
@@ -28,13 +28,17 @@ void updateGame()
   {
     updateClock();
     player.update();
-    for             (Worm everyWorm : worms)     everyWorm    .update();
-    for            (Virus everyVirus : vira)     everyVirus   .update(); 
-    for  (EnemyAdware everyAdware : adwares)     everyAdware  .update();
-    for    (Package everyPackage : packages)     everyPackage .update();
-    for    (Malware everyMalware : malwares)     everyMalware .update();
-    playerDamageParticle.update();
-  } else if (player.done)
+    if(player.health > 0)
+    {
+      for             (Worm everyWorm : worms)     everyWorm    .update();
+      for            (Virus everyVirus : vira)     everyVirus   .update(); 
+      for  (EnemyAdware everyAdware : adwares)     everyAdware  .update();
+      for    (Package everyPackage : packages)     everyPackage .update();
+      for    (Malware everyMalware : malwares)     everyMalware .update();
+      playerDamageParticle.update();
+    }
+  }
+  else if (player.done)
   {
     doneRoutine();                //otherwise do the done routine
   }
@@ -48,20 +52,20 @@ void drawGame()
   player.draw();
 
   //draw all enemies
-  for             (Worm everyWorm : worms)    everyWorm   .draw();
-  for            (Virus everyVirus : vira)    everyVirus  .draw();
-  for    (Package everyPackage : packages)    everyPackage.draw();
-  for  (EnemyAdware everyAdware : adwares)    everyAdware .draw();
-  for    (Malware everyMalware : malwares)    everyMalware.draw();
-  for                   (Ad everyAd : ads)    everyAd     .draw();
-  playerDamageParticle.draw();
   if (player.health > 0)
   {
+    for             (Worm everyWorm : worms)    everyWorm   .draw();
+    for            (Virus everyVirus : vira)    everyVirus  .draw();
+    for    (Package everyPackage : packages)    everyPackage.draw();
+    for  (EnemyAdware everyAdware : adwares)    everyAdware .draw();
+    for    (Malware everyMalware : malwares)    everyMalware.draw();
+    for                   (Ad everyAd : ads)    everyAd     .draw();
     drawHUD();
+    playerDamageParticle.draw();
   }
   else
   {
-    stretchAnimation(deathScreen, 0, 0);
+    slideFromTopAnimation(deathScreen, 0, 0);
     if (stretchCounter > height-10)  //check if the animation is almost done, if so, display the score
     { 
       fill(red); 

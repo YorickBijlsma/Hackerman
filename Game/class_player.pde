@@ -70,6 +70,10 @@ class Player
       if (keysPressed[RIGHT])  xsp = 1;
       if (keysPressed[UP])     ysp = -1;
       if (keysPressed[DOWN])   ysp = 1;
+      if (keysPressed[65])     xsp = -1; //A
+      if (keysPressed[68])     xsp = 1;  //D
+      if (keysPressed[87])     ysp = -1; //W
+      if (keysPressed[83])     ysp = 1;  //S
 
       if (keysPressed[SHIFT])
       {

@@ -11,7 +11,7 @@ void doneRoutine()
     
     //this suspends progressing to the next level for the number of frames in LEVELWAIT
     stall++;
-    if(stall>=LEVELWAIT)             
+    if(stall>=LEVELWAIT || keysPressed['Z'])             
     {
       stall = 0;
       if(levelNumber > AMOUNTOFLEVELS) levelNumber = 1;

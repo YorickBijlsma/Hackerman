@@ -184,7 +184,7 @@ void saveBestScores()
 
 void loadAllImages()
 {
-  entryScreen        = loadImage("start_screen.png");
+  entryScreen        = loadImage("start_screen.jpg");
   deathScreen        = loadImage("death_screen.png");
   wallSpritesheet    = loadImage("wall_texture.png");
   leaderboardImage   = loadImage("leaderboard_image.png");
@@ -196,6 +196,8 @@ void loadAllImages()
   adwareSprite       = loadImage("adwareSprite.png");
   virusSprite        = loadImage("virusSprite.png");
   malwareSprite      = loadImage("malwareSpriteSheet.png");
+  Packagespritesheet = loadImage("Packagespritesheet.png");
+  DoTcom = loadImage("DoTcom.png");
   
   adwareSprites = new PImage[EnemyAdware.amountOfAds];    //amountOfAds is a static member of EnemyAdware, so we can refer to the class name
   for(int i = 0; i < EnemyAdware.amountOfAds; i++)
@@ -215,6 +217,9 @@ void clearCoordinates()
   player.mainY = 0;
   player.mainW = 0;
   player.mainH = 0;
+  stretchCounter = 0;
+  blockCounter = 0;
+  easeCounter = 0;
   for(float[] c : wallCoords)
   {
      c[0] = 0.0; c[1]= 0.0; c[2] = 0.0; c[3]= 0.0;

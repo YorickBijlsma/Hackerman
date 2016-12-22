@@ -65,12 +65,12 @@ float[][] enemyCoords  = new float[12][2];     //12 enemies of which x and y are
 //game constants
 final int PUZZLEDONEMARGIN       = 40;                
 final int AMOUNTOFLEVELS         = 6;
-final int LEVELWAIT              = 150;
+final int LEVELWAIT              = 120;
 final int TIMELEVEL              = 10;
 
 PImage   entryScreen, deathScreen, wallSprite, leaderboardImage, scoreAdditionImage, 
          wallSpritesheet, playerInjuredSprite, puzzleDoneSprite, playerSpriteNormal,
-         playerSpriteDone, adwareSprite, virusSprite, malwareSprite;
+         playerSpriteDone, adwareSprite, virusSprite, malwareSprite, Packagespritesheet, DoTcom;
 PImage[] adwareSprites;
 PFont    regularFont;
 
@@ -131,13 +131,17 @@ void drawScoreAddition()
 {
   textSize(48);
   fill(red);
-  image(scoreAdditionImage, (width/2)-(344/2), (height/2)-(358/2));
-
-  text((int)score.oldScore, 678, 228);
-  text((int)score.timePoints, 678, 304);
-  text((int)score.scorePoints, 678, 382);
-
+  int scoreX = width /2 - (344/2);
+  int scoreY = height/2 - (358/2);
+  easeLeftAnimation(scoreAdditionImage, scoreX, scoreY);
+  
+  if(easeCounter > scoreX-10)    //only draw text if easing is nearly done
+  {
+    text((int)score.oldScore, 678, 228);
+    text((int)score.timePoints, 678, 304);
+    text((int)score.scorePoints, 678, 382);
+    textSize(64);
+    text((int)score.calculateScore(), 540, 490);
+  }
   float newScore = (int) score.calculateScore();
-  textSize(64);
-  text((int)score.calculateScore(), 540, 490);
 }

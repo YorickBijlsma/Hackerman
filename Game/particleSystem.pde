@@ -174,7 +174,7 @@ class ParticleSystem {
     // only change context once for all particles
     if (particleShape != "line") noStroke();
     strokeWeight(2);
-    noSmooth();
+    //noSmooth();
 
     // determine how transparancy is handeled
     if (blendMode == "add")

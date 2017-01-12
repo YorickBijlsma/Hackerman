@@ -89,8 +89,9 @@ void drawEnvironment()
     int puzzleW = (int) c[2];
     int puzzleH = (int) c[3];
     //image(puzzleSprite.get(0, 0, puzzleW, puzzleH), 
-     // puzzleX, puzzleY, puzzleW, puzzleH);
-     image(puzzleblockSprite, puzzleX, puzzleY);
+    // puzzleX, puzzleY, puzzleW, puzzleH);
+    puzzleSprite = puzzleSpritesheet.get(0, 0, puzzleW, puzzleH);
+    image            (puzzleSprite, puzzleX, puzzleY, puzzleW, puzzleH);
   }
 
   for (float[] c : wallCoords) //draw the walls

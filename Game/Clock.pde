@@ -13,6 +13,12 @@ void updateClock()
   if (secondsLeft < 0)
   {
     player.health = 0;
+    if (playingGameOver == false)
+    {
+    playingGameOver = true;
+    gameover.play();
+    }    
+    mainsong.stop();
   }
   
   secondsLeft = TIMELEVEL - secondsCounter;

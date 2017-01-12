@@ -209,8 +209,17 @@ void loadAllImages()
 
 void loadAllSounds()
 {
-  
-}
+  damage = new SoundFile(this, "damage.mp3");
+  adware = new SoundFile(this, "adware.mp3");
+  gameover = new SoundFile(this, "gameover.mp3");
+  gamequit = new SoundFile(this, "gamequit.mp3");  
+  gamestart = new SoundFile(this, "gamestart.mp3");  
+  menu = new SoundFile(this, "menu.mp3");
+  mainsong = new SoundFile(this, "mainsong.mp3");
+  wallbump = new SoundFile(this, "wallbump.mp3");
+  infected = new SoundFile(this, "infected.mp3");
+  leveldone = new SoundFile(this, "leveldone.mp3");
+ }
 
 void clearCoordinates()
 {

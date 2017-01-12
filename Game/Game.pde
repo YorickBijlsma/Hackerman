@@ -22,6 +22,7 @@ import java.util.Objects;
 import java.util.Arrays;
 import java.io.File;
 import java.lang.Math;
+import processing.sound.*;
 
 int slowMove = 0;
 int stall    = 0;
@@ -48,6 +49,9 @@ ArrayList<Malware>     malwares   = new ArrayList<Malware>();
 ArrayList<Ad>          ads        = new ArrayList<Ad>();
 //ArrayList<ParticleSystem>    particles  = new ArrayList<ParticleSystem>();
 
+boolean playingMenu = false;
+boolean playingGameOver = false;
+
 ParticleSystem playerDamageParticle = new ParticleSystem(0,0);
 
 
@@ -73,6 +77,8 @@ PImage   entryScreen, deathScreen, wallSprite, leaderboardImage, scoreAdditionIm
          playerSpriteDone, adwareSprite, virusSprite, malwareSprite, Packagespritesheet, DoTcom, puzzleSpritesheet, puzzleSprite;
 PImage[] adwareSprites;
 PFont    regularFont;
+
+SoundFile adware, damage, gamestart, gamequit, gameover, infected, menu, mainsong, wallbump, leveldone;
 
 File bestScoresEver = new File("best_5_scores.txt");
 
@@ -118,6 +124,7 @@ void drawHUD()
   if(player.hit)
   {
     image(playerInjuredSprite,0,0);
+    damage.play();
   }
 
   fill(player.healthColour);

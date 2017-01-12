@@ -174,6 +174,7 @@ class EnemyAdware
     if (overlapsPlayer(x, y))
     {
       bursting = true;
+      adware.play();
     }
     if (bursting)
     {

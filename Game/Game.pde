@@ -68,7 +68,7 @@ final int AMOUNTOFLEVELS         = 6;
 final int LEVELWAIT              = 120;
 final int TIMELEVEL              = 10;
 
-PImage   entryScreen, deathScreen, wallSprite, leaderboardImage, scoreAdditionImage, 
+PImage   entryScreen, deathScreen, WallSprite, leaderboardImage, scoreAdditionImage, 
          wallSpritesheet, playerInjuredSprite, puzzleDoneSprite, playerSpriteNormal,
          playerSpriteDone, adwareSprite, virusSprite, malwareSprite, Packagespritesheet, DoTcom, puzzleSpritesheet, puzzleSprite;
 PImage[] adwareSprites;

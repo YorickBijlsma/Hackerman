@@ -186,9 +186,9 @@ void loadAllImages()
 {
   entryScreen        = loadImage("start_screen.jpg");
   deathScreen        = loadImage("death_screen.png");
-  wallSpritesheet    = loadImage("wall_texture.png");
-  leaderboardImage   = loadImage("leaderboard_image.png");
-  scoreAdditionImage = loadImage("score_addition.png");
+  wallSpritesheet    = loadImage("wall_texture.jpg");
+  leaderboardImage   = loadImage("leaderboard_image.jpg");
+  scoreAdditionImage = loadImage("score_addition.jpg");
   playerInjuredSprite= loadImage("damagesprite.png");
   puzzleDoneSprite   = loadImage("donesprite.png");
   playerSpriteNormal = loadImage("sprite_player.png");
@@ -203,7 +203,7 @@ void loadAllImages()
   adwareSprites = new PImage[EnemyAdware.amountOfAds];    //amountOfAds is a static member of EnemyAdware, so we can refer to the class name
   for(int i = 0; i < EnemyAdware.amountOfAds; i++)
   {
-    adwareSprites[i] = loadImage("adware_images/ad"+(i+1)+".png");
+    adwareSprites[i] = loadImage("adware_images/ad"+(i+1)+".jpg");
   }
 }
 

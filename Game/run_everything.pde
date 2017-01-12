@@ -92,7 +92,7 @@ void drawEnvironment()
     //image(puzzleSprite.get(0, 0, puzzleW, puzzleH), 
     // puzzleX, puzzleY, puzzleW, puzzleH);
     puzzleSprite = puzzleSpritesheet.get(0, 0, puzzleW, puzzleH);
-    image            (puzzleSprite, puzzleX, puzzleY, puzzleW, puzzleH);
+    image     (puzzleSprite, puzzleX, puzzleY, puzzleW, puzzleH);
   }
 
   for (float[] c : wallCoords) //draw the walls
@@ -101,10 +101,18 @@ void drawEnvironment()
     int thisWallY = (int) c[1];
     int thisWallW = (int) c[2];
     int thisWallH = (int) c[3];
+    
+    /*int outWallX = thisWallX + 4; //stroke implementation for walls
+    int outWallY = thisWallY + 4;
+    int outWallW = thisWallW - 8;
+    int outWallH = thisWallH - 8;
 
-    //rect(wallX,wallY,wallW,wallH);
-
-    wallSprite = wallSpritesheet.get(thisWallX, thisWallY, thisWallW, thisWallH);
-    image               (wallSprite, thisWallX, thisWallY, thisWallW, thisWallH);
+    //rect(outWallX,outWallY,outWallW,outWallH);
+    //fill(55, 255, 255);
+    //rect(thisWallX,thisWallY,thisWallW,thisWallH);*/
+   
+    WallSprite    =    wallSpritesheet.get(thisWallX, thisWallY, thisWallW, thisWallH);
+    image                     (WallSprite, thisWallX, thisWallY, thisWallW, thisWallH);
+    
   }
 }

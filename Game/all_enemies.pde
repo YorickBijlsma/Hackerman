@@ -130,7 +130,7 @@ class EnemyAdware
   float y = 10;
   float w = 20;
   float h = 20;
-  final static int amountOfAds = 5;          //final static so we can use this variable by referring to the class, instead of a specific instance (used to spawn ads)
+  final static int amountOfAds = 6;          //final static so we can use this variable by referring to the class, instead of a specific instance (used to spawn ads)
   int adSpawnCounter = 0;
   int adSpawnTime = 2;
   boolean bursting = false;
@@ -231,7 +231,7 @@ class Ad
   {
     this.x = random(0, width  -  150);          //spawn anywhere, as long as it's 150 pixels away from all edges 
     this.y = random(0, height  -  150);
-    imageNumber = (int) random(0, EnemyAdware.amountOfAds-1); 
+    imageNumber = (int) random(0, EnemyAdware.amountOfAds); 
     adSprite = adwareSprites[imageNumber];
   }
 

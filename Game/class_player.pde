@@ -37,11 +37,11 @@ class Player
      else if(done) colour = color(0,255,0);
      else          colour = color(0,0,255);*/
 
-    fill(colour);
-    eitherSprite = (done)? playerSpriteDone : playerSpriteNormal; //change sprite if player done
+    //fill(colour);
+    //eitherSprite = (done)? playerSpriteDone : playerSpriteNormal; //change sprite if player done
     
-    sprite = eitherSprite.get(0, 0, (int)mainW, (int)mainH);
-    image(sprite, mainX, mainY);   //player sprite corresponding to width and height at x and y
+    //sprite = eitherSprite.get(0, 0, (int)mainW, (int)mainH);
+    image(playerSpriteNormal, mainX, mainY);   //player sprite corresponding to width and height at x and y
 
     if (checkDone()) done = true;     //check if puzzle is completed
     else colour = color(0, 0, 255);

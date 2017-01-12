@@ -79,7 +79,7 @@ void drawGame()
 
 void drawEnvironment()
 {
-  PImage puzzleSprite = (player.done)? playerSpriteDone: playerSpriteNormal;
+  //PImage puzzleSprite = (player.done)? playerSpriteDone: playerSpriteNormal;
 
   for (float[] c : puzzleCoords) //draw the puzzle
   {
@@ -88,8 +88,9 @@ void drawEnvironment()
     int puzzleY = (int) c[1];
     int puzzleW = (int) c[2];
     int puzzleH = (int) c[3];
-    image(puzzleSprite.get(0, 0, puzzleW, puzzleH), 
-      puzzleX, puzzleY, puzzleW, puzzleH);
+    //image(puzzleSprite.get(0, 0, puzzleW, puzzleH), 
+     // puzzleX, puzzleY, puzzleW, puzzleH);
+     image(puzzleblockSprite, puzzleX, puzzleY);
   }
 
   for (float[] c : wallCoords) //draw the walls

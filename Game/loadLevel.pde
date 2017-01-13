@@ -219,6 +219,8 @@ void loadAllSounds()
   wallbump = new SoundFile(this, "wallbump.mp3");
   infected = new SoundFile(this, "infected.mp3");
   leveldone = new SoundFile(this, "leveldone.mp3");
+  
+  allSounds.add(damage); allSounds.add(adware); allSounds.add(gameover); allSounds.add(gamequit); allSounds.add(gamestart); allSounds.add(menu); allSounds.add(wallbump); allSounds.add(infected); allSounds.add(leveldone);
  }
 
 void clearCoordinates()
@@ -247,4 +249,12 @@ void clearCoordinates()
   vira  .clear();
   packages    .clear();
   malwares    .clear();
+  
+  for (SoundFile everySound : allSounds)
+  {
+    everySound.stop();
+  }
+  playingMenu = false;
+  playingLevelDone = false;
+  playingGameOver = false;
 }

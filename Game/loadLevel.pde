@@ -244,7 +244,7 @@ void clearCoordinates()
   }
   worms       .clear();
   adwares     .clear();
-  vira  .clear();
+  vira        .clear();
   packages    .clear();
   malwares    .clear();
 }

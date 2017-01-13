@@ -36,12 +36,12 @@ int levelNumber = 1;
 int gameState = 0; //0 = starmenu, 1 = game, 2 = exitgame
 
 int drawbackground = 0;
-color HUDcolour = color(255, 201, 14);
+color HUDcolour = color(250, 250, 250);
 color red   = color(255, 0, 0);
 color green = color(0, 255, 0);
 color blue  = color(0, 0, 255);
 
-ArrayList<Virus>       vira = new ArrayList<Virus>();
+ArrayList<Virus>       vira       = new ArrayList<Virus>();
 ArrayList<Package>     packages   = new ArrayList<Package>();
 ArrayList<EnemyAdware> adwares    = new ArrayList<EnemyAdware>();
 ArrayList<Worm>        worms      = new ArrayList<Worm>();
@@ -119,7 +119,7 @@ void drawHUD()
   {
     textSize(30);
     fill(HUDcolour);
-    text("Score : " + (int)score.totalScore, leaderboard.x-125, leaderboard.padding);
+    text("Score : " + (int)score.totalScore, leaderboard.x-155, leaderboard.padding);
   }
   if(player.hit)
   {

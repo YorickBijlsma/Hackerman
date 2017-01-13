@@ -41,7 +41,12 @@ void updateGame()
   else if (player.done)
   {
     doneRoutine();
-    leveldone.play();//otherwise do the done routine
+    
+    if(!playingLevelDone)
+    {
+      leveldone.play();//otherwise do the done routine
+      playingLevelDone = true;
+    }
   }
 }
 

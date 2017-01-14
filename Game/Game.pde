@@ -47,7 +47,7 @@ ArrayList<EnemyAdware> adwares    = new ArrayList<EnemyAdware>();
 ArrayList<Worm>        worms      = new ArrayList<Worm>();
 ArrayList<Malware>     malwares   = new ArrayList<Malware>();
 ArrayList<Ad>          ads        = new ArrayList<Ad>();
-ArrayList<SoundFile>     allSounds = new ArrayList<SoundFile>();
+//ArrayList<SoundFile>     allSounds = new ArrayList<SoundFile>();
 
 //ArrayList<ParticleSystem>    particles  = new ArrayList<ParticleSystem>();
 

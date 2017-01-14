@@ -168,6 +168,9 @@ void restartGame()
   player.health = player.originalHealth;
   resetClock();
   score.totalScore = 0;
+  gameover.stop();
+  gamestart.play();
+  mainsong.play();
 }
 
 void saveBestScores()
@@ -220,7 +223,7 @@ void loadAllSounds()
   infected = new SoundFile(this, "infected.mp3");
   leveldone = new SoundFile(this, "leveldone.mp3");
   
-  allSounds.add(damage); allSounds.add(adware); allSounds.add(gameover); allSounds.add(gamequit); allSounds.add(gamestart); allSounds.add(menu); allSounds.add(wallbump); allSounds.add(infected); allSounds.add(leveldone);
+  //allSounds.add(damage); allSounds.add(adware); allSounds.add(gameover); allSounds.add(gamequit); allSounds.add(gamestart); allSounds.add(menu); allSounds.add(wallbump); allSounds.add(infected); allSounds.add(leveldone);
  }
 
 void clearCoordinates()
@@ -250,10 +253,10 @@ void clearCoordinates()
   packages    .clear();
   malwares    .clear();
   
-  for (SoundFile everySound : allSounds)
-  {
-    everySound.stop();
-  }
+  //for (SoundFile everySound : allSounds)
+ // {
+ //   everySound.stop();
+  //}
   playingMenu = false;
   playingLevelDone = false;
   playingGameOver = false;

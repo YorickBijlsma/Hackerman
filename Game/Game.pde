@@ -78,7 +78,7 @@ PImage   entryScreen, deathScreen, WallSprite, leaderboardImage, scoreAdditionIm
          wallSpritesheet, playerInjuredSprite, puzzleDoneSprite, playerSpriteNormal,
          playerSpriteDone, adwareSprite, virusSprite, malwareSprite, Packagespritesheet, DoTcom, puzzleSpritesheet, puzzleSprite;
 PImage[] adwareSprites;
-PFont    regularFont;
+PFont    regularFont, pixelFont;
 
 SoundFile adware, damage, gamestart, gamequit, gameover, infected, menu, mainsong, wallbump, leveldone;
 
@@ -87,6 +87,7 @@ File bestScoresEver = new File("best_5_scores.txt");
 void setup()
 {
   size(1250, 702);
+  pixelFont = createFont("pixtech.ttf", 32);
   regularFont = loadFont("regular_font.vlw");
   textFont(regularFont);
   
@@ -110,8 +111,8 @@ void drawHUD()
 {
   drawClock();
   textSize(32);
-  //color timeLeftColour = color((int) random(155,255));          //random colour between 155 and 255 RGB
   leaderboard.draw();
+  player.drawHealthBar();
   fill(255);
   textSize(24);
   //text(secondsLeft, player.mainX-5, player.mainY-5);
@@ -128,12 +129,6 @@ void drawHUD()
     image(playerInjuredSprite,0,0);
     damage.play();
   }
-
-  fill(player.healthColour);
-  float textSize = (int)  (player.mainW/2) + (player.mainH/2) /23;
-  textSize(textSize);
-  //textAlign(CENTER);
-  text((int)player.health, player.mainX, player.mainY+(player.mainH/2));
 }
 
 void drawScoreAddition()

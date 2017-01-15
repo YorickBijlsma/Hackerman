@@ -75,7 +75,9 @@ void drawGame()
     { 
       fill(red); 
       textSize(68);
+      textFont(pixelFont);
       text((int)score.totalScore, 760, 317);
+      textFont(regularFont);
     }
   }
 }

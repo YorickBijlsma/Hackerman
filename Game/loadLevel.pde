@@ -170,7 +170,7 @@ void restartGame()
   score.totalScore = 0;
   gameover.stop();
   gamestart.play();
-  mainsong.play();
+  //mainsong.play();
 }
 
 void saveBestScores()

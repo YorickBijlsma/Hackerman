@@ -2,7 +2,7 @@ class Player
 {
   final int originalHealth = 100;
   float health = originalHealth;
-  public color healthColour = color(255, 255,255);
+  public color healthColour = color(255, 255, 255);
   boolean hit = false;
   int hitCounter = 0;
   PImage sprite;
@@ -39,7 +39,7 @@ class Player
 
     //fill(colour);
     //eitherSprite = (done)? playerSpriteDone : playerSpriteNormal; //change sprite if player done
-    
+
     //sprite = eitherSprite.get(0, 0, (int)mainW, (int)mainH);
     image(playerSpriteNormal, mainX, mainY);   //player sprite corresponding to width and height at x and y
 
@@ -55,9 +55,9 @@ class Player
       {
         mainsong.stop();
         gameover.play();
-        playingGameOver = true;    
+        playingGameOver = true;
       }  
-      if(!savedBestScoresThisLevel) saveBestScores();
+      if (!savedBestScoresThisLevel) saveBestScores();
       if (keysPressed['Z'])
       {
         clearCoordinates();
@@ -65,8 +65,7 @@ class Player
         //gamestart.play();
         //mainsong.play();
       }
-    } 
-    else            //sequence for player is alive
+    } else            //sequence for player is alive
     {
       hitSpriteHandler();
       xsp *= 0.4;
@@ -111,18 +110,18 @@ class Player
         otherW = c[2]; 
         otherH = c[3];
 
-        if(                                                    //if our next position is...
-            nextXposition <= otherX + otherW    &&             //more left than most right side of wall   
-            nextXposition + mainW >= otherX     &&             //more right than most left side of wall   
-            mainY <= otherY + otherH            &&             //more up than most down side of wall   
-            mainY + mainH >= otherY                            //more down than most up side of wall
-           )                                                   //then we have collision!
-          {
-            if (!(mainX <= otherX + otherW)) mainX += 1;    //applies bounciness on x
-            if (!(mainX + mainW >= otherX))  mainX -= 1;
-            wallbump.play();
-            return true;
-          }
+        if (                                                    //if our next position is...
+          nextXposition <= otherX + otherW    &&             //more left than most right side of wall   
+          nextXposition + mainW >= otherX     &&             //more right than most left side of wall   
+          mainY <= otherY + otherH            &&             //more up than most down side of wall   
+          mainY + mainH >= otherY                            //more down than most up side of wall
+          )                                                   //then we have collision!
+        {
+          if (!(mainX <= otherX + otherW)) mainX += 1;    //applies bounciness on x
+          if (!(mainX + mainW >= otherX))  mainX -= 1;
+          wallbump.play();
+          return true;
+        }
       }
     }
     if (checkSide == 'y')
@@ -134,11 +133,11 @@ class Player
         otherW = c[2]; 
         otherH = c[3];
 
-        if(                                                       
-            mainX <= otherX + otherW            &&             
-            mainX + mainW >= otherX             &&                
-            nextYposition <= otherY + otherH    &&                
-            nextYposition + mainH >= otherY                       
+        if (                                                       
+          mainX <= otherX + otherW            &&             
+          mainX + mainW >= otherX             &&                
+          nextYposition <= otherY + otherH    &&                
+          nextYposition + mainH >= otherY                       
           )                                                       
         {
           if (!(mainY <= otherY + otherH)) mainY += 2;     //applies bounciness on y
@@ -155,9 +154,9 @@ class Player
   {
     //check if player collides with a pseudo hitbox cast around the requirement coordinates by margin amount of pixels
     if (mainX <= reqX + PUZZLEDONEMARGIN &&
-        mainX >= reqX - PUZZLEDONEMARGIN &&
-        mainY <= reqY + PUZZLEDONEMARGIN &&
-        mainY >= reqY - PUZZLEDONEMARGIN)
+      mainX >= reqX - PUZZLEDONEMARGIN &&
+      mainY <= reqY + PUZZLEDONEMARGIN &&
+      mainY >= reqY - PUZZLEDONEMARGIN)
     {
       //place the player exactly where they need to be, thus removing any ugly lines from the player not exactly fitting (puzzle margin)
       mainX = reqX;                   
@@ -166,17 +165,63 @@ class Player
     }
     return false;
   }
-  
+
   void hitSpriteHandler()
   {
-    if(hit)
+    if (hit)
     {
       hitCounter++;
     }
-    if(hitCounter >= 20)
+    if (hitCounter >= 20)
     {
       hitCounter = 0;
       hit = false;
+    }
+  }
+
+  void drawHealthBar()
+  {
+    String drawType = new String("bar");
+    //String drawType = new String("circle");
+
+    boolean drawOutline = false;
+
+    float barx, bary, barw, barh;
+    if (drawType == "bar")
+    {
+      barx = mainX + mainW + 10;
+      bary = mainY + mainH;
+      barw = 6;
+      barh = mainH * (health / 100); //the height of the bar is a representation of the percentage of health left
+
+      fill(green);
+      rect(barx, bary, 
+        barw, -barh);
+      if (drawOutline)
+      {
+        stroke(30);
+        strokeWeight(3);
+        noFill();
+        int pad = 2;
+        rect(barx, bary, 
+             barw, -barh);
+        noStroke();
+      }
+    }   
+
+    if (drawType == "circle")
+    {
+      ellipseMode(CENTER);
+      float cx = mainX + (mainW/2);
+      float cy = mainY + (mainH/2);
+      float r = health * 0.85;
+
+      stroke(green);
+      strokeWeight(3);
+      noFill();
+      ellipse(cx, cy, 
+        r, r);
+      noStroke();
     }
   }
 }

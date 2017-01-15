@@ -53,7 +53,7 @@ class Player
     {
       if (playingGameOver == false)
       {
-        mainsong.stop();
+        //mainsong.stop();
         gameover.play();
         playingGameOver = true;
       }  

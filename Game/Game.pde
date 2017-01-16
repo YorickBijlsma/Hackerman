@@ -111,7 +111,7 @@ void drawHUD()
 {
   drawClock();
   textSize(32);
-  leaderboard.draw();
+  leaderboard.draw(1170, 0, 20);
   
   fill(255);
   textSize(24);

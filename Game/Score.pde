@@ -30,11 +30,9 @@ class Score
 class Leaderboard
 {
   float[] bestFiveScores = {0, 0, 0, 0, 0};
-  int x = 1170;
-  int y = 0;
-  int padding = 20;
+  int x, y, padding;
 
-  void draw()
+  void draw(int x, int y, int padding)
   {
     fill(HUDcolour);
     image(leaderboardImage, x, y);

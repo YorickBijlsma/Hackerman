@@ -36,7 +36,7 @@ int levelNumber = 1;
 int gameState = 0; //0 = starmenu, 1 = game, 2 = exitgame
 
 int drawbackground = 0;
-color HUDcolour = color(250, 250, 250);
+color HUDcolour = color(0,0,0);
 color red   = color(255, 0, 0);
 color green = color(0, 255, 0);
 color blue  = color(0, 0, 255);
@@ -112,7 +112,7 @@ void drawHUD()
   drawClock();
   textSize(32);
   leaderboard.draw();
-  player.drawHealthBar();
+  
   fill(255);
   textSize(24);
   //text(secondsLeft, player.mainX-5, player.mainY-5);
@@ -122,6 +122,7 @@ void drawHUD()
   {
     textSize(30);
     fill(HUDcolour);
+    player.drawHealthBar();
     text("Score : " + (int)score.totalScore, leaderboard.x-155, leaderboard.padding);
   }
   if(player.hit)
@@ -134,7 +135,7 @@ void drawHUD()
 void drawScoreAddition()
 {
   textSize(48);
-  fill(red);
+  fill(255, 255, 180);
   int scoreX = width /2 - (344/2);
   int scoreY = height/2 - (358/2);
   easeLeftAnimation(scoreAdditionImage, scoreX, scoreY);

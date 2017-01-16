@@ -183,33 +183,35 @@ class Player
   {
     String drawType = new String("bar");
     //String drawType = new String("circle");
+    int pad = 2;
 
-    boolean drawOutline = false;
+    boolean drawOutline = //false;
+                          true;
 
     float barx, bary, barw, barh;
-    if (drawType == "bar")
+    if (Objects.equals(drawType,"bar"))
     {
-      barx = mainX + mainW + 10;
-      bary = mainY + mainH;
+      barx = mainX + mainW + 6;
+      bary = mainY + mainH + 2;
       barw = 6;
       barh = mainH * (health / 100); //the height of the bar is a representation of the percentage of health left
 
       fill(green);
-      rect(barx, bary, 
-        barw, -barh);
+      rect((int)barx, (int)bary-pad, 
+           (int)barw, (int)-barh);
       if (drawOutline)
       {
-        stroke(30);
+        stroke(35);
         strokeWeight(3);
         noFill();
-        int pad = 2;
-        rect(barx, bary, 
-             barw, -barh);
+        
+        rect((int)barx-pad, (int)bary-pad, 
+             (int)barw+pad, (int)-mainH);
         noStroke();
       }
     }   
 
-    if (drawType == "circle")
+    if (Objects.equals(drawType,"circle"))
     {
       ellipseMode(CENTER);
       float cx = mainX + (mainW/2);

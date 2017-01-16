@@ -73,7 +73,7 @@ void drawGame()
     slideFromTopAnimation(deathScreen, 0, 0);
     if (stretchCounter > height-10)  //check if the animation is almost done, if so, display the score
     { 
-      fill(red); 
+      fill(125, 185, 45); 
       textSize(68);
       textFont(pixelFont);
       text((int)score.totalScore, 760, 317);

@@ -30,7 +30,7 @@ void drawClock()
   {
     lengthTimer -= speed;
   }
-  fill(255,0,0);
+  fill(245, 100, 100);
   rect(0,0,lengthTimer,30);
 }
 void timerInit()

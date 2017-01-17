@@ -51,21 +51,16 @@ class Player
   {
     if (health <= 0)  //death sequence
     {
+      mainsong.stop();
       if (playingGameOver == false)
       {
-        //mainsong.stop();
         gameover.play();
         playingGameOver = true;
       }  
       if (!savedBestScoresThisLevel) saveBestScores();
-      if (keysPressed['Z'])
-      {
-        clearCoordinates();
-        restartGame();
-        //gamestart.play();
-        //mainsong.play();
-      }
-    } else            //sequence for player is alive
+      gameState = 2;
+    } 
+    else            //sequence for player is alive
     {
       hitSpriteHandler();
       xsp *= 0.4;

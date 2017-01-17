@@ -10,7 +10,6 @@ void runGame()
     break;
   case 2:
     deathScreen();
-    if(keysPressed['Z']) gameState = 1;
     break;
   case 3:
     exit();
@@ -71,10 +70,6 @@ void drawGame()
     for                   (Ad everyAd : ads)    everyAd     .draw();
     drawHUD();
     playerDamageParticle.draw();
-  }
-  else
-  {
-    gameState = 2;
   }
 }
 

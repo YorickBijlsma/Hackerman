@@ -28,7 +28,7 @@ int slowMove = 0;
 int stall    = 0;
 boolean done = false;
 int nEnemies = 5;
-float t      = 0.0; 
+int timer    = 0; 
 int health   = 100;
 boolean showStartScreen = true;
 boolean savedBestScoresThisLevel = false;
@@ -137,7 +137,7 @@ void drawScoreAddition()
 {
   textSize(48);
   fill(255, 255, 180);
-  int scoreX = width /2 - (344/2);
+  int scoreX = width /2 - (344/2) - 56;
   int scoreY = height/2 - (358/2);
   easeLeftAnimation(scoreAdditionImage, scoreX, scoreY);
   

@@ -2,7 +2,7 @@ void startScreen()
 {
   if (playingMenu == false)
   {
-    menu.loop();
+    menu.play();
     playingMenu = true;
   }
   blockAnimation(entryScreen, 0, 0);
@@ -10,10 +10,14 @@ void startScreen()
   {
     menu.stop();
     gameState = 1;
-    //gamestart.play();
-    //mainsong.play();
+    gamestart.play();
+    mainsong.play();
   }
-  if (keysPressed['X'])
+  if (frameCount % 60 == 0)
+  {
+    timer++;
+  }
+  if (keysPressed['X'] && (timer >= 3))
   {
     gameState = 3;
   }
@@ -21,14 +25,27 @@ void startScreen()
 
 void deathScreen()
 {
+  if(keysPressed['Z'])
+  {
+    clearCoordinates();
+    restartGame();
+    gameState = 1;
+  }
+
+  if(keysPressed['X']) 
+  {
+    playingMenu = false;
+    timer = 0;
+    gameState = 0; 
+  }
   slideFromTopAnimation(deathScreen, 0, 0);
-  println(gameState);
+  //println(gameState);
   if (stretchCounter > height-10)  //check if the animation is almost done, if so, display the score
   { 
     color hackerGreen = color(125, 255, 45);
     fill(hackerGreen); 
     textSize(56);
-    text((int)score.totalScore, 420, 645);
+    text((int)score.totalScore, 420, 643);
     leaderboard.drawScores(911, 190, 38, hackerGreen, 28);
   }
 }

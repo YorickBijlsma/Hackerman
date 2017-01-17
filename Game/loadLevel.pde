@@ -168,9 +168,8 @@ void restartGame()
   player.health = player.originalHealth;
   resetClock();
   score.totalScore = 0;
-  gameover.stop();
   gamestart.play();
-  //mainsong.play();
+  mainsong.play();
 }
 
 void saveBestScores()
@@ -191,7 +190,7 @@ void loadAllImages()
   deathScreen        = loadImage("deathScreen.jpg");
   wallSpritesheet    = loadImage("wall_texture.jpg");
   leaderboardImage   = loadImage("leaderboard_image.jpg");
-  scoreAdditionImage = loadImage("score_addition.jpg");
+  scoreAdditionImage = loadImage("score_addition.png");
   playerInjuredSprite= loadImage("damagesprite.png");
   puzzleDoneSprite   = loadImage("donesprite.png");
   playerSpriteNormal = loadImage("sprite_player.png");
@@ -218,7 +217,7 @@ void loadAllSounds()
   gamequit = new SoundFile(this, "gamequit.mp3");  
   gamestart = new SoundFile(this, "gamestart.mp3");  
   menu = new SoundFile(this, "menu.mp3");
-  mainsong = new SoundFile(this, "mainsong.mp3");
+  mainsong = new SoundFile(this, "mainsong.wav");
   wallbump = new SoundFile(this, "wallbump.mp3");
   infected = new SoundFile(this, "infected.mp3");
   leveldone = new SoundFile(this, "leveldone.mp3");

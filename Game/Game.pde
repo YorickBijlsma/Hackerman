@@ -47,6 +47,7 @@ ArrayList<EnemyAdware> adwares    = new ArrayList<EnemyAdware>();
 ArrayList<Worm>        worms      = new ArrayList<Worm>();
 ArrayList<Malware>     malwares   = new ArrayList<Malware>();
 ArrayList<Ad>          ads        = new ArrayList<Ad>();
+HealthPickup healthPickup = new HealthPickup();
 //ArrayList<SoundFile>     allSounds = new ArrayList<SoundFile>();
 
 //ArrayList<ParticleSystem>    particles  = new ArrayList<ParticleSystem>();
@@ -89,7 +90,7 @@ void setup()
   size(1250, 702);
   pixelFont = createFont("pixtech.ttf", 32);
   regularFont = loadFont("regular_font.vlw");
-  textFont(pixelFont);
+  textFont(regularFont);
   
   loadAllImages();
   loadAllSounds();
@@ -101,7 +102,7 @@ void setup()
 void draw()
 {
   runGame();
-  //println(frameRate); println("x:"+mouseX); println("y:"+mouseY);
+  println(frameRate);
 }
 
 
@@ -110,9 +111,8 @@ void draw()
 void drawHUD()
 {
   drawClock();
-  textSize(30);
-  leaderboard.drawScoresPlaque(1170, 0);
-  leaderboard.drawScores(1163, 42, 28, HUDcolour, 16);
+  textSize(32);
+  leaderboard.draw(1170, 0, 20);
   
   fill(255);
   textSize(24);
@@ -124,7 +124,7 @@ void drawHUD()
     textSize(30);
     fill(HUDcolour);
     player.drawHealthBar();
-    text("Score : " + (int)score.totalScore, leaderboard.x-155, leaderboard.padding);  //doesnt work as leaderboard no longer has these attributes by default (they are passed to methods)
+    text("Score : " + (int)score.totalScore, leaderboard.x-155, leaderboard.padding);
   }
   if(player.hit)
   {

@@ -9,10 +9,6 @@ void runGame()
     playGame();
     break;
   case 2:
-    deathScreen();
-    if(keysPressed['Z']) gameState = 1;
-    break;
-  case 3:
     exit();
     break;
   }
@@ -39,6 +35,7 @@ void updateGame()
       for  (EnemyAdware everyAdware : adwares)     everyAdware  .update();
       for    (Package everyPackage : packages)     everyPackage .update();
       for    (Malware everyMalware : malwares)     everyMalware .update();
+      healthPickup.update();
       playerDamageParticle.update();
     }
   }
@@ -48,6 +45,7 @@ void updateGame()
     {
       leveldone.play();//otherwise do the done routine
       playingLevelDone = true;
+      
     }
     doneRoutine();    
   }
@@ -69,12 +67,21 @@ void drawGame()
     for  (EnemyAdware everyAdware : adwares)    everyAdware .draw();
     for    (Malware everyMalware : malwares)    everyMalware.draw();
     for                   (Ad everyAd : ads)    everyAd     .draw();
+    healthPickup.draw();
     drawHUD();
     playerDamageParticle.draw();
   }
   else
   {
-    gameState = 2;
+    slideFromTopAnimation(deathScreen, 0, 0);
+    if (stretchCounter > height-10)  //check if the animation is almost done, if so, display the score
+    { 
+      fill(125, 185, 45); 
+      textSize(68);
+      textFont(pixelFont);
+      text((int)score.totalScore, 760, 317);
+      textFont(regularFont);
+    }
   }
 }
 

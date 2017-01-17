@@ -24,10 +24,10 @@ void loadLevel(int num) //)
     String varsWalls  [] = {};
     String varsEnemies[] = {};
 
-    varsPlayer = loadStrings(fileName+"_player.txt");
-    varsPuzzle = loadStrings(fileName+"_puzzle.txt");
-    varsWalls =  loadStrings(fileName+"_walls.txt");
-    varsEnemies =  loadStrings(fileName+"_enemies.txt");
+    varsPlayer   =  loadStrings(fileName+"_player.txt");
+    varsPuzzle   =  loadStrings(fileName+"_puzzle.txt");
+    varsWalls    =  loadStrings(fileName+"_walls.txt");
+    varsEnemies  =  loadStrings(fileName+"_enemies.txt");
 
     float[][] restCoords = new float[8][4];
 
@@ -93,7 +93,11 @@ void loadLevel(int num) //)
         wallBlocks++;
       }
     }
-
+    if(levelNumber % 5 == 0)
+    {
+     healthPickup.x = width/2;
+     healthPickup.y = height/2;
+    }
     for (int l = 0; l < varsEnemies.length; l+=2)
     {
       int enemyX = (int)Float.parseFloat(varsEnemies[l]);
@@ -233,7 +237,7 @@ void clearCoordinates()
   player.mainH = 0;
   stretchCounter = 0;
   blockCounter = 0;
-  //easeCounter = 0;
+  easeCounter = 0;
   for(float[] c : wallCoords)
   {
      c[0] = 0.0; c[1]= 0.0; c[2] = 0.0; c[3]= 0.0;

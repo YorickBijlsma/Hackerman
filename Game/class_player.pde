@@ -105,12 +105,12 @@ class Player
         otherW = c[2]; 
         otherH = c[3];
 
-        if (                                                    //if our next position is...
+        if (                                                 //if our next position is...
           nextXposition <= otherX + otherW    &&             //more left than most right side of wall   
           nextXposition + mainW >= otherX     &&             //more right than most left side of wall   
           mainY <= otherY + otherH            &&             //more up than most down side of wall   
           mainY + mainH >= otherY                            //more down than most up side of wall
-          )                                                   //then we have collision!
+          )                                                  //then we have collision!
         {
           if (!(mainX <= otherX + otherW)) mainX += 1;    //applies bounciness on x
           if (!(mainX + mainW >= otherX))  mainX -= 1;

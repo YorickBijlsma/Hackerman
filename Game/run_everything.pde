@@ -9,6 +9,10 @@ void runGame()
     playGame();
     break;
   case 2:
+    deathScreen();
+    if(keysPressed['Z']) gameState = 1;
+    break;
+  case 3:
     exit();
     break;
   }
@@ -70,15 +74,7 @@ void drawGame()
   }
   else
   {
-    slideFromTopAnimation(deathScreen, 0, 0);
-    if (stretchCounter > height-10)  //check if the animation is almost done, if so, display the score
-    { 
-      fill(125, 185, 45); 
-      textSize(68);
-      textFont(pixelFont);
-      text((int)score.totalScore, 760, 317);
-      textFont(regularFont);
-    }
+    gameState = 2;
   }
 }
 

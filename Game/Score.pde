@@ -32,15 +32,19 @@ class Leaderboard
   float[] bestFiveScores = {0, 0, 0, 0, 0};
   int x, y, padding;
 
-  void draw(int x, int y, int padding)
+  void drawScores(int x, int y, int padding, color colour, int textSize)
   {
-    fill(HUDcolour);
-    image(leaderboardImage, x, y);
-    textSize(18);
+    fill(colour);
+    
+    textSize(textSize);
     for (int thisScore = 0; thisScore < 5; thisScore++)
     {
-      text(thisScore+1+": " + (int)bestFiveScores[thisScore], x+10, padding*2.5 + (thisScore*padding));    //write every score at the right place depending on its index in the array
+      text(thisScore+1+":" + (int)bestFiveScores[thisScore], x+10,  y + thisScore*padding);    //write every score at the right place depending on its index in the array
     }
+  }
+  void drawScoresPlaque(int x, int y)
+  {
+    image(leaderboardImage, x, y);
   }
   void loadBestScores()
   {

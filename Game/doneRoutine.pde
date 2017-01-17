@@ -14,8 +14,9 @@ void doneRoutine()
     if(stall>=LEVELWAIT || keysPressed['Z'])             
     {
       stall = 0;
+      easeCounter = 0;
       if(levelNumber > AMOUNTOFLEVELS) levelNumber = 1;
-      loadLevel(levelNumber);     
+      loadLevel(levelNumber);   
     }
   }
 }

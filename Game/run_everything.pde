@@ -38,7 +38,6 @@ void updateGame()
       for  (EnemyAdware everyAdware : adwares)     everyAdware  .update();
       for    (Package everyPackage : packages)     everyPackage .update();
       for    (Malware everyMalware : malwares)     everyMalware .update();
-      playerDamageParticle.update();
     }
   }
   else if (player.done)
@@ -69,7 +68,6 @@ void drawGame()
     for    (Malware everyMalware : malwares)    everyMalware.draw();
     for                   (Ad everyAd : ads)    everyAd     .draw();
     drawHUD();
-    playerDamageParticle.draw();
   }
 }
 

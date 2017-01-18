@@ -42,7 +42,6 @@ boolean damagePlayer(float x, float y, float damage)
     player.hit = true;
     player.colour = color(255,0,0);
     player.health -= damage;
-    playerDamageParticleEffect(x,y);
     return true;
   }
   return false;

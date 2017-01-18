@@ -55,7 +55,6 @@ HealthPickup healthPickup = new HealthPickup();
 boolean playingMenu, playingGameOver, playingLevelDone
         = false;
 
-ParticleSystem playerDamageParticle = new ParticleSystem(0,0);
 
 
 //setup prerequisites

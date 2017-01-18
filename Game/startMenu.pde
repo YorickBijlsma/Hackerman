@@ -42,7 +42,7 @@ void deathScreen()
   //println(gameState);
   if (stretchCounter > height-10)  //check if the animation is almost done, if so, display the score
   { 
-    color hackerGreen = color(125, 255, 45);
+    
     fill(hackerGreen); 
     textSize(56);
     text((int)score.totalScore, 420, 643);

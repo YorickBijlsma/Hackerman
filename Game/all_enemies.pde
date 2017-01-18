@@ -184,8 +184,7 @@ class EnemyAdware
         burstCounter = 0;
         bursting = false;
         ads.clear();
-      }
-      else
+      } else
       {
         burstAdware();
       }
@@ -260,7 +259,7 @@ class Virus
   float draw = 0;
   int amountOfPackages = 0;
   int damage = 3;
-  
+
   //spriteSheet variables
   int frameAmount = 1; //after frameAmount frames, the next sprite loads
   int spritePosition = 0; //spritecounter
@@ -302,8 +301,8 @@ class Virus
 
   void draw() 
   {
-fill(colour);
-    copy(DoTcom,(spritePosition*frameWidth), 0, frameWidth, frameHeight, (int)x, (int)y, frameWidth, frameHeight); //this is the engine in spritesheet, change the first imageVariable
+    fill(colour);
+    copy(DoTcom, (spritePosition*frameWidth), 0, frameWidth, frameHeight, (int)x, (int)y, frameWidth, frameHeight); //this is the engine in spritesheet, change the first imageVariable
   }
 }
 
@@ -316,14 +315,14 @@ class Package
   int infectCounter = 0;
   boolean infected = false;
   int infectTime = 35;
- 
-//spriteSheet variables
+
+  //spriteSheet variables
   int frameAmount = 10; //after frameAmount frames, the next sprite loads
   int spritePosition = 0; //spritecounter
   int frameWidth = 20;
   int frameHeight = 19;
   int spriteAmount = 1; //amount of sprites in spritesheet
-  
+
   void init(float x, float y)
   {
     this.x = x;
@@ -331,14 +330,14 @@ class Package
   }
   void draw()
   {
-    copy(Packagespritesheet,(spritePosition*frameWidth), 0, frameWidth, frameHeight, (int)x, (int)y, frameWidth, frameHeight); //this is the engine in spritesheet, change the first imageVariable
+    copy(Packagespritesheet, (spritePosition*frameWidth), 0, frameWidth, frameHeight, (int)x, (int)y, frameWidth, frameHeight); //this is the engine in spritesheet, change the first imageVariable
   }
   void update()
   {
     damagePlayer(x, y, damage);
-    
-if ((frameCount % frameAmount) == 0)  spritePosition =  (spritePosition + 1) % spriteAmount; //spritesheet counter
-    
+
+    if ((frameCount % frameAmount) == 0)  spritePosition =  (spritePosition + 1) % spriteAmount; //spritesheet counter
+
     if (overlapsPlayer(x, y)) infected = true;
     damagePlayerDoT(x, y, damage);
   }
@@ -366,7 +365,7 @@ class Malware
   int damage = 10;
   boolean alive = true;
   int engagementDistance = 300;
-  
+
   //spriteSheet variables
   int frameSpeed = 2; //after frameSpeed amount frames, the next sprite loads
   int spritePosition = 0; //spritecounter
@@ -383,7 +382,7 @@ class Malware
   void draw()
   {
     fill(colour);
-    copy(malwareSprite,(spritePosition*frameWidth), 0, frameWidth, frameHeight, (int)x, (int)y, frameWidth, frameHeight); //this is the engine in spritesheet, change the first imageVariable
+    copy(malwareSprite, (spritePosition*frameWidth), 0, frameWidth, frameHeight, (int)x, (int)y, frameWidth, frameHeight); //this is the engine in spritesheet, change the first imageVariable
   }
 
   void update()
@@ -427,6 +426,7 @@ class HealthPickup
   int healthBonus = 30;
   boolean hit, spawned = false;
   int outScreen = 10000;
+  int healCounter = 0;
 
   public HealthPickup()
   {    
@@ -434,41 +434,56 @@ class HealthPickup
     speedY = calcSpeed();
     x = width/2;
     y = height/2;
+    while(wallCollide())
+    {
+      x += speedX;
+      y += speedY;
+    }
   }
 
   void update()
   {
-    collision();
+    healSpriteHandler();
+    if (x<width && x > 0 
+      &&
+      y<height && y > 0)
+    {
+      collision();
 
-    //movement
-    x = x + speedX;
-    y = y + speedY;
+      //movement
+      x = x + speedX;
+      y = y + speedY;
 
-    //collision Player
-    if (overlapsPlayer(x, y))
-    {
-      hit = true;
-    } else
-    {
-      hit = false;
-    }
-    if (hit && player.health < player.originalHealth)
-    {
-      player.health += healthBonus;
-      if (player.health > player.originalHealth)
+      //collision Player
+      if (overlapsPlayer(x, y))
       {
-        player.health = player.originalHealth;
+        hit = true;
+      } else
+      {
+        hit = false;
       }
-      x = outScreen;
-      y = outScreen;
-      hit = false;
+      if (hit && player.health < player.originalHealth)
+      {
+        player.health += healthBonus;
+        if (player.health > player.originalHealth)
+        {
+          player.health = player.originalHealth;
+        }
+        x = outScreen;
+        y = outScreen;
+        showingHealSprite = true;
+        hit = false;
+      }
     }
   }
   void draw()
   {
     fill(255, 0, 0);
-    rectMode(RADIUS);
-    rect(x, y, diameter, diameter);  
+    //rectMode(RADIUS);
+    //rect(x, y, diameter, diameter);  
+    imageMode(CENTER);
+    image(healthPickupSprite, x, y);
+    imageMode(CORNER);
     //rectMode(CORNER);
   }
 
@@ -497,13 +512,34 @@ class HealthPickup
 
     // walls
 
-    if (bounceOffWall(x + diameter, y + diameter))
+    if (wallCollide())
     {
       if (speedX < 0) speedX = speedX *-1; 
       else speedX = speedX *-1;
 
       if (speedY < 0) speedY = speedY *-1; 
       else speedY = speedY *-1;
+    }
+  }
+  boolean wallCollide()
+  {
+    if (bounceOffWall(x + diameter, y + diameter) || bounceOffWall(x - diameter, y - diameter))
+    {
+      return true;
+    }
+    return false;
+  }
+  
+  void healSpriteHandler()
+  {
+    if(showingHealSprite)
+    {
+      healCounter++;
+    }
+    if (healCounter >= 20)
+    {
+      healCounter = 0;
+      showingHealSprite = false;
     }
   }
 }

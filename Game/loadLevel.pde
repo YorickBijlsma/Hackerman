@@ -93,10 +93,14 @@ void loadLevel(int num) //)
         wallBlocks++;
       }
     }
-    if(levelNumber % 5 == 0)
+    if(num % 5 == 0)
     {
-     healthPickup.x = width/2;
-     healthPickup.y = height/2;
+      HealthPickup healthPickup = new HealthPickup();
+      healthPickups.add(healthPickup);
+    }
+    else
+    {
+      healthPickups.clear();
     }
     for (int l = 0; l < varsEnemies.length; l+=2)
     {
@@ -205,6 +209,8 @@ void loadAllImages()
   Packagespritesheet = loadImage("Packagespritesheet.png");
   puzzleSpritesheet  = loadImage("sprite_puzzel.png");
   DoTcom             = loadImage("DoTcom.png");
+  healthPickupSprite = loadImage("healthSprite.png");
+  healthFeedback     = loadImage("healthFeedback.png");
   
   adwareSprites = new PImage[EnemyAdware.amountOfAds];    //amountOfAds is a static member of EnemyAdware, so we can refer to the class name
   for(int i = 0; i < EnemyAdware.amountOfAds; i++)

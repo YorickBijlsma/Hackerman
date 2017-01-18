@@ -7,6 +7,7 @@ class Player
   int hitCounter = 0;
   PImage sprite;
   PImage eitherSprite;
+  boolean showingHealSprite = false;
 
   float reqX, reqY;
   float mainX, mainY, mainW, mainH;

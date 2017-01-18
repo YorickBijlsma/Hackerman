@@ -32,7 +32,7 @@ int timer    = 0;
 int health   = 100;
 boolean showStartScreen = true;
 boolean savedBestScoresThisLevel = false;
-int levelNumber = 1;
+int levelNumber = 5;
 int gameState = 0; //0 = starmenu, 1 = game, 2 = exitgame
 
 int drawbackground = 0;
@@ -40,6 +40,7 @@ color HUDcolour = color(255,255,255);
 color red   = color(255, 0, 0);
 color green = color(0, 255, 0);
 color blue  = color(0, 0, 255);
+color hackerGreen = color(125, 255, 45);
 
 ArrayList<Virus>       vira       = new ArrayList<Virus>();
 ArrayList<Package>     packages   = new ArrayList<Package>();
@@ -47,12 +48,12 @@ ArrayList<EnemyAdware> adwares    = new ArrayList<EnemyAdware>();
 ArrayList<Worm>        worms      = new ArrayList<Worm>();
 ArrayList<Malware>     malwares   = new ArrayList<Malware>();
 ArrayList<Ad>          ads        = new ArrayList<Ad>();
-HealthPickup healthPickup = new HealthPickup();
+ArrayList<HealthPickup> healthPickups = new ArrayList<HealthPickup>();
 //ArrayList<SoundFile>     allSounds = new ArrayList<SoundFile>();
 
 //ArrayList<ParticleSystem>    particles  = new ArrayList<ParticleSystem>();
 
-boolean playingMenu, playingGameOver, playingLevelDone
+boolean playingMenu, playingGameOver, playingLevelDone, showingHealSprite
         = false;
 
 
@@ -61,6 +62,7 @@ boolean playingMenu, playingGameOver, playingLevelDone
 Player player           = new Player();                  
 Score score             = new Score();
 Leaderboard leaderboard = new Leaderboard();
+HealthPickup healthPickup;
 
 float[][] wallCoords   = new float[30][4];     //a 30 slot 2d array, each subarray having 4 slots. this is for the maximum of 30 wall blocks
 float[][] puzzleCoords = new float[20][4];     //a 20 slot 2d array, each subarray having 4 slots. this is for the maximum of 20 puzzle blocks
@@ -71,12 +73,14 @@ float[][] enemyCoords  = new float[12][2];     //12 enemies of which x and y are
 //game constants
 final int PUZZLEDONEMARGIN       = 40;                
 final int AMOUNTOFLEVELS         = 6;
-final int LEVELWAIT              = 120;
+final int LEVELWAIT              = 120; //was 120
 final int TIMELEVEL              = 10;
 
 PImage   entryScreen, deathScreen, WallSprite, leaderboardImage, scoreAdditionImage, 
          wallSpritesheet, playerInjuredSprite, puzzleDoneSprite, playerSpriteNormal,
-         playerSpriteDone, adwareSprite, virusSprite, malwareSprite, Packagespritesheet, DoTcom, puzzleSpritesheet, puzzleSprite;
+         playerSpriteDone, adwareSprite, virusSprite, malwareSprite, Packagespritesheet, DoTcom,
+         puzzleSpritesheet, puzzleSprite, healthPickupSprite, healthFeedback
+         ;
 PImage[] adwareSprites;
 PFont    regularFont, pixelFont;
 
@@ -87,6 +91,7 @@ File bestScoresEver = new File("best_5_scores.txt");
 void setup()
 {
   size(1250, 702);
+  background(11, 15, 11);
   pixelFont = createFont("pixtech.ttf", 32);
   regularFont = loadFont("regular_font.vlw");
   textFont(pixelFont);
@@ -102,6 +107,7 @@ void draw()
 {
   runGame();
   //println(frameRate); println("x:"+mouseX); println("y:"+mouseY);
+  println(levelNumber-1);
 }
 
 
@@ -126,7 +132,11 @@ void drawHUD()
     player.drawHealthBar();
     //text("Score : " + (int)score.totalScore, leaderboard.x-155, leaderboard.padding);  //doesnt work as leaderboard no longer has these attributes by default (they are passed to methods)
   }
-  if(player.hit)
+  if(showingHealSprite)
+  {
+    image(healthFeedback,0,0);
+  }
+  else if(player.hit)            //using else if here because we don't want the hit feedback to go over an eventual heal feedback
   {
     image(playerInjuredSprite,0,0);
     damage.play();
@@ -135,17 +145,17 @@ void drawHUD()
 
 void drawScoreAddition()
 {
-  textSize(48);
+  textSize(36);
   fill(255, 255, 180);
   int scoreX = width /2 - (344/2) - 56;
   int scoreY = height/2 - (358/2);
   easeLeftAnimation(scoreAdditionImage, scoreX, scoreY);
   
-  if(easeCounter > scoreX-10)    //only draw text if easing is nearly done
+  if(easeCounter > scoreX-25)    //only draw text if easing is nearly done
   {
-    text((int)score.oldScore, 678, 228);
-    text((int)score.timePoints, 678, 304);
-    text((int)score.scorePoints, 678, 382);
+    text((int)score.oldScore, 676, 223);
+    text((int)score.timePoints, 676, 299);
+    text((int)score.scorePoints, 676, 377);
     textSize(64);
     text((int)score.calculateScore(), 540, 490);
   }

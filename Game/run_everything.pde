@@ -38,6 +38,7 @@ void updateGame()
       for  (EnemyAdware everyAdware : adwares)     everyAdware  .update();
       for    (Package everyPackage : packages)     everyPackage .update();
       for    (Malware everyMalware : malwares)     everyMalware .update();
+      for (HealthPickup everyHealthPickup : healthPickups) everyHealthPickup.update();
     }
   }
   else if (player.done)
@@ -67,6 +68,7 @@ void drawGame()
     for  (EnemyAdware everyAdware : adwares)    everyAdware .draw();
     for    (Malware everyMalware : malwares)    everyMalware.draw();
     for                   (Ad everyAd : ads)    everyAd     .draw();
+    for (HealthPickup everyHealthPickup : healthPickups) everyHealthPickup.draw();
     drawHUD();
   }
 }

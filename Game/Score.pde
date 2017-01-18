@@ -1,6 +1,6 @@
 class Score
 {
-  float totalScore = 0;
+  float totalScore = 0; //was 0
   float oldScore = 0;
   int numberOfScores = 0;
   float scorePoints = 20;

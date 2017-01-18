@@ -125,7 +125,7 @@ void drawHUD()
     textSize(30);
     fill(HUDcolour);
     player.drawHealthBar();
-    text("Score : " + (int)score.totalScore, leaderboard.x-155, leaderboard.padding);  //doesnt work as leaderboard no longer has these attributes by default (they are passed to methods)
+    //text("Score : " + (int)score.totalScore, leaderboard.x-155, leaderboard.padding);  //doesnt work as leaderboard no longer has these attributes by default (they are passed to methods)
   }
   if(player.hit)
   {

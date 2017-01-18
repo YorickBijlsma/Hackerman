@@ -4,7 +4,7 @@ void doneRoutine()
   {
 
     image(puzzleDoneSprite,0,0);
-    player.colour = color(0,255,0);   //set colour to green
+    //player.colour = color(0,255,0);   //set colour to green
     
     score.calculateScore();
     drawScoreAddition();

@@ -255,7 +255,7 @@ class Virus
   float diameter = 45;
 
   color colour = color(255, 0, 0);
-  int teller = 0;
+  int teller = 100;
   float draw = 0;
   int amountOfPackages = 0;
   int damage = 3;
@@ -287,7 +287,7 @@ class Virus
     if ( (y > height-diameter/2) || (y < diameter/2) )   vy = -vy;
     teller++;  
 
-    if (teller == 150 && amountOfPackages!=5)
+    if (teller == 110 && amountOfPackages!=5)
     {
       amountOfPackages++;
 

@@ -32,7 +32,7 @@ int timer    = 0;
 int health   = 100;
 boolean showStartScreen = true;
 boolean savedBestScoresThisLevel = false;
-int levelNumber = 5;
+int levelNumber = 1;
 int gameState = 0; //0 = starmenu, 1 = game, 2 = exitgame
 
 int drawbackground = 0;
@@ -72,7 +72,7 @@ float[][] enemyCoords  = new float[12][2];     //12 enemies of which x and y are
 
 //game constants
 final int PUZZLEDONEMARGIN       = 40;                
-final int AMOUNTOFLEVELS         = 6;
+final int AMOUNTOFLEVELS         = 35;
 final int LEVELWAIT              = 120; //was 120
 final int TIMELEVEL              = 10;
 

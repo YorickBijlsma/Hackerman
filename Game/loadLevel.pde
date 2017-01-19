@@ -177,7 +177,7 @@ void restartGame()
   resetClock();
   score.totalScore = 0;
   gamestart.play();
-  mainsong.play();
+  mainsong.loop();
 }
 
 void saveBestScores()

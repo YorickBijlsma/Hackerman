@@ -11,7 +11,7 @@ void startScreen()
     menu.stop();
     gameState = 1;
     gamestart.play();
-    mainsong.play();
+    mainsong.loop();
   }
   if (frameCount % 60 == 0)
   {

@@ -195,7 +195,7 @@ void saveBestScores()
 
 void loadAllImages()
 {
-  entryScreen        = loadImage("start_screen.jpg");
+  entryScreen        = loadImage("start_screen.png");
   deathScreen        = loadImage("deathScreen.jpg");
   wallSpritesheet    = loadImage("wall_texture.jpg");
   leaderboardImage   = loadImage("leaderboard_image.jpg");

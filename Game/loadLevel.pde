@@ -143,6 +143,7 @@ void loadLevel(int num) //)
     score.calculatedThisLevel = false;
     savedBestScoresThisLevel  = false;
     levelNumber++;
+    levelTotal++;
   } else
   {
     //do nothing, as the next level doesn't exist
@@ -203,6 +204,7 @@ void loadAllImages()
   puzzleDoneSprite   = loadImage("donesprite.png");
   playerSpriteNormal = loadImage("sprite_player.png");
   playerSpriteDone   = loadImage("playersprite_done.png");
+  wormSprite         = loadImage("worm.png");
   adwareSprite       = loadImage("adwareSprite.png");
   virusSprite        = loadImage("virusSprite.png");
   malwareSprite      = loadImage("malwareSpriteSheet.png");

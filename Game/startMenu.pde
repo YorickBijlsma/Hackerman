@@ -13,6 +13,11 @@ void startScreen()
     gamestart.play();
     mainsong.loop();
   }
+  if (keysPressed[DOWN])
+  {
+    menu.stop();
+    gameState = 4;
+  }
   if (frameCount % 60 == 0)
   {
     timer++;
@@ -42,10 +47,38 @@ void deathScreen()
   //println(gameState);
   if (stretchCounter > height-10)  //check if the animation is almost done, if so, display the score
   { 
-    
     fill(hackerGreen); 
     textSize(56);
     text((int)score.totalScore, 420, 643);
     leaderboard.drawScores(911, 190, 38, hackerGreen, 28);
+  }
+  if(levelTotal >= secretTotal)
+    {
+      secretTotal = levelTotal;
+    }
+    levelTotal = 0;
+}
+
+void secretScreen()
+{ 
+  fill(hackerGreen); 
+  textSize(56); 
+  
+  if (counter <= 8)
+  {
+    loadingAnimation();
+  }
+  else
+  { 
+    text("Longest Run", 360, 280);
+    text((int)secretTotal, width/2 - 10, height/2 + 40);
+  }
+  
+  if(keysPressed['X']) 
+  {
+    timer = 0;
+    gameState = 0; 
+    counter = 0;
+    
   }
 }

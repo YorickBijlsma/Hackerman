@@ -24,23 +24,19 @@ import java.io.File;
 import java.lang.Math;
 import processing.sound.*;
 
-int slowMove = 0;
-int stall    = 0;
-boolean done = false;
-int nEnemies = 5;
-int timer    = 0; 
-int health   = 100;
-boolean showStartScreen = true;
-boolean savedBestScoresThisLevel = false;
+int stall = 0;
+int health   = 100; 
 int levelNumber = 1;
-int gameState = 0; //0 = starmenu, 1 = game, 2 = exitgame
+int levelTotal = 0;
+int secretTotal = 0;
+int gameState = 0; //0 = starmenu, 1 = game, 2 = deathscreen, 3 = exit
+int timer    = 0; //arbritary bug delay
+boolean savedBestScoresThisLevel = false;
 
-int drawbackground = 0;
 color HUDcolour = color(255,255,255);
-color red   = color(255, 0, 0);
 color green = color(0, 255, 0);
-color blue  = color(0, 0, 255);
 color hackerGreen = color(125, 255, 45);
+color background = color(11, 15, 11);
 
 ArrayList<Virus>       vira       = new ArrayList<Virus>();
 ArrayList<Package>     packages   = new ArrayList<Package>();
@@ -49,11 +45,8 @@ ArrayList<Worm>        worms      = new ArrayList<Worm>();
 ArrayList<Malware>     malwares   = new ArrayList<Malware>();
 ArrayList<Ad>          ads        = new ArrayList<Ad>();
 ArrayList<HealthPickup> healthPickups = new ArrayList<HealthPickup>();
-//ArrayList<SoundFile>     allSounds = new ArrayList<SoundFile>();
 
-//ArrayList<ParticleSystem>    particles  = new ArrayList<ParticleSystem>();
-
-boolean playingMenu, playingGameOver, playingLevelDone, showingHealSprite
+boolean playingMenu, playingGameOver, playingLevelDone, showingHealSprite, loadingMenu
         = false;
 
 
@@ -72,13 +65,13 @@ float[][] enemyCoords  = new float[12][2];     //12 enemies of which x and y are
 
 //game constants
 final int PUZZLEDONEMARGIN       = 40;                
-final int AMOUNTOFLEVELS         = 35;
-final int LEVELWAIT              = 120; //was 120
+final int AMOUNTOFLEVELS         = 39;
+final int LEVELWAIT              = 120; 
 final int TIMELEVEL              = 10;
 
 PImage   entryScreen, deathScreen, WallSprite, leaderboardImage, scoreAdditionImage, 
          wallSpritesheet, playerInjuredSprite, puzzleDoneSprite, playerSpriteNormal,
-         playerSpriteDone, adwareSprite, virusSprite, malwareSprite, Packagespritesheet, DoTcom,
+         playerSpriteDone, wormSprite, adwareSprite, virusSprite, malwareSprite, Packagespritesheet, DoTcom,
          puzzleSpritesheet, puzzleSprite, healthPickupSprite, healthFeedback
          ;
 PImage[] adwareSprites;
@@ -91,7 +84,7 @@ File bestScoresEver = new File("best_5_scores.txt");
 void setup()
 {
   size(1250, 702);
-  background(11, 15, 11);
+  background(background);
   pixelFont = createFont("pixtech.ttf", 32);
   regularFont = loadFont("regular_font.vlw");
   textFont(pixelFont);
@@ -106,8 +99,12 @@ void setup()
 void draw()
 {
   runGame();
-  //println(frameRate); println("x:"+mouseX); println("y:"+mouseY);
+  /* these are debug tools 
+  println(frameRate);
+  println("x:"+mouseX); 
+  println("y:"+mouseY);
   println(levelNumber-1);
+  */
 }
 
 

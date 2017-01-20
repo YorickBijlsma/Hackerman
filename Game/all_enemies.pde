@@ -25,12 +25,13 @@ class Worm
   {
     for (int i = 0; i < segments; i++)
     {
-      if (i==0)        fill(color(240, 0, 240));           //make the head (first segment) a unique colour
+      if (i==0)        fill(color(30, 250, 95));           //make the head (first segment) a unique colour
       else                                          
       {  
-        if (i%2==0)   fill(color(244, 164, 96));    
-        else          fill(color(205, 133, 63));          //segments are alternated between 2 colours
+        if (i%2==0)   fill(color(0, 185, 155));    
+        else          fill(color(32, 249, 239));          //segments are alternated between 2 colours
       }
+      image(wormSprite, x-10, y-11);
 
       //black magic ternary operator, draws the head bigger
       size = (i == 0) ? headSize : segmentSize;
@@ -255,7 +256,7 @@ class Virus
   float diameter = 45;
 
   color colour = color(255, 0, 0);
-  int teller = 100;
+  int teller = 80;
   float draw = 0;
   int amountOfPackages = 0;
   int damage = 3;

@@ -14,6 +14,9 @@ void runGame()
   case 3:
     exit();
     break;
+  case 4:
+    secretScreen();
+    break;
   }
 }  
 

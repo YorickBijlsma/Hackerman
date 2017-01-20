@@ -74,3 +74,37 @@ void slideFromTopAnimation(PImage source, int x, int y)
   }
   image(source, x, yPos);
 }
+
+boolean flicker = false;
+int counter = 0;
+void loadingAnimation()
+{
+  int x = width/2 - 20;
+  int y = height/2;
+  int w = 50;
+  int h = 50;  
+  
+  background(background);
+  noStroke();
+  
+  if (flicker)
+  {
+    fill(hackerGreen);
+  }
+  else
+  {
+    fill(background);
+  }
+
+  if(frameCount % 60 == 0)
+  {
+    flicker = true;
+    counter++;
+  }
+  
+  if (counter % 2 == 0)
+  {
+    flicker = false;
+  }
+  rect(x, y, w, h);
+}

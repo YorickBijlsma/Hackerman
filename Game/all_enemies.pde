@@ -272,9 +272,16 @@ class Virus
   {
     this.x = x;
     this.y = y;
-
-    vx = random(-3.0, 3.0);
-    vy = random(-3.0, 3.0);
+    
+    while(true)
+    {
+      vx = (int)random(-3.0, 3.0);
+      vy = (int)random(-3.0, 3.0);
+      if (vx + vy == 0)
+      {
+        break;
+      }     
+    }
   }
 
   void update()

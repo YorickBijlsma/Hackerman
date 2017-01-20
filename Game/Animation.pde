@@ -79,7 +79,7 @@ boolean flicker = false;
 int counter = 0;
 void loadingAnimation()
 {
-  int x = width/2 - 20;
+  int x = width/2 - 30;
   int y = height/2;
   int w = 50;
   int h = 50;  

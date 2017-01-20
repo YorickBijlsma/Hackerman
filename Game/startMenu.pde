@@ -62,7 +62,7 @@ void deathScreen()
 void secretScreen()
 { 
   fill(hackerGreen); 
-  textSize(56); 
+  textSize(60);
   
   if (counter <= 8)
   {
@@ -70,15 +70,14 @@ void secretScreen()
   }
   else
   { 
-    text("Longest Run", 360, 280);
-    text((int)secretTotal, width/2 - 10, height/2 + 40);
+    text("Most cores hacked", 200, 280);
+    text((int)secretTotal, width/2 - 15, height/2 + 40);
   }
   
   if(keysPressed['X']) 
   {
     timer = 0;
     gameState = 0; 
-    counter = 0;
-    
+    counter = 0;    
   }
 }

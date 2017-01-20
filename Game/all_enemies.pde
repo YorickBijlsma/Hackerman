@@ -275,9 +275,9 @@ class Virus
     
     while(true)
     {
-      vx = (int)random(-3.0, 3.0);
-      vy = (int)random(-3.0, 3.0);
-      if (vx + vy == 0)
+      vx = (int)random(-4.0, 4.0);
+      vy = (int)random(-4.0, 4.0);
+      if (!(vx == 0 && vy == 0))
       {
         break;
       }     
